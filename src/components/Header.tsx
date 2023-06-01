@@ -5,7 +5,7 @@ import Logo from "../../public/images/logo.png";
 
 export default function Header() {
     return (
-        <header className="flex justify-between sticky top-0 left-0 z-10 h-20 mb-10 w-full bg-white dark:bg-[#111111]">
+        <header className="flex justify-between sticky top-0 left-0 z-10 h-20 w-full bg-white dark:bg-[#111111]">
             <Link href="/" className="flex items-center text-2xl font-semibold">
                 <Image src={Logo} alt="logo" width={50} />
             </Link>

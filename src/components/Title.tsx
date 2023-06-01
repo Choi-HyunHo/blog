@@ -7,7 +7,7 @@ interface Title {
 export default function Title({ title }: Title) {
     return (
         <section className="mt-20 mb-6">
-            <h2 className="font-bold text-2xl sm:text-3xl font-mono">
+            <h2 className="font-bold text-2xl sm:text-4xl font-mono">
                 {title}
             </h2>
         </section>

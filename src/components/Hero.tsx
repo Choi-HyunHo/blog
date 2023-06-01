@@ -3,7 +3,7 @@ import Profile from "../../public/images/profile.jpg";
 
 export default function Hero() {
     return (
-        <section className="flex flex-col sm:flex-row justify-center items-center gap-8 flex-wrap">
+        <section className="mt-10 flex flex-col sm:flex-row justify-center items-center gap-8 flex-wrap">
             <Image
                 src={Profile}
                 alt="choi hyunho"
