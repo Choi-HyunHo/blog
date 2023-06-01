@@ -5,3 +5,13 @@
 body {
     @apply max-w-screen-md flex flex-col px-4 m-auto;
 }
+
+h1,
+h2,
+h3,
+blockquote,
+p,
+a,
+strong {
+    @apply dark:text-white;
+}

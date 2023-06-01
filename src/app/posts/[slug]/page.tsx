@@ -14,8 +14,8 @@ export default function Detail({ params }: any) {
 
     return (
         <Container>
-            <div className="prose max-w-screen-md">
-                <h1 className="">{post.title}</h1>
+            <div className="prose max-w-screen-md dark:text-white">
+                <h1>{post.title}</h1>
                 <MDXComponent />
             </div>
         </Container>
