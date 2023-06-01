@@ -17,8 +17,8 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="ko" className={karla.className}>
-            <body className="max-w-screen-md flex flex-col px-4 m-auto">
+        <html lang="ko">
+            <body className={karla.className}>
                 <Provider>
                     <Header />
                     {children}
