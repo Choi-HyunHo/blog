@@ -1,3 +1,6 @@
+"use client";
+
+import React, { useState } from "react";
 import Link from "next/link";
 
 interface Props {
@@ -9,6 +12,9 @@ interface Props {
 }
 
 export default function BlogPost({ date, title, des, tag, slug }: Props) {
+    const [filteredData, setFilteredData] = useState(tag);
+    const [filterValue, setFilterValue] = useState("");
+
     return (
         <Link href={`/posts/${slug}`} passHref>
             <div className="w-full my-7">
