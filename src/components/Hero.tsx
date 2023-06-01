@@ -9,10 +9,11 @@ export default function Hero() {
                 alt="choi hyunho"
                 width={300}
                 height={300}
+                priority
                 className="rounded-2xl"
             />
-            <div className="min-w-[250] max-w-[300px] flex flex-col justify-center items-center">
-                <h2 className="text-xl font-bold">
+            <div className="flex flex-col justify-center items-center">
+                <h2 className="text-lg sm:text-xl font-bold">
                     프론트엔드 개발자 최현호 입니다.
                 </h2>
                 <br></br>
