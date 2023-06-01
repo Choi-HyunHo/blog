@@ -10,7 +10,7 @@ export default function Header() {
             <nav className="flex items-center gap-4 text-xl">
                 <Button />
                 <Link href="">Resume</Link>
-                <Link href="">Note</Link>
+                <Link href="/posts">Note</Link>
             </nav>
         </header>
     );
