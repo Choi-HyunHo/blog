@@ -1,11 +1,7 @@
 import BlogPost from "@/components/BlogPost";
-import { allPosts } from "contentlayer/generated";
+import { posts } from "@/service/posts";
 
 const Blog = () => {
-    const posts = allPosts.sort(
-        (a, b) => Number(new Date(b.date)) - Number(new Date(a.date))
-    );
-
     return (
         <div>
             <div className={`mt-10 flex flex-col`}>
