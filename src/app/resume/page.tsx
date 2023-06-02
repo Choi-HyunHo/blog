@@ -1,5 +1,5 @@
-import React from "react";
+import Notion from "@/components/resume/Notion";
 
 export default function resume() {
-    return <div></div>;
+    return <Notion />;
 }
