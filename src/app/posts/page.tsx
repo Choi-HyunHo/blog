@@ -1,5 +1,7 @@
 import MainView from "@/components/posts/MainView";
+import { getPosts } from "@/service/posts";
 
-export default function Blog() {
-    return <MainView />;
+export default async function Blog() {
+    const data = await getPosts();
+    return <MainView data={data} />;
 }
