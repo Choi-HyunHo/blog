@@ -1,6 +1,6 @@
-import Hero from "@/components/Hero";
-import Recent from "@/components/Recent";
-import Title from "@/components/Title";
+import Hero from "@/components/ui/Hero";
+import Recent from "@/components/posts/Recent";
+import Title from "@/components/ui/Title";
 
 export default function Home() {
     return (

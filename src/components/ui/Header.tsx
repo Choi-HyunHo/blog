@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Button from "./Button";
 import Image from "next/image";
-import Logo from "../../public/images/logo.png";
+import Logo from "../../../public/images/logo.png";
 
 export default function Header() {
     return (

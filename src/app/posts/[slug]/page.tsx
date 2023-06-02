@@ -1,7 +1,7 @@
 import React from "react";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import { allPosts } from "contentlayer/generated";
-import Container from "@/components/Container";
+import Container from "@/components/posts/Container";
 
 export default function Detail({ params }: any) {
     const post = allPosts.find((p) => p._raw.flattenedPath === params.slug);

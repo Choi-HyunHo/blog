@@ -1,7 +1,7 @@
-import Header from "@/components/Header";
+import Header from "@/components/ui/Header";
 import "./globals.css";
 import { Karla } from "next/font/google";
-import Footer from "@/components/Footer";
+import Footer from "@/components/ui/Footer";
 import Provider from "@/components/Provider";
 
 const karla = Karla({ subsets: ["latin"] });
