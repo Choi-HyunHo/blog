@@ -14,11 +14,7 @@ const Tags = ({ onFilter, onClearFilter }: Props) => {
 
     // 태그를 선택하면 선택된 태그 상태를 업데이트하고 필터링 함수 호출
     const handleTagSelection = (tag: string) => {
-        if (tag === selectedTag) {
-            // "All" 버튼을 선택 해제하는 경우
-            setSelectedTag("All"); // 선택된 태그 상태를 "All"로 업데이트
-            onClearFilter(); // 필터링 해제 함수 호출
-        } else {
+        if (tag !== selectedTag) {
             setSelectedTag(tag); // 다른 태그를 선택하는 경우
             onFilter(tag); // 필터링 함수 호출
         }
