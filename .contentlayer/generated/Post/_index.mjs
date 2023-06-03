@@ -27,5 +27,21 @@ import reactWanted_2Mdx from './react-wanted-2.mdx.json' assert { type: 'json' }
 import reactWanted_3Mdx from './react-wanted-3.mdx.json' assert { type: 'json' }
 import reactWanted_4Mdx from './react-wanted-4.mdx.json' assert { type: 'json' }
 import reactViteMdx from './react-vite.mdx.json' assert { type: 'json' }
+import jsStartMdx from './js-start.mdx.json' assert { type: 'json' }
+import jsJavaScriptMdx from './js-javaScript.mdx.json' assert { type: 'json' }
+import jsVariableMdx from './js-variable.mdx.json' assert { type: 'json' }
+import jsExpressionMdx from './js-expression.mdx.json' assert { type: 'json' }
+import jsDataTypeMdx from './js-dataType.mdx.json' assert { type: 'json' }
+import jsOperatorMdx from './js-operator.mdx.json' assert { type: 'json' }
+import jsControlMdx from './js-control.mdx.json' assert { type: 'json' }
+import jsTypeMdx from './js-type.mdx.json' assert { type: 'json' }
+import jsObjectMdx from './js-object.mdx.json' assert { type: 'json' }
+import jsPremitiveMdx from './js-premitive.mdx.json' assert { type: 'json' }
+import jsFunctionMdx from './js-function.mdx.json' assert { type: 'json' }
+import jsScopeMdx from './js-scope.mdx.json' assert { type: 'json' }
+import jsGlobalVariableMdx from './js-globalVariable.mdx.json' assert { type: 'json' }
+import jsLetConstMdx from './js-let-const.mdx.json' assert { type: 'json' }
+import jsArrayMdx from './js-array.mdx.json' assert { type: 'json' }
+import jsNumberMdx from './js-number.mdx.json' assert { type: 'json' }
 
-export const allPosts = [reactComponentMdx, reactImmutabilityMdx, reactReduxMdx, reactRenderingMdx, reactStartMdx, reactStatePropsMdx, reactUseEffectMdx, reactUseStateMdx, reactUseContextMdx, reactUseReducerMdx, reactUseMemoMdx, reactUseCallbackMdx, reactUseRefMdx, reactReactMemoMdx, reactQuery_1Mdx, reactQuery_2Mdx, reactQuery_3Mdx, reactQuery_4Mdx, reactQuery_5Mdx, reactQuery_6Mdx, reactQuery_7Mdx, reactQueryToolMdx, reactWanted_1Mdx, reactWanted_2Mdx, reactWanted_3Mdx, reactWanted_4Mdx, reactViteMdx]
+export const allPosts = [reactComponentMdx, reactImmutabilityMdx, reactReduxMdx, reactRenderingMdx, reactStartMdx, reactStatePropsMdx, reactUseEffectMdx, reactUseStateMdx, reactUseContextMdx, reactUseReducerMdx, reactUseMemoMdx, reactUseCallbackMdx, reactUseRefMdx, reactReactMemoMdx, reactQuery_1Mdx, reactQuery_2Mdx, reactQuery_3Mdx, reactQuery_4Mdx, reactQuery_5Mdx, reactQuery_6Mdx, reactQuery_7Mdx, reactQueryToolMdx, reactWanted_1Mdx, reactWanted_2Mdx, reactWanted_3Mdx, reactWanted_4Mdx, reactViteMdx, jsStartMdx, jsJavaScriptMdx, jsVariableMdx, jsExpressionMdx, jsDataTypeMdx, jsOperatorMdx, jsControlMdx, jsTypeMdx, jsObjectMdx, jsPremitiveMdx, jsFunctionMdx, jsScopeMdx, jsGlobalVariableMdx, jsLetConstMdx, jsArrayMdx, jsNumberMdx]

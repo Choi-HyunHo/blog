@@ -1,0 +1,146 @@
+---
+title: 모던 자바스크립트 Deep Dive_Number
+date: "2023-05-04"
+description: 자바스크립트 공부하는 사람들은 모를 수 없는 그 책..❗️
+tag: JS
+---
+
+## 28.1 Number 생성자 함수
+
+표준 빌트인 객체로서 생성자 함수 객체로 `new` 연산자와 Number 인스턴스를 생성 할 수 있다.
+
+-   인수를 **전달하지 않고** 호출하면 `[[NumberData]] 내부 슬롯에 0을 할당`한 Number 객체를 생성.
+-   인수로 **숫자를 전달**하면 `[[NumberData]] 내부 슬롯에 인수`를 할당한 Number 객체를 생성.
+-   인수로 숫자가 아닌 값을 전달하면 숫자로 강제 변환 후 전달한다.
+-   명시적 타입 변환 수단으로 사용할 수 있다.
+
+![1](https://user-images.githubusercontent.com/87301268/236116217-ac8483c9-7c24-419c-bbe8-914dcea92e89.png)
+
+## 28.2 Number 프로퍼티
+
+### 28.2.1 .EPSILON
+
+구조적인 한계 때문에 부동소수점 연산은 정확한 결과를 기대하기 어렵다.
+
+-   Number.EPSILON은 이러한 오차를 해결하기 위해 사용한다.
+
+![2](https://user-images.githubusercontent.com/87301268/236116572-7201da80-a944-4dd6-ba00-3cce7437a076.png)
+
+### 28.2.2 .MAX_VALUE
+
+**자바스크립트에서 표현할 수 있는 가장 큰 양수 값.**
+
+-   이보다 더 큰 숫자는 `Infinity` 이다.
+
+![3](https://user-images.githubusercontent.com/87301268/236116703-907b1384-c866-4141-8b51-3e0db68160fc.png)
+
+### 28.2.3 .MIN_VALUE
+
+**자바스크립트에서 표현할 수 있는 가장 작은 양수 값.**
+
+-   이보다 더 작은 숫자는 `0` 아다.
+
+![4](https://user-images.githubusercontent.com/87301268/236117155-84860571-8e60-4d70-a7dc-db5650417cc7.png)
+
+### 28.2.4 .MAX_SAFE_INTEGER
+
+자바스크립트에서 **안전하게 표현할 수 있는 가장 큰 정수값.**
+
+![5](https://user-images.githubusercontent.com/87301268/236117331-2dd4b281-1805-497f-b7cf-e525fe0604d1.png)
+
+### 28.2.5 .MIN_SAFE_INTEGER
+
+자바스크립트에서 **안전하게 표현할 수 있는 가장 작은 정수값.**
+
+![6](https://user-images.githubusercontent.com/87301268/236117392-e8bc0139-dd0e-4bbe-b703-25f9a9f727d9.png)
+
+### 28.2.6 .POSITIVE_INFINITY
+
+**양의 무한대**를 나타내는 숫자값 Infinity.
+
+![7](https://user-images.githubusercontent.com/87301268/236117477-37e9077d-cc90-41d9-a42c-c7967b8d5483.png)
+
+### 28.2.7 .NEGATIVE_INFINITY
+
+**음의 무한대**를 나타내는 숫자값 -Infinity.
+
+![8](https://user-images.githubusercontent.com/87301268/236117589-a3c55b82-ff18-4c95-8f77-ca4c5e063a34.png)
+
+### 28.2.8 Number.NaN
+
+`숫자가 아님 (Not-a-Number)`을 나타내는 숫자값.
+
+![9](https://user-images.githubusercontent.com/87301268/236117684-ee875e40-85b4-4229-987f-f483119d52e7.png)
+
+## 28.3 Number 메서드
+
+### 28.3.1 .isFinite
+
+인수로 전달된 숫자값이 `Infinity` 또는 `-Infinity`인지 여부를 **검사하여 불리언 값으로 반환.**
+
+![10](https://user-images.githubusercontent.com/87301268/236117978-29c1e52c-de7d-4de8-8b47-6dec0004799a.png)
+
+빌트인 전역 함수 isFinite는 인수를 암묵적 형변환하여 검사하지만
+**Number의 정적 메서드인 isFinite는 형변환하지 않기 때문에** `숫자가 아닌 값이 주어지면 언제나 false` 이다.
+
+![11](https://user-images.githubusercontent.com/87301268/236118333-9128d04f-7550-4bee-a79b-79f34116c19f.png)
+
+### 28.3.2 .isInteger
+
+인수로 전달된 숫자값이 **정수인지 여부**를 `불리언 값`으로 반환
+
+-   **암묵적 형변환이 없다.**
+
+![12](https://user-images.githubusercontent.com/87301268/236118665-9a4a1d19-fcc5-4338-a66f-d63a22b3347e.png)
+
+### 28.3.3 .isNaN
+
+인수로 전달된 숫자값이 NaN인지 여부를 불리언 값으로 반환.
+
+![13](https://user-images.githubusercontent.com/87301268/236118786-d66afdec-fad4-4cc1-aa96-f78e82dba0ea.png)
+
+빌트인 전역 함수 isNaN은 인수를 암묵적 형변환하여 검사하지만
+**Number의 정적 메서드인 isNaN은 형변환하지 않기 때문에** `숫자가 아닌 값이 주어지면 언제나 false` 이다.
+
+![14](https://user-images.githubusercontent.com/87301268/236118833-00a1898b-6154-4dfb-82c4-468c420d1a20.png)
+
+### 28.3.4 .isSafeInteger
+
+인수로 전달된 숫자값이 안전한 정수인지 여부를 불리언 값으로 반환.
+
+-   **암묵적 타입 변환은 없다.**
+
+![15](https://user-images.githubusercontent.com/87301268/236119196-6ba61597-84ad-4f2a-b61b-24c441d7bdb1.png)
+
+### 28.3.5 .toExponential
+
+숫자를 **지수 표기법으로 변환**하여 `문자열로 반환.`
+
+-   지수 표기법이란 매우 크거나 작은 숫자를 표기할 때 주로 사용
+-   e(Exponent) 앞에 있는 숫자에 10의 n승을 곱하는 형식
+
+![16](https://user-images.githubusercontent.com/87301268/236119448-a8f16a79-bc2c-49cd-a9f5-58100bf2b8a1.png)
+
+### 28.3.6 .toFixed
+
+숫자를 **반올림하여 문자열로 반환.**
+
+-   반올림하는 소수점 이하 자릿수를 나타내는 0 ~ 20 사이의 정수값을 인수로 전달 가능.
+-   생략하면 기본값 0 이 적용.
+
+![17](https://user-images.githubusercontent.com/87301268/236120297-cabbd77a-1fef-4fc9-ba4d-61ec3400f1f0.png)
+
+### 28.3.7 .toPrecision
+
+인수로 전달받은 전체 자릿수까지 유효하도록 나머지 자릿수를 반올림하여 문자열로 반환.
+
+![18](https://user-images.githubusercontent.com/87301268/236121159-d3eb103f-930c-4fd4-b232-849bf2676959.png)
+
+### 28.3.8 .toString
+
+숫자를 **문자열로 변환하여 반환.**
+
+-   진법을 나타내는 2 ~ 36 사이의 정수를 인수로 전달할 수 있다.
+-   기본값은 10진법.
+
+![19](https://user-images.githubusercontent.com/87301268/236121571-b5c1672f-35d2-4460-b0b1-a476976bda90.png)
