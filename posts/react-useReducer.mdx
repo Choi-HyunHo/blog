@@ -1,0 +1,117 @@
+---
+title: useReducer
+date: "2023-02-13"
+description: hooks 네 번째❗️ useReducer
+tag: React
+---
+
+리액트 공식 문서에 따르면 useReducer 시작하기 앞서 아래와 같이 문구가 있습니다!
+
+[https://ko.reactjs.org/docs/hooks-reference.html#usereducer](https://ko.reactjs.org/docs/hooks-reference.html#usereducer)
+
+> 다음의 Hook는 이전 섹션에서의 기본 Hook의 변경이거나 특정한 경우에만 필요한 것입니다.  
+> 익히는 것에 너무 압박받지는 마세요.
+
+부담 가지지 말고 가벼운 마음으로 정리 해보겠습니다. 😀
+
+## **useReducer 란 ❓**
+
+state 를 관리하고 업데이트 하는 hook 인 useState 를 대체 할 수 있는 hook 입니다.
+
+즉, **useReducer 는 useState 처럼 state 를 관리하고 업데이트 할 수 있는 hook 입니다.**
+
+## **그렇다면 useState 가 있으니 굳이 필요한가요 ..❓**
+
+음.. 사실 꼭 필요하다고는 단정 지을 수 없을 것 같습니다! 처음 말했다시피 **'hook 의 변경이거나 특정한 경우에만 필요하다'**  나와있듯이 useState 만 가지고 state 관리를 해도 문제는 없습니다.
+
+하지만 **특정한 경우** useReducer 가 가지는 장점이 분명 있습니다. 지금부터 살펴보도록 합시다!
+
+## **useState 만으로 상태 변화 로직을 만들면**
+
+![1](https://user-images.githubusercontent.com/87301268/223932345-35b476d5-f1a1-46d2-9688-1f72a7c2efb4.jpeg)
+
+상태 변화 함수를 해당 컴포넌트 안에서 작성해야 했습니다. 물론 이렇게 사용하는게 일반적인 방법 입니다. 하지만 컴포넌트 안에서 관리해야 하는 상태 값이 많아지고 구조가 복잡해진다면 useReducer 를 사용하는 것이 하나의 대안이 될 수 있습니다.
+
+## **useReducer 를 사용하면 ❓** 
+
+![2](https://user-images.githubusercontent.com/87301268/223932402-a8953752-9e8e-4bbf-8c8b-b19bbc70f649.jpeg)
+
+useReducer 의 핵심은 **분리!**
+
+> 하나의 컴포넌트 내에서 state 를 다루는 로직을 해당 컴포넌트로 분리하여 외부에서 처리 할 수 있도록 해주는 것 입니다.
+
+## **useReducer 문법**
+
+![3](https://user-images.githubusercontent.com/87301268/223932422-f3924877-d2d7-490a-92d6-f09ec51460e9.png)
+
+**state :** 컴포넌트에서 사용할 상태 ( useState 의 state 와 동일 )
+
+**dispatch :** reducer 함수를 실행 시키며, 컴포넌트 내에서 state 의 업데이트를 다루기 위해 사용
+
+**reducer :** 컴포넌트 외부에서 state 를 업데이트 하는 로직의 함수 ( state, action 객체를 인자로 받는다 )
+
+**initialState** : 초기 state ( useState 의 초기 할당 값과 동일 )
+
+useState 와 동일하게 보이면서도 dispatch, reducer 등 새로운 개념과 마주하게 됩니다.
+
+하지만 전역 상태관리 라이브러리인 redux 에도 동일한 단어가 사용되기 때문에 지금 이해해두면 추후 도움이 될 거라 생각 합니다 🥺
+
+예시를 통해 하나씩 살펴보겠습니다.
+
+## **useReducer 예시**
+
+![4](https://user-images.githubusercontent.com/87301268/223932444-02fd83e5-8911-4e3c-a9cc-b6a5a48bb137.png)
+
+**컴포넌트에서 벗어나 상태 관리 로직이 만들어져 있는 걸 확인 할 수 있습니다.**
+
+먼저 버튼을 보면 아래 처럼 클릭 이벤트가 되어 있습니다.
+
+![7](https://user-images.githubusercontent.com/87301268/223934763-e0e9f0f2-2384-458a-bdbf-c663e8ea35c9.png)
+
+**dispatch :** reducer 함수를 실행 시키며, 컴포넌트 내에서 state 의 업데이트를 다루기 위해 사용
+
+즉, **현재 정의되어 있는 reducer 함수를 실행** 시키게 되며 ( export function reducer 부분 )
+
+**dispatch** 는 **함수의 인자로 업데이트 하기 위한 정보**를 가진 **action** 을 사용 합니다.
+
+그렇다면 **action** 은
+
+**업데이트를 위한 정보를 가지고 있는 것**이며, **reducer 함수**의 두 번째 인자인 **action** 에 할당 됩니다.
+
+**action** 의 주 모습은 **type 이라는 값을 가진 객체 형태**로 사용 됩니다.
+
+**reducer 함수는**
+
+![6](https://user-images.githubusercontent.com/87301268/223932619-4ac4ed56-e842-434a-afd7-6d233c3cc5f7.png)
+
+**dispatch 함수**에 의해 실행되며 컴포넌트 외부에서 state 를 업데이트 하는 로직을 담당 합니다.
+
+인자로 **현재 state** 와 **action** 을 받게 되는데 **action** 값에 근거하여 기존의 state 를 업데이트 합니다.
+
+**참고로 reducer 함수에 if-else 를 사용하든, switch 를 사용하든 상관 없습니다.**
+
+그리고 잘 보시면, **reducer 함수 앞에 export 한 흔적을 볼 수 있습니다.**
+
+맞습니다. '해당 컴포넌트로 분리하여 외부에서 처리 할 수 있도록 해주는 것' 의미를 되돌아보면 다른 파일에서도 불러와서 사용 할 수 있습니다.
+
+## 직접 확인 해봅시다!
+
+<iframe
+    width="100%"
+    height="400px"
+    src="https://codesandbox.io/embed/usereducer-1q6ly4?autoresize=1&amp;fontsize=14&amp;hidenavigation=1&amp;theme=dark"
+></iframe>
+
+---
+
+## **참고**
+
+[한입 크기로 잘라 먹는 리액트(React.js) : 기초부터 실전까지](https://www.inflearn.com/course/%ED%95%9C%EC%9E%85-%EB%A6%AC%EC%95%A1%ED%8A%B8)
+
+[https://velog.io/@sdc337dc/React-useReducer](https://velog.io/@sdc337dc/React-useReducer)
+
+[https://xiubindev.tistory.com/104](https://xiubindev.tistory.com/104)
+
+[blog](https://velog.io/@iamhayoung/React-Hooks-useReducer%EC%97%90-%EB%8C%80%ED%95%B4-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0#%EC%A0%84%EC%B2%B4-%EC%83%98%ED%94%8C-%EC%BD%94%EB%93%9C-)
+
+[https://ko.reactjs.org/docs/hooks-reference.html#usereducer](https://ko.reactjs.org/docs/hooks-reference.html#usereducer)

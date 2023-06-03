@@ -1,0 +1,84 @@
+---
+title: React-Query - 로딩 및 오류 상태
+date: "2023-03-18"
+description: 리액트 쿼리 3화
+tag: React
+---
+
+useQuery에 반환되는 값들을 활용해 이전 포스팅에서 보지못했던 로딩 및 오류 상태에 대해 알아보겠습니다.
+
+[useQuery 는 반환되는 값이 다양 합니다.](https://tanstack.com/query/v4/docs/react/reference/useQuery?from=reactQueryV3&original=https%3A%2F%2Freact-query-v3.tanstack.com%2Freference%2FuseQuery)
+
+## 데이터가 아직 준비되지 않았을 때
+
+데이터가 정의되지 않으면 오류가 나오게 하지 않고, 적절한 조치를 할 수 있습니다.
+그 때 활용할 수 있는 값이 **isLoading** 과 **isError** 입니다.
+
+## 저번에 만든 코드에 추가해보도록 하겠습니다.
+
+![carbon (7)](https://user-images.githubusercontent.com/87301268/225783751-f37ff8cb-bfa0-4186-95c7-8e74e7362e7c.png)
+
+## isLoading
+
+현재 로딩중인지 아닌지를 알려주는 역할을 하는 useQuery 의 값 입니다.
+➡️ useQuery가 **fetch** 로 담아온 데이터 값을 기다리는 중 입니다.
+
+![carbon (8)](https://user-images.githubusercontent.com/87301268/225788819-3c286cec-b0b6-403f-9ce6-8d9135a4b34d.png)
+
+## 특징으로
+
+isLoading 은 캐시된 데이터조차 없이, **처음 실행한 쿼리 일 때** 로딩 여부에 따라 `true / false` 로 나누어집니다.
+
+![image](https://user-images.githubusercontent.com/87301268/225789097-cda20015-fbab-45cc-acb5-abc98044f2e1.gif)
+
+-   개발자 도구로 데이터를 불러오는 모습을 보면, **로딩을 포기하기 전까지 총 세번을 시도** 합니다.
+-   시도 횟수는 변경 할 수 있지만, React Query 는 기본적으로 세 번 시도한 후에 해당 데이터를 가져올 수 없다고 결정 합니다.
+
+지금 다뤄볼 것은 아니지만 비슷한 개념으로 **isFetching** 이 있습니다.
+
+## isFetching
+
+react-query가 요청 되었을 때 비동기 함수가 처리되었는지 여부에 따라 `true / false` 로 나누어집니다.
+
+여기까지만 보면 사실 같은 의미라고 생각 할 수 있는데 일상적인 예시를 들어보면,
+
+➡️ 음식을 처음 주문하면 **음식 및 물, 수저, 젓가락** 등 자리 세팅을 처음부터 해줍니다. **(isLoading)**
+➡️ 부족해서 음식을 재주문하면 **음식만** 가져다 줍니다. **(isFetching)**
+
+## isLoading vs isFetching 정리해보면
+
+-   isLoading은 서버에 데이터 요청을 **처음** 할 때
+-   isFetching은 서버에 데이터 요청을 **다시** 할 때 (캐시된 데이터가 있을 때)
+
+다시 본론으로 돌아와 이번에는 isError 에 대해 알아보겠습니다.
+
+## isError
+
+비동기 함수 요청이 **실패**하면 사용자에게 보여줄 데이터를 가져오지 못합니다.
+이런 상황에서 사용자에게 데이터를 불러오는 여부에 대해 알려줄 수 있습니다.
+
+![carbon (9)](https://user-images.githubusercontent.com/87301268/225788951-a17d0c9f-8da4-4c8a-a423-0843543cb65f.png)
+
+그리고 반환된 값에는 에러에 대한 메세지도 있습니다.
+
+![image](https://user-images.githubusercontent.com/87301268/225789308-1e28b02c-8537-45b7-b1db-2bf0e98bb5e3.png)
+
+## 직접 확인해보기
+
+isLoading 과 isError 을 확인해보기 위해 일부러 9번째 줄 `${pageNum}`에 1을 추가 했습니다.
+
+<iframe
+    src="https://codesandbox.io/embed/react-query-2-d0tsnn?fontsize=14&hidenavigation=1&theme=dark"
+    width="100%"
+    height="500px"
+></iframe>
+
+**다음 포스팅은 React-Query 개발자 도구에 대해 알아보겠습니다.**
+
+---
+
+## 참고
+
+[https://react-query-v3.tanstack.com/](https://react-query-v3.tanstack.com/)
+
+[https://www.udemy.com/course/react-query-react/](https://www.udemy.com/course/react-query-react/)

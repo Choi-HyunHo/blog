@@ -1,0 +1,138 @@
+---
+title: useMemo
+date: "2023-02-28"
+description: hooks 다섯 번째❗️ useMemo 에 대해서
+tag: React
+---
+
+최적화에 사용되는 리액트의 hook 중 하나인 useMemo 에 대하여 알아보겠습니다. 😀
+
+## **useMemo 란 ❓**
+
+**컴포넌트의 성능을 최적화** 시킬 수 있는 대표적인 hook 중 하나로, useMemo 에서 **Memo** 는 **'Memoization'** 을 말합니다.
+
+## **Memoization .. ❓**
+
+**기존의 수행한 연산의 결과 값**을 **어딘가에 저장**해 두고 **동일한 입력이 들어오면 재활용**하는
+
+프로그래밍 기법 입니다.
+
+![1](https://user-images.githubusercontent.com/87301268/224193098-617e032e-9ef4-45eb-aa4d-387ae6da3a43.jpeg)
+![2](https://user-images.githubusercontent.com/87301268/224193121-c5b4494d-8331-40a4-8670-6bce2b016857.jpeg)
+
+### **✅ 잠깐 함수형 컴포넌트의 특징 하나만** 
+
+함수형 컴포넌트는
+
+1.  컴포넌트 함수 호출
+2.  모든 내부 변수 초기화
+
+➡️ 위와 같은 순서를 거칩니다.
+
+예시를 통해 살펴보면
+
+![3](https://user-images.githubusercontent.com/87301268/224193135-cceb1d57-052c-4ddf-a8df-7dae561188c3.png)
+
+> 컴포넌트가 렌더링 될 때마다 **value라는 변수가 초기화** 됩니다.
+
+즉, 렌더링 될 때마다 calculate 함수가 불필요하게 재호출된다는 것인데
+
+만약 calculate가 무겁고 복잡한 함수라면 매우 비효율적일 것 입니다.
+
+불필요한 호출을 막기 위해 useMemo 훅을 사용하는 것이고 useMemo를 사용하면
+
+렌더링 ➡️ 컴포넌트 함수 호출 ➡️ memoize된 함수 재사용하는 순서를 거칩니다.
+
+이렇게 되면 calculate 함수를 반복적으로 실행할 필요가 없게 되고,
+
+메모리에 저장되어있는 계산된 값을 가져와 재사용할 수 있게 해줍니다.
+
+### **⚠️ 하지만**
+
+**값을 재활용하기 위해 따로 메모리를 소비하여 저장해두는 것 입니다.**
+
+**➡️** 불필요한 값들을 모두 저장해두면 반대로 성능이 저하 될 수 있으므로 꼭 필요한 곳에만 사용 합니다.
+
+## **useMemo 구조**
+
+![4](https://user-images.githubusercontent.com/87301268/224193159-f073fcf2-e2b7-4097-99a5-42a7b6106932.png)
+
+useMemo는 useEffect처럼 첫 번째 인자로 콜백 함수, 두 번째 인자로 의존성 배열(dependancyArray)을 받습니다.
+
+➡️ 의존성 배열 안에있는 값이 업데이트 될 때에만 콜백 함수를 다시 호출하여 메모리에 저장된 값을 업데이트
+
+➡️ 만약 빈 배열을 넣는다면 useEffect와 마찬가지로 마운트 될 때에만 값을 계산하고 그 이후론 계속 memoization된 값을 꺼내와 사용
+
+## **예시 1**
+
+![5](https://user-images.githubusercontent.com/87301268/224193175-ee6b2ebb-0184-42da-bda6-a8981a4b07dd.png)
+
+hardCalculate 또는 easyCalculate 둘 중 하나만 버튼을 눌러도 console.log 는 같이 나옵니다
+
+그 이유는 만약, 쉬운 계산기의 input값을 변경하면 함수형 컴포넌트인 App이 리렌더링되는데
+
+이 때, 위에서 말했듯 내부의 변수들이 초기화되기 때문에 hardCalculate가 다시 실행되기 때문 입니다.
+
+### **useMemo 를 적용해보면**
+
+![6](https://user-images.githubusercontent.com/87301268/224193195-334bc842-0301-4c0f-ad9f-90706060eaa8.png)
+
+이처럼 useMemo의 첫 번째 인자로 콜백 함수를 넣고, 의존성 배열 안에 hardNumber를 넣어
+
+hardNumber 값이 변경될 때에만 콜백함수가 실행되게 됩니다.
+
+### **직접 확인해보기**
+
+<iframe
+    width="100%"
+    height="300px"
+    src="https://codesandbox.io/embed/usememo-1-q17g2r?fontsize=14&amp;hidenavigation=1&amp;theme=dark"
+></iframe>
+
+## **예시2**
+
+![7](https://user-images.githubusercontent.com/87301268/224193213-80dbcad3-8286-4151-ba87-29752c23b1cd.png)
+
+useEffect의 의존성 배열에 location을 넣었는데 **number** state를 변경해도 useEffect가 실행 됩니다.
+
+그 이유는 자바스크립트에서 **객체**는 원시 타입과는 다르게 **값이 저장될 때 주소 값으로 저장**되기 때문 입니다. ➡️ [불변성이란](https://choi-hyunho.com/react/react-immutability/)
+
+> 즉, 메모리 주소가 다르게 저장되어 있습니다.
+
+그렇기 때문에 리액트에선 number state가 바뀌면 App 컴포넌트가 재호출되면서 location의 주소값이 변경이 되었기 때문에 location이 변경이 되었다고 인식을 합니다.
+
+### **useMemo 를 적용해보면**
+
+![8](https://user-images.githubusercontent.com/87301268/224193235-74c3633f-0aaa-4cd9-830c-532ea0dae5dd.png)
+
+number 상태 값을 눌러도 더 이상 의미없는 호출이 되지 않는 걸 확인 할 수 있습니다.
+
+<iframe
+    width="100%"
+    height="350px"
+    src="https://codesandbox.io/embed/usememo-2-o90hyz?fontsize=14&amp;hidenavigation=1&amp;theme=dark"
+></iframe>
+
+## **정리**
+
+**useMemo 란 ❓**
+
+**컴포넌트의 성능을 최적화** 시킬 수 있는 대표적인 hook 중 하나로,
+
+useMemo 에서 **Memo** 는 **'Memoization'** 을 말합니다.
+
+**Memoization .. ❓**
+
+**기존의 수행한 연산의 결과 값**을 **어딘가에 저장**해 두고 **동일한 입력이 들어오면 재활용**하는
+
+프로그래밍 기법 입니다.
+
+---
+
+## **참고**
+
+[https://www.inflearn.com/course/%ED%95%9C%EC%9E%85-%EB%A6%AC%EC%95%A1%ED%8A%B8](https://www.inflearn.com/course/%ED%95%9C%EC%9E%85-%EB%A6%AC%EC%95%A1%ED%8A%B8)
+
+[https://ko.reactjs.org/docs/hooks-reference.html#usememo](https://ko.reactjs.org/docs/hooks-reference.html#usememo)
+
+[https://www.youtube.com/watch?v=e-CnI8Q5RY4&list=PLZ5oZ2KmQEYjwhSxjB_74PoU6pmFzgVMO&index=7](https://www.youtube.com/watch?v=e-CnI8Q5RY4&list=PLZ5oZ2KmQEYjwhSxjB_74PoU6pmFzgVMO&index=7)

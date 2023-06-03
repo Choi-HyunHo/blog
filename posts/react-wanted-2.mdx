@@ -1,0 +1,180 @@
+---
+title: 원티드 - 프리온보딩 프론트엔드 챌린지 Week 1-2
+date: "2023-04-06"
+description: 4월 프론트엔드 여행자를 위한 리액트 해부학
+tag: React
+---
+
+해당 포스트는 원티드의 [프리온보딩 프론트엔드 챌린지](https://www.wanted.co.kr/events/pre_challenge_fe_8) 강의 내용 복습 겸 정리 입니다.
+
+## Week 1-2. 상태(state)관리가 리액트 rendering 에 미치는 영향
+
+전반적인 내용은 useState, useMemo, useCallback, Redux, Recoil 에 관한 설명 입니다. + React18 에서 새로 소개된 hook
+
+최근 스터디를 진행하면서 정리했던 기록이 있기에 추가적인 보완 설명만 짧게 적고 기존 포스팅을 참고하시면 좋을 것 같습니다.
+
+## 1. useState()
+
+➡️ [useState 바로가기](https://choi-hyunho.com/react/react-useState/)
+
+간단한 상태 관리 (값이 하나인 경우)
+
+-   상태들이 서로 관련이 없는 경우
+-   컴포넌트 내에서 사용
+
+## 2. useReducer()
+
+➡️ [useReducer 바로가기](https://choi-hyunho.com/react/react-useReducer/)
+
+복잡한 상태관리
+
+-   상태들이 서로 관련이 있거나, 참조가 필요한 경우
+-   reducer 를 따로 선언하는 것이 일반적
+
+## useState vs useReducer
+
+1. useState만 써서 충분한 경우가 대부분
+2. useReducer를 사용하는 것이 효율적인 경우
+
+-   관리해야하는 상태가 많을 때
+-   상태들이 서로 관련이 있는 경우
+-   비즈니스 로직 분리
+
+## 3. useMemo()
+
+➡️ [useMemo 바로가기](https://choi-hyunho.com/react/react-useMemo/)
+
+함수의 결과를 cache하기 위해 사용
+
+-   “Expensive” computation
+-   React는 1ms 이상 걸리면 `expensive`라고 칭함
+-   “Expensive”하지 않다면 굳이 필요 없다.
+
+## 4. useCallback()
+
+➡️ [useCallback 바로가기](https://choi-hyunho.com/react/react-useCallback/)
+
+함수 자체를 cache하기 위해 사용
+
+-   dependency를 확인해야 하는 함수일 때
+-   ChildComponent에 prop으로 넘겨주는 함수일 때
+
+## 전역 상태 툴 - Context API
+
+➡️ [useContext 바로가기](https://choi-hyunho.com/react/react-useContext/)
+
+1. 기본제공툴
+
+2. Provider를 사용해서 components들에 `state`를 `provide` 하는 방식
+
+3. 장점
+
+    - 매우 간단함
+    - 추가 패키지를 설치하지 않아도 됨
+
+4. 단점
+    - 비즈니스 로직에 따라서 Provider를 생성해줘야함
+    - 코드가 복잡해질 수 있음 b. 렌더링 효율에 좋지 않음
+
+## 전역 상태 툴 - Redux
+
+➡️ [Redux 그리고 Redux-toolkit 바로가기](https://choi-hyunho.com/react/react-redux/)
+
+1. 모든 상태를 store에 저장함
+
+    - Context API가 context별로 reducer를 따로 사용하는 것과 반대됨
+
+2. Read-only states
+
+    - useReducer와 유사하게 `dispatch`를 통해서만 상태를 업데이트 할 수 있음
+    - store를 직접적으로 mutate할 수 없음
+
+3. 장점
+
+    - Redux DevTools등을 활용한 비교적 쉬운 debugging
+    - Middleware: saga, thunk, persistent
+
+4. 단점
+
+    - 구조가 복잡함
+    - 사이즈가 작을경우 불필요한 overhead
+
+## 전역 상태 툴 - Recoil
+
+1. Facebook에서 만들었음
+
+2. atoms and selectors라는 개념
+
+    - 내가 필요한 값만 `subscribe`하는 느낌
+    - atom은 일반적인 state와 유사한 개념
+    - selector는 atom을 Manipulate 해야하는 경우 사용됨
+
+3. 장점
+
+    - 구조가 간단해서 적용하기 쉬움
+    - ContextAPI의 rendering 비효율을 개선함
+    - React 상태관리를 위해서 만들어짐
+
+4. 단점
+    - 미들웨어의 부재
+
+다음은 이번 챌린지 사전 과제이자 React18 에서 추가된 기능 및 새로 소개된 hook 을 간단히 살펴보겠습니다.
+
+## React18 에서 업데이트 된 기능
+
+### 자동배치(Automatic Batching)
+
+여러 개의 상태 업데이트를 하나의 리렌더링으로 그룹핑하는 것 입니다.
+
+![carbon (5)](https://user-images.githubusercontent.com/87301268/230404594-cf581ef9-6f60-4ea5-b0db-41d8b44ae383.png)
+
+### 전환(Transitions)
+
+긴급 업데이트와 전환 업데이트를 구분하기 위한 React의 새로운 개념으로 전환 업데이트를 명시적으로 구분하여 상태 업데이트를 진행할 수 있게 되었습니다.
+
+-   긴급한 업데이트 (urgent updates) : 직접적인 상호작용 반영 (타이핑, 호버, 스크롤 등). 업데이트가 즉각적으로 일어나는 대상.
+-   전환 업데이트(Transition updates) : 하나의 뷰에서 다른 뷰로 UI 전환. 상태값 변화에 따른 모든 업데이트가 뷰에 즉시 반영되지 않아도 됨.
+
+### Suspense
+
+아직 브라우저에 표시되지 않은 컴포넌트에 대한 로딩 상태(UI)를 선언적으로 지정할 수 있습니다.
+
+Suspense는 v16에서 도입되었는데 React.lazy를 활용한 code splitting에서만 지원되었고, 서버 렌더링은 지원하지 못했습니다.
+v18에서는 서버 렌더링 지원을 추가 했습니다.
+
+다음은 추가된 hook 입니다.
+
+## useId
+
+![carbon (2)](https://user-images.githubusercontent.com/87301268/230403129-682be693-1647-4e84-8df5-f3fd1c1739b9.png)
+
+useId는 클라이언트와 서버 간의 hydration에서 mismatch를 피하면서 고유한 id값을 생성해주는 훅.
+
+-   이것은 유니크한 ID가 필요한 API를 사용하는 컴포넌트에서 유용하게 쓰일 수 있습니다.
+-   공식 문서에서는 useId 훅이 list에서의 key로서 사용되기 위해 도입된 것은 아니라고 설명 합니다.
+
+## useTransition
+
+![carbon (3)](https://user-images.githubusercontent.com/87301268/230403250-7b43231c-f3f5-4d46-bb6d-e2e6b2883936.png)
+
+useTransition은 트렌지션의 펜딩 상태 여부를 나타내는 값과, 트랜지션을 실행시킬 함수를 리턴.
+
+-   useTransition과 startTransition은 일부 상태 업데이트를 긴급하지 않은 것으로 간주해 관리가 가능 합니다.
+-   isPending 은 작업이 지연되고 있음을 알리는 boolean 이며, startTransition 은 낮은 우선순위로 실행할 함수를 인자로 받습니다.
+
+## useDeferredValue
+
+![carbon (4)](https://user-images.githubusercontent.com/87301268/230403356-2e8aaedf-8f98-4ac5-9258-e8b253f74807.png)
+
+useTransition 과 유사하게 낮은 우선순위를 지정하기 위한 훅
+
+-   차이점이라면 useTransition은 함수 실행의 우선순위를 지정하는 반면
+-   useDeferredValue는 값의 업데이트 우선순위를 지정 합니다.
+
+---
+
+## 참고
+
+[blog](https://velog.io/@ktthee/React-18-%EC%97%90-%EC%B6%94%EA%B0%80%EB%90%9C-useDeferredValue-%EB%A5%BC-%EC%8D%A8-%EB%B3%B4%EC%9E%90)
+
+https://yrnana.dev/post/2022-04-12-react-18/

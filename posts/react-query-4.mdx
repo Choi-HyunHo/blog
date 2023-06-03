@@ -1,0 +1,140 @@
+---
+title: React-Query - stale 그리고 라이프 사이클
+date: "2023-03-20"
+description: 리액트 쿼리 4화
+tag: React
+---
+
+## Stale Data ( 만료된 데이터 ) ❓
+
+> '신선하지 않은' 데이터를 말 합니다.
+
+유통기한이 지난 오래된 식빵과 비슷하다고 할 수 있습니다.
+
+## 신선하다는 말은 무슨 의미인가요 ❓
+
+**서버에서 조회할 당시**의 데이터는 요청할 당시의 snapshot 이지만 ( 신선한 )
+
+**외부 요청으로 데이터가 변경**된 경우 브라우저가 가진 데이터는 오래된 데이터가 되어버려서
+➡️ stale 하다고 하는 것 입니다.
+
+## stale Time
+
+> **staleTime** 은 데이터를 허용하는 '최대 시간' 라고 할 수 있습니다.
+
+➡️ 달리 말하면, **데이터가 만료됐다고 판단하기 전**까지 **허용되는 시간** 이 staleTime 입니다.
+
+➡️ **'웹사이트에 표시된 데이터가 10초 까지는 그대로여도 괜찮다'** 라고 판단하면 staleTime 을 10초로 설정 합니다.
+
+➡️ 그 이후 stale 한 데이터를 사용자에게 보여주는 것은 유의미하지 않다고 React Query는 판단하고 fresh 한 데이터를 요구하게 됩니다.
+
+### 그럼, staleTime 이 지난 다음은 ❓
+
+> 데이터 리패칭(Refetching) 이 발생 합니다.
+
+데이터 리패칭(Refetching) 은 **만료된 데이터** 에서만 실행 됩니다.
+➡️ **staleTime 이 지난 데이터**
+
+### 주의할 점 ⚠️
+
+default 값이 0이기 때문에 받아오는 즉지 stale하다고 판단해서
+캐싱 데이터와는 무관하게 계속 fetching을 수행 합니다.
+
+### 리패칭이 발생하는 조건은
+
+1. **새로운 Query Instance가 마운트** 될 때 ( 페이지를 이동했다가 왔을 경우 )
+
+2. **브라우저 화면을 이탈했다가 다시 Focus** 할 때
+
+3. **네트워크가 다시 연결**될 때
+
+4. 설정한 **refetch interval**에 의한 경우
+
+refetch가 되는 조건에 만족했지만 refetchOnWindowFocus 등의 옵션으로 refetch를 막을 수 있고,
+staleTime 옵션으로 설정한 시간 동안 데이터가 stale 되지 않도록 refetch를 막을 수 있습니다.
+
+### 리패칭이 발생 한다는 것은
+
+서버로부터 **fresh한 데이터를 전달받기 위해** refetch가 이루어집니다.
+
+## staleTime 사용
+
+**useQuery** 에 세번째 옵션으로 추가 합니다.
+
+![carbon (12)](https://user-images.githubusercontent.com/87301268/225818397-464b11bb-8b17-48b9-b399-4333726d890b.png)
+
+게시물이 2초마다 만료되도록 설정 했습니다.
+
+## 개발자 도구에서 확인
+
+![](https://velog.velcdn.com/images/hoho_0815/post/396d19df-6648-4421-bd2f-8dae326d3939/image.gif)
+
+-   윈도우가 다시 포커스 될 때 fresh 상태가 되었고, 2초 후에 stale 상태로 바뀌었습니다.
+-   새로 고침해도 2초 동안 fresh 상태였다가, stale 상태로 바뀝니다.
+
+### 직접 확인해보기
+
+<iframe
+    src="https://codesandbox.io/embed/react-query-3-48rmdj?fontsize=14&hidenavigation=1&theme=dark"
+    width="100%"
+    height="500px"
+></iframe>
+
+여기까지 stale 과 staleTime 의 정리였습니다.
+
+그리고 개발자 도구안에 fresh, fetching, stale, inactive 가 수시로 변하는 것을 보면서
+다른 개념을 알기 전에 위의 4가지를 포함한 React Query 라이프 사이클을 알아보겠습니다.
+
+## ♻️ React Query 의 라이프 사이클
+
+![image (2).png](https://user-images.githubusercontent.com/87301268/225827297-2e3c2b49-0d8d-4697-9c27-e1cdff340f97.png)
+출처, 우아한 테크 세미나: React Query
+
+### 상태 별 개념 ( 중요 ✅ )
+
+-   fetching : **데이터 요청 상태**
+-   fresh : 데이터가 프레시한 **(만료되지 않은 상태)**
+    ➡️ 컴포넌트의 상태가 변경되더라도, 데이터를 다시 요청하지 않지 않습니다.
+    ➡️ 새로고침하면 다시 fetching.
+
+-   stale : **데이터가 만료된 상태.**
+    ➡️ 한번 프론트로 내려준 서버 데이터는, 최신화가 필요한 데이터라고 볼 수 있습니다.
+    ➡️ 그 사이에 다른 유저가 데이터를 추가, 수정, 삭제 등을 할 수 있기 때문에 컴포넌트가 마운트, 업데이트되면 데이터를 다시 요청 합니다.
+    ➡️ fresh 에서 stale 로 넘어가는 시간의 디폴트는 0.
+-   inactive : **사용하지 않는 상태**
+    ➡️ 일정 시간이 지나면 가비지 콜렉터가 캐시에서 제거 합니다. 기본값 5분
+-   delete : **가비지 콜렉터에 의해 캐시에서 제거된 상태.**
+
+### 라이프 사이클 ( 중요 ✅ )
+
+1. A 쿼리 인스턴스가 mount 됨
+2. 네트워크에서 데이터를 **fetch** 하고 A 라는 **query key 로 캐싱함**
+3. 이 데이터는 fresh 상태에서 staleTime (기본값 0) 이후 **stale 상태**로 변경됨
+4. A 쿼리 인스턴스가 unmount 됨
+5. **캐시**는 cacheTime (기본값 5분) 만큼 유지되다가 **가비지 콜렉터**로 수집됨
+6. 만일 cacheTime 이 지나기 전에 A 쿼리 인스턴스가 **새롭게 mount 되면**, fetch 가 실행되고, **fresh 한 값을 가져오는 동안 캐시 데이터를 보여줌**.
+
+### cacheTime 이란 ?
+
+데이터가 inactive 상태일 때 **캐싱된 상태로 남아있는 시간**
+
+➡️ **쿼리 인스턴스가 unmount** 되면 데이터는 inactive 상태로 변경되며, 캐시는 cacheTime만큼 유지된다.
+➡️ cacheTime이 지나면 **가비지 콜렉터**로 수집된다.
+➡️ cacheTime이 지나기 전에 쿼리 인스턴스가 다시 mount 되면, 데이터를 fetch하는 동안 캐시 데이터를 보여준다.
+➡️ cacheTime은 staleTime과 관계없이, 무조건 inactive 된 시점을 기준으로 캐시 데이터 삭제를 결정한다.
+
+여기까지 라이프 사이클에 대한 설명이었습니다. React Query 의 중요한 내용인 만큼 꾸준히 복습하면 좋습니다.(필자 또한)
+
+**다음 포스팅은 쿼리 키에 대해서 알아보겠습니다.**
+
+---
+
+## 참고
+
+[https://yrnana.dev/post/2021-04-10-react-query-staletime-cachetime/](https://yrnana.dev/post/2021-04-10-react-query-staletime-cachetime/)
+
+[https://www.udemy.com/course/react-query-react/](https://www.udemy.com/course/react-query-react/)
+
+[https://react-query-v3.tanstack.com/](https://react-query-v3.tanstack.com/)
+
+[우아한 테크 세미나](https://www.youtube.com/watch?v=MArE6Hy371c)

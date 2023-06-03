@@ -9,5 +9,23 @@ import reactStatePropsMdx from './react-state-props.mdx.json' assert { type: 'js
 import reactUseEffectMdx from './react-useEffect.mdx.json' assert { type: 'json' }
 import reactUseStateMdx from './react-useState.mdx.json' assert { type: 'json' }
 import reactUseContextMdx from './react-useContext.mdx.json' assert { type: 'json' }
+import reactUseReducerMdx from './react-useReducer.mdx.json' assert { type: 'json' }
+import reactUseMemoMdx from './react-useMemo.mdx.json' assert { type: 'json' }
+import reactUseCallbackMdx from './react-useCallback.mdx.json' assert { type: 'json' }
+import reactUseRefMdx from './react-useRef.mdx.json' assert { type: 'json' }
+import reactReactMemoMdx from './react-React.memo.mdx.json' assert { type: 'json' }
+import reactQuery_1Mdx from './react-query-1.mdx.json' assert { type: 'json' }
+import reactQuery_2Mdx from './react-query-2.mdx.json' assert { type: 'json' }
+import reactQuery_3Mdx from './react-query-3.mdx.json' assert { type: 'json' }
+import reactQuery_4Mdx from './react-query-4.mdx.json' assert { type: 'json' }
+import reactQuery_5Mdx from './react-query-5.mdx.json' assert { type: 'json' }
+import reactQuery_6Mdx from './react-query-6.mdx.json' assert { type: 'json' }
+import reactQuery_7Mdx from './react-query-7.mdx.json' assert { type: 'json' }
+import reactQueryToolMdx from './react-query-tool.mdx.json' assert { type: 'json' }
+import reactWanted_1Mdx from './react-wanted-1.mdx.json' assert { type: 'json' }
+import reactWanted_2Mdx from './react-wanted-2.mdx.json' assert { type: 'json' }
+import reactWanted_3Mdx from './react-wanted-3.mdx.json' assert { type: 'json' }
+import reactWanted_4Mdx from './react-wanted-4.mdx.json' assert { type: 'json' }
+import reactViteMdx from './react-vite.mdx.json' assert { type: 'json' }
 
-export const allPosts = [reactComponentMdx, reactImmutabilityMdx, reactReduxMdx, reactRenderingMdx, reactStartMdx, reactStatePropsMdx, reactUseEffectMdx, reactUseStateMdx, reactUseContextMdx]
+export const allPosts = [reactComponentMdx, reactImmutabilityMdx, reactReduxMdx, reactRenderingMdx, reactStartMdx, reactStatePropsMdx, reactUseEffectMdx, reactUseStateMdx, reactUseContextMdx, reactUseReducerMdx, reactUseMemoMdx, reactUseCallbackMdx, reactUseRefMdx, reactReactMemoMdx, reactQuery_1Mdx, reactQuery_2Mdx, reactQuery_3Mdx, reactQuery_4Mdx, reactQuery_5Mdx, reactQuery_6Mdx, reactQuery_7Mdx, reactQueryToolMdx, reactWanted_1Mdx, reactWanted_2Mdx, reactWanted_3Mdx, reactWanted_4Mdx, reactViteMdx]

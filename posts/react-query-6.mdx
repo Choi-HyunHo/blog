@@ -1,0 +1,65 @@
+---
+title: React-Query - Pagination
+date: "2023-03-22"
+description: 리액트 쿼리 6화
+tag: React
+---
+
+## Pagination ❓
+
+콘텐츠를 여러 페이지로 나누어 다음 또는 이전 페이지로 이동하거나 특정 페이지로 이동 할 수 있는 요소 입니다.
+
+이 방법은 댓글을 작업했듯이 페이지마다 다른 쿼리키가 필요 합니다.
+따라서 쿼리키를 배열로 업데이트해서 가져오는 페이지 번호를 포함하면 됩니다.
+
+즉, 사용자가 다음 혹은 이전 페이지로 가는 버튼 누르면 current Page 상태를 업데이트하면 되며, React Query가 바뀐 쿼리키를 감지하고 새로운 쿼리를 실행해서 새 페이지를 표시 합니다.
+
+## 나눠서 살펴보면
+
+### 쿼리 함수 및 useQuery
+
+![carbon (2)](https://user-images.githubusercontent.com/87301268/226264472-c58ddcad-3678-4732-b109-c161fe88afd0.png)
+
+➡️ 어떤 페이지 번호를 입력하든 간에 가져올 수 있도록 **쿼리 함수에 pageNum 를 인자**로 받았습니다.
+
+➡️ 현재 페이지를 쿼리 키로 사용해서 **변화가 있을 때 마다 데이터를 다시 가져오도록** 하겠습니다.
+
+### 버튼 부분
+
+![carbon (5)](https://user-images.githubusercontent.com/87301268/226265946-80a04c3b-7a98-44b7-9af3-010127ad006c.png)
+
+maxPostPage 는 페이지의 최대 개수를 임의로 지정한 변수 입니다.
+
+이전 버튼은
+➡️ 기본적으로 disabled 되어 있는데 만약, currentPage 가 1과 같거나 1보다 작으면 이전 버튼을 비활성화 합니다.
+
+다음 버튼은
+➡️ 현재 페이지가 maxPostPage 보다 크거나 같을 경우 가져올 데이터가 없기에 비활성화 합니다.
+
+## 전체 코드
+
+![carbon (6)](https://user-images.githubusercontent.com/87301268/226266757-78a7d273-1199-4858-8fcb-6e97331abb32.png)
+
+## 결과
+
+![image (2)](https://user-images.githubusercontent.com/87301268/226267347-f86e93ca-5d09-48a1-b80a-ea4dfae1d1d4.gif)
+
+## 직접 확인해보기
+
+<iframe
+    src="https://codesandbox.io/embed/react-query-6-suw56x?fontsize=14&hidenavigation=1&theme=dark"
+    width="100%"
+    height="500px"
+></iframe>
+
+하지만 다음 페이지로 넘어가는 도중에 로딩이 나와서 사용자 경험에 방해를 줍니다.
+
+**다음 포스팅에서 다음 페이지 결과를 프리패칭(Prefetching) 해서 바로 보일 수 있도록 하겠습니다.**
+
+---
+
+## 참고
+
+[https://react-query-v3.tanstack.com/](https://react-query-v3.tanstack.com/)
+
+[https://www.udemy.com/course/react-query-react/](https://www.udemy.com/course/react-query-react/)

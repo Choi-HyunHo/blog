@@ -12,6 +12,7 @@ h3,
 blockquote,
 p,
 a,
-strong {
+strong,
+code {
     @apply dark:text-white;
 }
