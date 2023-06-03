@@ -1,0 +1,200 @@
+---
+title: useEffect
+date: "2023-02-06"
+description: hooks 두 번째❗️ useEffect 에 대해서
+tag: React
+---
+
+useState 와 더불어 가장 많이 사용되는 hook 인 useEffect 에 대해서 정리 하겠습니다 😀
+
+## **먼저 useEffect 란 ❓**
+
+> 컴포넌트가 렌더링 될 때 마다 Side Effect 로직을 다루는 hook 입니다.
+
+## **네..❓ Side Effect 가 뭔가요..❓**
+
+함수형 프로그래밍의 특징 이라고도 볼 수 있습니다. 사전적인 정의는
+
+> Side Effect 란, 원래의 목적과 다르게 다른 효과 즉, 부작용을 말합니다.
+
+여기서 끝나면 좋겠지만, 위와 연관지어 나오는 개념이 순수함수라고 있습니다.
+
+## **순수 함수❓**
+
+> 함수형 프로그래밍에서는 어떤 외부 상태에 의존하지도 않고 변경시키지도 않는
+> 즉, 부수 효과(Side Effect)가 없는 함수를 순수함수(Pure function)이라고 한다.
+
+반대로 부수 효과가 있는 함수는 비순수 함수(Impure function) 이라고 합니다.
+
+**순수 함수의 특징은❓**
+
+➡️ 동일한 인수가 전달되면 언제나 동일한 값을 반환 합니다. (외부 상태에 의존하지 않는다)
+
+➡️ 외부상태를 변경하지 않습니다.
+
+아래는 순수 함수 예시 입니다
+
+**1\. 외부 상태에 의존하지 않는 순수 함수**
+
+![1](https://user-images.githubusercontent.com/87301268/223919115-2e7296d3-e5d9-4b00-b722-7607a8e9887c.png)
+
+**2\. 외부 상태를 변경하는 비순수 함수**
+
+![2](https://user-images.githubusercontent.com/87301268/223919151-b7e35b73-bcff-435c-9ef3-fe6ab087c85f.png)
+
+## **순수함수를 사용하는 이유 ❓**
+
+비순수함수를 사용하면 다음과 같은 문제가 발생 합니다.
+
+-   함수가 외부 상태를 변경하면 상태 변화를 추적하기 어려워지고,
+-   추적의 어려움은 결국 오류를 야기하고, 오류해결을 어렵게 만든다.
+
+위와 같은 이유로 함수형 프로그래밍에서는 순수함수의 사용을 지향 합니다.
+
+useEffect 를 알기 위해서 이걸 알아야 하나라고 생각 할 수 있지만, **리액트 공식 문서에는 아래와 같은 말이 있습니다.**
+
+> 모든 React 컴포넌트는 **자신의 props를 다룰 때 반드시 순수 함수처럼 동작**해야 합니다.
+
+**✅ React의 컴포넌트는 순수 함수이며, input 을 받아 예측 가능한 리턴 값을 만들어 냅니다.**
+
+➡️ 아래와 같이 같은 input 을 전달하면, 항상 같은 output 을 리턴 할 것 입니다.
+
+➡️ props 는 '읽기 전용' 입니다.
+
+![3](https://user-images.githubusercontent.com/87301268/223919171-23de678d-2e8d-4c5b-b90d-d69258ae34f0.png)
+
+## **리액트에서 Side Effect..❓**
+
+> 함수가 실행되면서 함수 외부에 존재하는 값이나 상태를 변경시키는 등의 행위를 말합니다.
+
+➡️ setTimeout(), setInterval() 등의 타이머 함수를 사용할 때
+
+➡️ 데이터를 가져오기 위해 외부 API 를 호출하는 경우
+
+➡️ 직접 컴포넌트의 DOM 을 수정 할 때
+
+즉, 무언가를 하기 위해 컴포넌트 외부에 도달해야 하는 경우 Side Effect 를 수행 합니다.
+
+그래서 useEffect 는 컴포넌트 내에서 이러한 Side Effect 를 처리하게 위해 사용 합니다.
+
+## **useEffect  특징**
+
+➡️ 컴포넌트의 **Lifecycle** 를 제어하는 hook 입니다.
+
+![4](https://user-images.githubusercontent.com/87301268/223919267-2e709239-e31e-4fc7-9c9b-1a8b530cb2eb.jpeg)
+
+**탄생** : 컴포넌트가 화면에 나타나는 것 ( React 에서 **Mount** 라고 지칭 )
+
+**변화** : state 가 바뀌거나, 업데이트(리렌더) 되거나 이런 변화들 ( **Update** )
+
+**죽음** : 컴포넌트가 화면에서 사라지게 되는 것 입니다. ( React 에서 **unMount** 라고 지칭 )
+
+> 즉, React 에서 제작하고 사용하는 컴포넌트들의 탄생 부터 시작해서  
+> state 나 props 이 바뀌게 되어 일어나는 변화를 거쳐, 컴포넌트가 화면에서 없어지게 되는 죽음에 관한 이야기 입니다.
+
+## **제어를 한다고..❓**
+
+> 컴포넌트가 탄생하고, 변화하고, 사라지고 죽는 순간에 각각 어떤 작업을 수행 시킬 수 있다는 것을 제어한다고 말할 수 있습니다.
+
+1.  **탄생**시에는 ex) 초기화 작업 을 진행한다.
+2.  **변화**가 일어날 때 ex) 해당 변화를 통해 발생 할 수 있는 예외에 대한 처리 작업을 추가로 수행 한다.
+3.  **컴포넌트가 사라지게 될 때** ex) 해당 컴포넌트가 사용하던 메모리를 반환하게 하는 작업들
+
+기존에 위와 같은 Lifecycle 를 제어하기 위해서는 클래스형 컴포넌트의 Lifecycle 메서드를 활용해야 했습니다.
+
+하지만, 간단한 Side Effect 처리에도 복잡한 코드 작성이 필요했기 때문에 유지 보수 및 사용하기 어려웠습니다.
+
+![5](https://user-images.githubusercontent.com/87301268/223919295-8a33f42c-cc15-41c0-bfa4-107cc4850e8f.png)
+
+이러한 문제를 해결하기 위해 useEffect 가 등장 했습니다
+
+![6](https://user-images.githubusercontent.com/87301268/223919324-7e07ab50-0a31-4e10-ba16-b6e437bd2c40.png)
+
+## **useEffect 사용법**
+
+![7](https://user-images.githubusercontent.com/87301268/223919361-e6f94282-99aa-420b-8e35-e93dbcdbb45a.jpeg)
+
+![8](https://user-images.githubusercontent.com/87301268/223919377-ccc868f0-99cd-42d7-8ca8-801a0202ae0d.png)
+
+-   2개의 파라미터를 전달하게 되는데 **1\. callback 함수,** **2\. 의존성 배열** 을 전달 합니다.
+-   의존성 배열을 **뎁스(deps)** 라고 부르기도 합니다.
+
+**useEffect 는 뎁스에 따라 동작이 달라 집니다.**
+
+**1\. deps 에 빈 배열을 전달 할 때 ➡️ 컴포넌트가 mount 되는 시점**
+
+![9](https://user-images.githubusercontent.com/87301268/223919431-3de4d48d-1f60-4897-9895-6ee7b6c2041f.png)
+
+**빈 배열을 전달하면 컴포넌트 최초 렌더링 이후 한 번만 실행 합니다.** **즉, 생애주기로 보면 생성 되는 시점이라고 볼 수 있습니다.**
+
+주로 사용하는 상황은
+
+1.  axios, fetch 등을 통해서 서버에 데이터를 요청 할 때
+2.  DOM 의 속성을 읽거나 변경 할 때 등
+
+**2\. deps 특정 props, state 가 있을 때 ➡️ 컴포넌트가 update 되는 시점**
+
+![10](https://user-images.githubusercontent.com/87301268/223919447-0493dfd3-2a98-4166-9437-cf5a5068e4cb.png)
+
+**props, state 를 deps 에 전달하게 되면 컴포넌트 최초 렌더링 및 해당 값이 변경 될 때마다 실행 합니다.**
+**생애주기로 보면, 변화하는 중이라고 볼 수 있습니다.**
+
+**3\. 컴포넌트가 사라지게 될 때 ➡️ unmount 되는 시점**
+
+![11](https://user-images.githubusercontent.com/87301268/223919735-7f6383eb-f4e8-4f1f-b73d-f93e0d1fb759.png)
+
+**useEffect 안에 return 문이 존재하면 컴포넌트가 unmount 인 경우 실행되는 클린업 함수라고 합니다.**
+
+주로 사용하는 상황은
+
+1.  DOM 이벤트를 제거 할 때 ( 현업에서 일해보니 가장 많이 보이는 방법 )
+2.  타이머 함수를 종료 할 때
+
+더 많은 상황이 있을 거 같은데 알려주시면 감사하겠습니다 😀
+
+## **만약 deps 를 사용하지 않으면 ❓**
+
+![12](https://user-images.githubusercontent.com/87301268/223919793-cbe416f3-e845-47d2-bc8a-c00b3529cc10.png)
+
+**컴포넌트가 렌더링 될 때 마다** 실행 됩니다.
+
+주의해야 할 점은 **모든 렌더링에 상호작용** 하기 때문에 **의도와 다르게 Side Effect 가 실행** 될 수 있습니다.
+
+## **정리**
+
+지금까지 Side Effect 가 무엇인지, 순수 함수란, 생명주기, useEffect 사용법 등
+
+짧지 않은 내용이지만 저를 포함한 많은 분들이 이 글을 접하게 되시면 도움이 되었으면 하는 바램 입니다.
+피드백은 환영 입니다👍
+
+짧게 정리을 해보면
+
+-   **useEffect()** 훅으로만 **클래스 컴포넌트의 생명주기 함수들과 동일한 기능을 수행 할 수 있음**
+-   **첫 컴포넌트 렌더링 시 한 번은 수행** ( \[ \] 여부와 관계없이 )
+
+![13](https://user-images.githubusercontent.com/87301268/223919801-a07a3a2f-8c3b-4795-9360-cb186bb4636f.png)
+
+만약 number 의 값이 변하면 위의 useEffect 는 다시 작동 합니다. ( action 값이 같아도! )
+
+-   즉, number가 바뀌면 console.log(action) 은 같이 나옵니다.
+-   이유는 의존성 배열에 들어있는 값이 변하기 때문입니다.
+
+## **참고**
+
+[http://www.yes24.com/Product/Goods/109781552](http://www.yes24.com/Product/Goods/109781552)
+
+[https://choar816.tistory.com/163](https://choar816.tistory.com/163)
+
+[https://blog.greenroots.info/what-are-pure-functions-and-side-effects-in-javascript](https://blog.greenroots.info/what-are-pure-functions-and-side-effects-in-javascript)
+
+[https://www.inflearn.com/course/%ED%95%9C%EC%9E%85-%EB%A6%AC%EC%95%A1%ED%8A%B8](https://www.inflearn.com/course/%ED%95%9C%EC%9E%85-%EB%A6%AC%EC%95%A1%ED%8A%B8)
+
+[https://velog.io/@jmean12/useEffect%EB%9E%80](https://velog.io/@jmean12/useEffect%EB%9E%80)
+
+[https://ko.reactjs.org/docs/components-and-props.html](https://ko.reactjs.org/docs/components-and-props.html)
+
+[https://seokzin.tistory.com/entry/React-useEffect%EC%9D%98-%EC%B2%A0%ED%95%99%EA%B3%BC-Lifecycle](https://seokzin.tistory.com/entry/React-useEffect%EC%9D%98-%EC%B2%A0%ED%95%99%EA%B3%BC-Lifecycle)
+
+```toc
+
+```

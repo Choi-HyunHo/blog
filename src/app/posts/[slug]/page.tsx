@@ -13,7 +13,7 @@ export default function Detail({ params }: any) {
 
     return (
         <div className="max-screen-md">
-            <div className="prose  dark:text-white mt-10 dark:bg-[#121212]">
+            <div className="prose max-w-none dark:text-white mt-10 dark:bg-[#121212]">
                 <h1>{post.title}</h1>
                 <MDXComponent />
             </div>
