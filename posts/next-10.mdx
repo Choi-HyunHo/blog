@@ -1,0 +1,73 @@
+---
+title: Next.js - MetaData(SEO)
+date: 2023-04-26
+description: 내가 만든 사이트도 검색 엔진 상위권으로.. 👆🏻
+tag: Next.js
+---
+
+SEO 를 위한 MetaData 설정하는 방법에 대해 알아보겠습니다.
+
+이미 layout.js 를 포스팅을 보신 분들은 아시겠지만 `최상의 layout.js` 에 metadata 가 기본적으로 정의되어 있다는 걸 의도치 않게 봤습니다.
+
+➡️ [layout.js 포스팅 보러가기](https://choi-hyunho.com/next/next-9/)
+
+공식문서에 많은 설정 방법이 있지만 기본적인 방법만 우선 공부해보겠습니다.
+
+## metadata를 선언하는 위치에 따라 다르다 ❓
+
+`page.js` 에 선언하는 것과 `layout.js` 에 선언하는 것은 미치는 범위..? 가 다릅니다.
+
+-   `page.js` : 해당 페이지에만 적용이 됩니다. 다른 페이지에 영향 ❌
+-   `layout.js` : 해당 경로의 페이지 뿐만 아니라 자식 라우터에서도 메타데이터가 재사용 됩니다.
+
+웹 페이지에 전체적으로 보여지고 싶은 기본적인 metadata 라면 `layout.js` 에 하는 것이 좋습니다.
+
+만약 전체가 아닌 정해진 라우터 경로들에서 데이터를 바꾸고싶다면 마찬가지로 해당 라우터의 `layout.js` 페이지에 추가를 합니다.
+
+## 최상위 layout.js
+
+![](https://user-images.githubusercontent.com/87301268/233396456-56308f6e-7a12-4869-82e1-a39f37be43e7.png)
+
+![](https://user-images.githubusercontent.com/87301268/233420522-996a56c7-04a2-4f03-b313-df4d19a4213c.png)
+
+### 바꿔보면 ❓
+
+![carbon](https://user-images.githubusercontent.com/87301268/233420864-858f9f4b-526a-4a5d-84a8-95f46c669864.png)
+
+![](https://user-images.githubusercontent.com/87301268/233420944-64a1d53b-71e8-4dbc-bc53-05926a62df30.png)
+
+## 해당 라우터에서 지정
+
+posts 경로를 기준으로 바꿔보겠습니다.
+
+![4](https://user-images.githubusercontent.com/87301268/233424142-2b21d120-b78a-4279-90af-7212c0596aac.png)
+
+![1](https://user-images.githubusercontent.com/87301268/233423967-699eeb16-0e27-4535-b44e-abf3de0d05f5.gif)
+
+## 동적 라우팅에서 metadata 받기
+
+`[slug]` 파일로 데이터를 동적으로 받아오면 metadata 또한 동적으로 바꾸고 싶은 경우가 생길 수도 있습니다.
+
+slug 의 `page.js` 에서 전달 받아 보겠습니다.
+
+### generateMetadata
+
+➡️ [공식문서](https://beta.nextjs.org/docs/api-reference/metadata#generatemetadata-function)
+
+![5](https://user-images.githubusercontent.com/87301268/233426548-feaa6cd2-aa22-43d0-81fb-db8ff6de3a1f.png)
+
+![2](https://user-images.githubusercontent.com/87301268/233427610-ffcfef00-e4a2-4748-bb01-c87eccc0f20f.gif)
+
+## 후기
+
+지금 해본 것 말고도 훨씬 많은 기능이 있습니다. 하지만 미리 배운다고 다 기억하는게 아니기에 적절한 시기에 또 배워봅시다..🥹
+
+---
+
+## 참고
+
+https://velog.io/@henrynoowah/Next.js-v13.2-Feature-Metadata
+
+https://velog.io/@jay/Nextjs13-File-based-Metadata
+
+https://beta.nextjs.org/docs/api-reference/metadata#generatemetadata-function

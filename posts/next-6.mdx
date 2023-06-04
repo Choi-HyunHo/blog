@@ -1,0 +1,149 @@
+---
+title: Next.js - 12버전, 13버전 ?
+date: 2023-04-22
+description: 두 버전의 차이점을 알아봅시다 ❗️
+tag: Next.js
+---
+
+회사에서 처음 Next.js 를 사용할 때 12버전으로 사용을 했었는데
+다시 공부하는 지금 13버전이 출시되었습니다.
+
+물론 아직 beta 인 부분도 있지만 앞으로 사용될 버전이기도 함으로 이전 버전과 같이 공부 해보겠습니다.
+
+바뀐 13버전에 대해 먼저 알아봅시다!
+
+![3](https://user-images.githubusercontent.com/87301268/232970688-09068346-302b-4bb9-8f12-10a2c707cdbb.jpg)
+
+## app / Directory (beta)
+
+![1](https://user-images.githubusercontent.com/87301268/232967823-4acb4aa9-b262-44be-9e92-f1b6658f32f7.png)
+
+기존 버전에서는 `pages` 라는 폴더 내부에 폴더와 파일을 생성하면 file-system 기반의 라우팅을 하여 주소가 맵핑이 되었습니다.
+
+하지만 13버전부터는 `app/` 폴더 안에서 이루어지게 됩니다. ( 물론 이외에 아래 다른 많은 기능까지 )
+
+하나씩 살펴보도록 하겠습니다.
+
+## 13버전의 대표적인 변화는
+
+`app / Directory` 를 기반으로
+
+1. **Layouts**
+   ➡️ 리렌더링 방지를 기본으로 구현한 Layout
+
+2. **React Server Component**
+   ➡️ React 의 새로운 Server Component 지원하여 로딩 속도 개선
+
+3. **Streaming**
+   ➡️ 점진적으로 스트리밍 되어 UI 렌더링 할 수 있는 Streaming
+
+4. **Turbopack (alpha)**
+   ➡️ 웹팩보다 700배 빠른 Rust 기반의 대체품
+
+5. **New Next/image**
+   ➡️ 빨라진 lazy loading (Google과 협업으로 기존 로딩 퍼포먼스를 저해하던 요소들 개선)
+
+6. **New @next/font (beta)**
+   ➡️ 빌드타임 때 최적화를 시키면 구글 폰트가 기본으로 내장 (폰트 최적화)
+
+7. **Improved next/link**
+   ➡️ 기존 `<Link>`안에 사용되던 `<a> `태그 불필요
+
+사실 보기만 한들.. 사용하지 않으면 의미가 없기 때문에 최소한의 개념만 정리하고 직접 사용해보면서
+기록을 남기도록 하겠습니다.
+
+### Layouts
+
+공통으로 사용되는 UI 컴포넌트를 layout 파일안에 위치시키면 불필요한 리렌더링을 방지를 하고 컴포넌트간의 상호 작용을 쉽게 구현할 수 있습니다.
+
+➡️ [공식문서](https://beta.nextjs.org/docs/routing/pages-and-layouts)
+
+### React Server Component
+
+React의 새로운 Server Components 아키텍처에 대한 지원으로 나온 업데이트
+
+➡️ [공식문서](https://beta.nextjs.org/docs/rendering/server-and-client-components)
+
+### Streaming
+
+![streaming](https://user-images.githubusercontent.com/87301268/232972088-74f87eb8-a17e-4477-84ec-812609af8006.png)
+
+![loading-diagram](https://user-images.githubusercontent.com/87301268/232972336-f9d111d1-7ce4-4824-9ac5-923ee87f1ebe.png)
+
+app 디렉토리에 lodaing이라는 예약파일을 생성하면 데이터를 가져오는 부분에서 로드 상태를 표시해주는 컴포넌트 입니다.
+
+loading.js 는 layout.js 내부에 위치하여 page.js 파일을 감싸는 `<Suspense>`를 만듭니다.
+
+Server Components와 layout.js 함께 사용하면 데이터가 필요하지 않은 부분은 화면에 먼저 표시되고 데이터가 필요한 부분은 loading.js 에 작성한 내용이 먼저 표시된 후 로드가 완료되는 실제 내용이 표시
+
+### Turbopack
+
+![4](https://user-images.githubusercontent.com/87301268/232974072-4bd3c1c9-7bd7-4828-9985-b2d8ecc7e1f8.png)
+
+Rust 기반의 700x 배 빠른 번들링 툴
+
+### next/image
+
+-   client-side JavaScript에서 image shift 현상 최소화
+-   더 쉽게 style 가능
+-   alt를 기본으로 주면서 접근성 향상
+-   웹 플랫폼에 맞게 조정
+-   기본 브라우저 로딩 지연으로 더 빨라진 속도
+
+![carbon](https://user-images.githubusercontent.com/87301268/232974346-2c817549-9d48-4348-99c6-e34f18291de7.png)
+
+### next/font (beta)
+
+-   자동으로 최적화된 기본 글꼴 및 커스텀 글꼴 제공
+-   프라이버시와 퍼포먼스 향상을 위해 외부 네트워크 요청 방식을 제거
+-   모든 글꼴 파일을 위한 자동 셀프 호스팅 방식
+-   css의 size-adjust 프로퍼티를 이용한 Layout shift 요소 제거
+
+중요한건 성능 향상 뿐만 아니라 내장된 구글 폰트를 편리하게 사용 가능
+
+➡️ CSS와 폰트파일은 빌드타임에 다운로드되고, static assets은 self-host 되기때문에 브라우저에서 Google로 요청이 없다고 합니다.
+
+![carbon (2)](https://user-images.githubusercontent.com/87301268/232975746-fd6102d6-48eb-4494-b5de-44e443a681f8.png)
+
+### next/link
+
+![carbon (1)](https://user-images.githubusercontent.com/87301268/232974694-92a242db-eee6-4288-a306-e578ee95c655.png)
+
+`<Link>` 를 사용할 때 더이상 `<a>` 태그를 자식 요소로 포함하지 않아도 됩니다.
+기존에는 `<a>` 태그가 아닌 다른 태그 요소를 활용시, `passHref` 라는 속성이 필요했는데, 이제 더이상 사용하지 않아도 됩니다. (기본으로 포함)
+
+### Data Fetching
+
+더 이상 getServerSideProps, getStaticProps, getInitialProps 를 사용하지 않습니다.
+
+➡️ async/await을 활용하여 데이터를 불러옵니다.
+
+![carbon (3)](https://user-images.githubusercontent.com/87301268/232977005-c90570e4-684b-4219-a10e-b29da509b53a.png)
+
+![carbon (4)](https://user-images.githubusercontent.com/87301268/232977022-5198a0fd-115f-42e9-9ab7-ce91343c6a5c.png)
+
+fetch의 cache, revalidate 옵션을 활용하여 기존의 getServerSideProps, getStaticProps, getInitialProps 처럼 활용이 가능하며 SSG, SSR, ISR의 모든 장점들을 하나의 API에서 사용이 가능 합니다.
+
+### OG Image Generation
+
+`@vercel/og` 가 추가되어 Next.js만으로도 og 이미지를 만들 수 있게 되었습니다.
+
+![carbon (5)](https://user-images.githubusercontent.com/87301268/232977586-305dbd46-ff33-4a20-b37d-f123538418ca.png)
+
+## 소감
+
+버전 업그레이드가 아니라 그냥 새로운 툴로 느껴진다... 화이팅..!
+
+---
+
+## 참고
+
+https://nextjs.org/blog/next-13
+
+https://velog.io/@hwangyena/Next.js-13-version
+
+https://helloinyong.tistory.com/345
+
+https://velog.io/@dbwjd5864/Next.js-13-%EC%B0%8D%EC%96%B4%EB%A8%B9%EA%B8%B0
+
+https://ahnanne.tistory.com/92

@@ -1,0 +1,72 @@
+---
+title: Next.js -  error.js
+date: 2023-05-10
+description: 친절하게 에러를 알려주자❗️
+tag: Next.js
+---
+
+loading.js 처럼 라우트 별로 에러를 표기 할 때 사용 할 수 있는 UI 입니다.
+
+<img src="https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/510b7756-b6ae-4c2c-823d-0330c7fc6470" />
+
+내부적으로는 아래 예시처럼 만들라고 공식 문서에 나와있습니다.
+
+![2](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/3da1ef71-43f9-49f1-bf93-165d0323b42d)
+
+에러 컴포넌트는 클라이언트 컴포넌트로 만들어야 합니다.('use client')
+
+그리고 콜백을 2가지 전달 합니다.
+
+1. 어떤 `error` 가 발생했는지 알 수 있는 요소
+2. 페이지를 `reset` 할 수 있는 요소
+
+직접 확인해보겠습니다.
+
+## error.js 만들기
+
+![4](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/2069c277-7af0-4755-9fbf-e48f0c891994)
+
+posts 라우트 전체에 error 파일을 만들었습니다.
+
+### error.js
+
+![3](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/63e7ba81-2b8a-46c8-9bc3-086f9798413c)
+
+의도적으로 posts 경로에 접근하면 에러가 발생하도록 해보겠습니다.
+
+![1](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/cd438f2f-cb09-4650-9ffc-1bd8479e9495)
+
+화면에 에러 메세지와 리셋 버튼이 생기는 걸 확인 할 수 있습니다.
+
+## Error 는
+
+### 1. loading suspense 와 마찬가지로 Error Boundary 도 필요한 곳에만 적용 할 수 있습니다.
+
+<img src="https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/89c6ea13-43e4-4a3c-a5b6-2f1edbba7472" />
+
+-   error.js는 자동으로 리액트 에러 바운더리를 생성하고, page.js 컴포넌트 또는 중첩된 자식 세그먼트를 감쌉니다.
+-   에러 바운더리 안에서 에러가 발생하면 해당 에러가 포함 되며 폴백 컴포넌트가 렌더 됩니다.
+
+### 2. Nested Routes
+
+<img src="https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/d3d22c3e-3b05-471a-8e15-9f341078d72a" />
+
+또한 중첩되게 사용 할 수 있으며 만약 dashboard 안에서 error.js 를 정의하지 않았다면
+error 가 발생 한 경우 상위 라우트로 가서 해당 상위 라우트의 error 를 보여줍니다. 🆙
+
+### 3. Handling Errors in Root Layouts
+
+루트 app/error.js는 루트 app/layout.js나 app/template.js 컴포넌트 안에서 발생한 **에러는 캐치하지 않습니다.**
+
+이러한 루트 컴포넌트들 안에서 에러를 핸들링 하려면,
+
+-   루트 app 디렉토리 안에 `app/global-error.js` 를 이용해야 합니다.
+-   파일 안의 내용은 error.js 와 동일 합니다.
+
+---
+
+## 참고
+
+[공식 문서](https://nextjs.org/docs/app/building-your-application/routing/error-handling#handling-errors-in-root-layouts)
+
+https://velog.io/@chaewonkang/Next.js-13-1.-Routing-1.6.-Error-Handling

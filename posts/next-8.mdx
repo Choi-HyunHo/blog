@@ -1,0 +1,48 @@
+---
+title: Next.js - 커스텀 404 페이지
+date: 2023-04-24
+description: 사용자에게 조금 더 예쁜 404 페이지를 보여주자 👍
+tag: Next.js
+---
+
+지정되지 않은 경로로 이동했을 때 나오는 Next.js 의 제공되는 404 페이지 입니다.
+
+![](https://user-images.githubusercontent.com/87301268/233140722-a0e5b27b-9f1d-43b3-a841-3dbd77fc9999.png)
+
+404 페이지를 13 버전에 맞게 커스텀 해보겠습니다. (아직 beta 라 나중에 또 달라질 수 있습니다..)
+
+현재 버전 기준 : `"next": "13.3.0"`
+
+## 디렉토리 구조
+
+![](https://user-images.githubusercontent.com/87301268/233142153-6b67836a-55cb-4a68-ab65-bdb76eff1f8a.png)
+
+`[...404]` 폴더와 최상위 `not-found.tsx` 를 보시면 됩니다.
+
+**스택 오버 플로우** 답변
+
+Next 13.3에서는 파일 이름을 not-found.js.
+
+이제 파일 app/not-found.js은 앱에 일치하는 경로가 없는 URL 방문을 자동으로 처리합니다.
+
+문서: https://beta.nextjs.org/docs/api-reference/file-conventions/not-found
+
+발표 위치: https://nextjs.org/blog/next-13-3
+
+## [...404]
+
+![carbon](https://user-images.githubusercontent.com/87301268/233142630-b36f96e7-478d-4a66-8c25-d0262c98d06a.png)
+
+## not-found.tsx
+
+![2](https://user-images.githubusercontent.com/87301268/233142742-4a48ec28-cdbe-4be5-a5f0-662faa0eced1.png)
+
+## 결과
+
+![1](https://user-images.githubusercontent.com/87301268/233143422-b55b8c34-9323-45ce-b125-af3fb6c38982.gif)
+
+---
+
+## 참고
+
+[stackoverflow](https://stackoverflow.com/questions/75302340/not-found-page-does-not-work-in-next-js-13/75625136#75625136?newreg=e41ff09bcca0434db4af2efd60851168)
