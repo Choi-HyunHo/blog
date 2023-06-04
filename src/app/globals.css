@@ -16,3 +16,7 @@ strong,
 code {
     @apply dark:text-white;
 }
+
+a:hover {
+    @apply hover:text-red-400 ease-in duration-150;
+}
