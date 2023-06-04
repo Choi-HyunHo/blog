@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-    @apply max-w-screen-md flex flex-col px-4 m-auto;
+    @apply max-w-screen-md flex flex-col px-4 m-auto dark:bg-[#22272e];
 }
 
 h1,
@@ -19,4 +19,8 @@ code {
 
 a:hover {
     @apply hover:text-red-400 ease-in duration-150;
+}
+
+.notion-title {
+    @apply dark:text-white;
 }

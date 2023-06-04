@@ -13,7 +13,7 @@ export default function Header() {
         <header
             className={`${
                 pathname === "/resume" ? "mb-0" : "mb-10"
-            }0 flex justify-between sticky top-0 left-0 z-10 h-20 w-full bg-white dark:bg-[#111111]`}
+            }0 flex justify-between sticky top-0 left-0 z-10 h-20 w-full bg-white dark:bg-[#22272e]`}
         >
             <Link href="/" className="flex items-center text-2xl font-semibold">
                 <Image src={Logo} alt="logo" width={50} />
