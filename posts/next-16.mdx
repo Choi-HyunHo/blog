@@ -1,0 +1,72 @@
+---
+title: Next.js - Fonts
+date: 2023-05-16
+description: Next.js 에서 제공하는 Font 사용해보자
+tag: Next.js
+---
+
+이미지와 마찬가지로 폰트 또한 Next 에서 최적화하여 지원해줍니다.
+
+Next.js 에서 Fonts 를 사용하는 방법에 대해 알아봅시다.
+
+## 사용하지 않은 경우(일반적)
+
+이전 이미지에서 잠깐 **layout shift** 에 대해서 언급하고 지나왔습니다.
+
+**일반적으로 폰트를 페이지에 추가하게 되면**
+
+1. 사용자가 페이지를 다운받으면 텍스트는 폰트가 적용 되어있지 않은 기본 텍스트를 가져옵니다.
+2. 그 후 폰트를 사용한다면 폰트를 요청 및 다운로드 한 후 페이지에 적용하여 다시 렌더링이 됩니다.
+3. 적용된 폰트를 볼 수 있습니다.
+
+하지만 기본 폰트 사이즈와 새로 적용하는 폰트는 많이 다릅니다.(크기, 굵기 등...)
+이러한 특징 때문에 layout shift 가 발생 합니다.
+
+또한 만약 **다른 서버에 있는 폰트를 사용하면(구글 폰트 등)**
+
+1. 구글 서버에 요청해서 폰트 파일을 다운로드 받고
+2. 페이지에서 적용한 다음 사용자에게 보여집니다.
+
+위와 같은 문제를 해결하기 위해 Next에서 폰트 최적화를 지원합니다.
+
+## Next에서 제공하는 Fonts 를 사용한다면
+
+외부 네트워크에서 사용하는 폰트를 직접 쓰는 것이 아니라 웹 애플리케이션 안에서 사용하는 폰트를
+**자체적으로 서버를 통해 호스팅 할 수 있도록 해주고 layout shift 까지 발생하지 않도록 최적화를 해줍니다.**
+
+## 사용법
+
+### 1. 먼저 처음 프로젝트를 생성하면 최상단 page 내부에서 폰트에 관련된 코드를 볼 수 있습니다.
+
+![1](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/aff1d2a7-acfa-42b1-8933-41da250d2590)
+
+사용하고 싶은 폰트가 있다면 구글에서 제공해주는 폰트를 사용하면 됩니다.(`variable fonts`)
+
+> variable fonts ?
+>
+> 하나의 폰트라도 굵기, 기울임이 달라 파일을 각각 다운로드 받아야 할 수도 있는데
+> variable fonts 는 하나의 파일만으로도 다양한 버전을 가지고 있는 것을 말합니다.
+> 즉, 하나의 폰트 파일을 가지고도 두께 조절이 가능하고, 기울임 역시 마찬가지 입니다.
+
+-   [Google Fonts에 관한 Next 문서](https://nextjs.org/docs/app/building-your-application/optimizing/fonts#google-fonts)
+-   [variable fonts](https://fonts.google.com/variablefonts)
+
+### 2. page 보다는 layout에서 사용하자
+
+아래와 같이 코드를 사용해보겠습니다.
+
+![2](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/40713dda-02ac-4aeb-9a8b-061e5fa2bc40)
+
+폰트는 전체에 적용 할 수도 있고, 라우트 별, 태그 별 각각 지정이 가능 합니다.
+
+---
+
+## 참고
+
+https://nextjs.org/docs/app/building-your-application/optimizing/fonts#google-fonts
+
+https://fonts.google.com/variablefonts
+
+https://velog.io/@sangbooom/nextfont-%EC%A0%81%EC%9A%A9
+
+https://dev-boku.tistory.com/entry/Nextjs-13%EC%97%90%EC%84%9C-%EC%9B%B9-%ED%8F%B0%ED%8A%B8-%EC%B5%9C%EC%A0%81%ED%99%94

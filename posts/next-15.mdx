@@ -1,0 +1,112 @@
+---
+title: Next.js - Image
+date: 2023-05-11
+description: Next.js 에서 이미지 태그를 사용해보자
+tag: Next.js
+---
+
+Next.js 에서 이미지를 불러오는 방법부터 살펴보겠습니다.
+
+먼저 public 폴더 안에 image 라는 폴더를 생성 후 이미지 파일을 넣었습니다.
+
+<img src="https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/6b09d1ab-5279-41da-8b92-dda00fc62585" />
+
+똑같이 img 태그를 사용 할 수 있지만 이미지를 위한 최적화된 태그인 `<Image>` 를 사용 합니다.
+기본적으로 기존 img 태그랑 크게 사용법이 다르지 않습니다.
+
+## Image
+
+## 1. 이미지를 경로 말고 import 방식으로 가져오기
+
+![2](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/ae6ce47c-e6a4-4c17-89e1-1422f334e63c)
+
+최상위 import 부분과 `<Image>` 태그를 보시면 됩니다. 아래는 적용된 화면 입니다.
+
+![3](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/1c9dba1b-3867-4daf-8d85-3d1ec165011f)
+
+## 2. 이미지 파고들기
+
+특이점은 개발자 도구로 해당 img 경로를 확인해보면 기본적인 너비, 높이, src, srcset 등 여러 속성을 볼 수 있습니다.
+
+![5](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/54fe9cc7-21c0-444a-9a66-a7315c6b3da5)
+
+먼저 로컬에 있는 이미지의 크기는 10KB 였습니다.
+
+![6](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/02f0bf4c-3047-47c7-8095-7f40c306fdd1)
+
+하지만 웹에 올라간 이미지의 크기는 4.3KB로 줄어든 것을 볼 수 있습니다.
+
+![7](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/49139002-61fa-4982-bed9-9e37a91d00f5)
+
+이유는 위에서 언급한 srcset 을 보면 '너비를 기준으로 해당하는 너비의 디바이스에서는 이미지를 어떻게 보여줘라'
+라고 사용자가 지정하지 않아도 최적화가 되있습니다.
+
+일반 이미지 태그 사용하는 것보다 Next.js 의 `<Image>` 태그가 더 효율적이다 라는 것을 알 수 있습니다.
+
+-   이미지가 public 경로에서 가져오면 Next.js 에서 이미지에 대한 정보를 가지고 있습니다.
+-   그렇기에 자동으로 최적화를 해줍니다.
+
+### 2.1 하지만 만약 이미지를 외부의 경로로 불러오면?
+
+![8](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/c72abe16-2b46-451c-9e5b-281ffea64931)
+
+에러가 발생 합니다.
+
+![9](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/4a677dc0-d481-47b9-b49d-a742b7601b65)
+
+-   외부 경로를 사용 할 때는 `width`, `height` 속성이 필수 입니다.
+-   추가로 외부 경로 사용 시 `next.config.js` 에 경로를 지정해야 합니다.
+-   config 폴더를 수정하면 꼭 **재실행**을 해야 합니다.
+
+![10](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/ee909645-6037-43d3-ba6c-23febdd2e717)
+
+-   위와 같은 형태를 유지하되 `protocol` 과 `hostname` 은 상황에 맞게 입력 합니다.
+
+![11](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/4cc9a52d-2568-41d1-804a-3dada016409b)
+
+## Image 태그 사용 시
+
+### 1. 이미지 사이즈를 지정해두면 그 사이즈의 공간을 미리 HTML에서 만듭니다.
+
+-   이미지가 브라우저에 표기될 때 layout shift 가 발생하지 않습니다.
+-   layout shift 가 발생하면 UI 컴포넌트가 자리를 이동하면서 브라우저가 다시 렌더링을 해야하는데 사용자가 화면을 보는 경우 UI 움직임을 볼 가능성이 있고, 브라우저 자체적으로 렌더링이 다시 걸리기 때문에 성능에 영향을 미칩니다.
+
+> layout shift 란
+> 뒤늦게 로드가 되는 소스로 인하여 화면에서 봤을 때 밀리는 현상을 의미 합니다.
+> ex) 화면에 텍스트가 먼저 렌더링 되고 → 추후 이미지가 로딩되어 텍스트가 밀리는 현상
+
+### 2. priority
+
+하나의 화면에 보여지는 이미지가 많은 경우 이미지 렌더링 되는 시점을 생각하여
+**'사용자에게 우선적으로 보여질 이미지'** 를 정할 수 있습니다.
+
+![12](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/ac18e20c-491e-41b6-81e2-2ec3d7a8b2ed)
+
+### 3. placeholder
+
+input 태그를 사용하면서 사용자에게 무엇을 입력하는지 미리 알려줄때 사용했었는데 맞습니다..
+
+해당 속성을 사용하면 **이미지가 로드되는 동안 그 자리에 사용할 표시자** 입니다.
+
+![14](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/3a14edca-9aa9-48c7-ad04-2cd9574e5945)
+
+-   [blurDataURL](https://nextjs.org/docs/pages/api-reference/components/image#blurdataurl)
+
+### 4. 그리고...
+
+정말 너무 많은 속성들과 기능이 있습니다.. 하나씩 다 설명해보고 싶은 욕심이 있지만
+어느정도 사용하는데 기본적인 틀은 정리 해본것 같아 추후 프로젝트에 직접 적용해보면서 특이점이 있으면 정리 해보겠습니다.
+
+![13](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/10b73df1-dd16-438a-8baa-eae8c7b05e62)
+
+---
+
+## 참고
+
+[공식문서](https://nextjs.org/docs/pages/api-reference/components/image)
+
+https://abangpa1ace.tistory.com/242
+
+https://fe-developers.kakaoent.com/2022/220714-next-image/
+
+https://www.nokiahub.site/dev/next-image/

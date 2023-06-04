@@ -1,0 +1,44 @@
+---
+title: Next.js - 13버전 App directory에서 Redux 설정 해보자
+date: 2023-05-19
+description: Redux 를 사용하고 싶은데 Provider 를 어느 곳에 사용하나요 ❓
+tag: Next.js
+---
+
+최근에 Next.js 13버전을 사용하여 사이드 프로젝트를 하고 있는데 전역 모달을 Redux로 만들기 위해 Provider 설정을 해야 했다.
+
+하지만 app directory 에는 `index.js` 등 최상위 파일이라고 해야하나 비슷한건 있지만 대놓고는 없다는거..
+지금부터 어떻게 Redux 를 설정하는지,, 어떻게 `Provider` 를 씌우는지 살펴보도록 하자
+
+![1](https://github.com/Choi-HyunHo/coding_test/assets/87301268/d6c359e4-0116-4de2-965c-b6bcd5a76036)
+
+## 먼저 설치부터 해야겠지 ?
+
+리덕스와 리덕스 툴킷을 준비 했다는 가정하에 넘어가보자
+
+근데 사실 본인도 한번 코드 정리해놓으면 이거는 복붙하는 형태로 주로 사용해서.. 기록용이다..
+
+리덕스와 리덕스 툴킷에 대한 내용이 궁금하면 [정리한 글](https://choi-hyunho.com/react/react-redux/)을 참고 바란다..
+
+## 1. src/redux/store.ts
+
+![1](https://github.com/Choi-HyunHo/coding_test/assets/87301268/5be3776b-55dc-4e2e-b3fc-a8426a4fdfd1)
+
+## 2. src/redux/Provider.tsx
+
+![2](https://github.com/Choi-HyunHo/coding_test/assets/87301268/37e0e3f1-6001-4c49-b99e-eeaa73b9e924)
+
+## 3. 여기가 포인트❗️ src/app/layout.tsx
+
+전체 레이아웃 파일에 아래와 같이 `Provider` 를 감싸자.
+
+![3](https://github.com/Choi-HyunHo/coding_test/assets/87301268/dd711837-364b-4eb6-a56d-2c876940e9e9)
+
+그 외 소스들은 무시해도 됩니다~!
+
+---
+
+## 마무리
+
+막상 봤을 때는 크게 별 거 없을 수 있지만 처음 할 때는 당황할 수 있으니 글을 보시는 분들에게
+조금이나마 도움이 되길 바랍니다 🙏
