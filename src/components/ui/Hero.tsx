@@ -1,18 +1,19 @@
 import Image from "next/image";
 import Profile from "../../../public/images/profile.jpg";
+import View from "../../../public/images/overview.gif";
 
 export default function Hero() {
     return (
         <section className="mt-10 mb-10 flex flex-col sm:flex-row justify-center items-center gap-8 flex-wrap">
             <Image
-                src={Profile}
+                src={View}
                 alt="choi hyunho"
-                width={300}
-                height={300}
+                width={350}
+                height={100}
                 priority
                 className="rounded-2xl"
             />
-            <div className="flex flex-col justify-center items-center">
+            {/* <div className="flex flex-col justify-center items-center">
                 <h2 className="text-lg sm:text-xl font-bold">
                     프론트엔드 개발자 최현호 입니다.
                 </h2>
@@ -47,7 +48,7 @@ export default function Hero() {
                         </svg>
                     </a>
                 </div>
-            </div>
+            </div> */}
         </section>
     );
 }
