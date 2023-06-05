@@ -24,9 +24,15 @@ const Button = () => {
     return (
         <>
             {currentTheme === "dark" ? (
-                <BsFillMoonFill onClick={onClick("light")} />
+                <BsFillMoonFill
+                    onClick={onClick("light")}
+                    className="cursor-pointer"
+                />
             ) : (
-                <BsFillSunFill onClick={onClick("dark")} />
+                <BsFillSunFill
+                    onClick={onClick("dark")}
+                    className="cursor-pointer"
+                />
             )}
         </>
     );

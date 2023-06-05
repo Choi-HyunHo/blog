@@ -1,0 +1,59 @@
+---
+title: 한 입 크기로 잘라먹는 TS - 인터페이스
+date: "2023-06-08"
+description: 타입 별칭과 비슷하면서도 다른 문법
+tag: TS
+---
+
+> 이정환 님의 [한 입 크기로 잘라먹는 타입스크립트](https://www.inflearn.com/course/%ED%95%9C%EC%9E%85-%ED%81%AC%EA%B8%B0-%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/) 를 수강한 내용 입니다.
+
+## 인터페이스
+
+타입 별칭과 동일하게 타입에 이름을 지어주는 또 다른 문법 입니다.
+
+-   객체의 구조를 정의하는데 특화된 문법(상속, 합침 등)
+
+먼저 사용하는 예시부터 살펴보겠습니다.
+
+![1](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/0e96e1cd-4faf-4951-be83-dc8c5d320dfc)
+
+## 선택적 프로퍼티
+
+인터페이스에서도 동일한 방법으로 선택적 프로퍼티 설정이 가능합니다.
+
+![2](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/e4790ac3-ce1d-45ee-986c-6ff0cfa99c56)
+
+## 읽기 전용 프로퍼티
+
+![3](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/7dbfc553-b876-439e-a745-5b02c9df42f9)
+
+## 메서드 타입 정의하기
+
+다음과 같이 메서드의 타입을 정의하는 것 또한 가능합니다.
+
+> 메서드 ? 프로퍼티에 저장된 값이 함수인 것을 메서드라 부릅니다.
+
+![4](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/eda5a847-1925-4e6a-a86b-8eeab6710a52)
+
+## 메서드 오버로딩
+
+**함수 타입 표현식**으로 메서드의 타입을 정의하면 메서드의 오버로딩 구현이 `불가능` 합니다. ❌
+
+-   그러나 **호출 시그니처**를 이용해 메서드의 타입을 정의하면 오버로딩 구현이 `가능` 합니다 ✅
+
+![5](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/7e57a088-88c1-449e-8b10-c6484eceea14)
+
+## 하이브리드 타입
+
+인터페이스또한 함수이자 일반 객체인 하이브리드 타입을 정의할 수 있습니다.
+
+![6](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/cda9dd84-ba61-41f3-b858-c70dbbfad5ec)
+
+### ⚠️ 주의할 점
+
+타입 별칭에서는 다음과 같이 `Union`이나 `Intersection` 타입을 정의할 수 있었던 반면
+
+-   인터페이스에서는 **할 수 없습니다.**
+-   따라서 인터페이스로 만든 타입을 Union 또는 Intersection으로 이용해야 한다면 다음과 같이 **타입 별칭과 함께 사용**하거나 **타입 주석에서 직접 사용**해야 합니다.
+
+![7](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/8396abd1-64c0-47f6-a4af-de93ba0e8386)

@@ -1,0 +1,92 @@
+---
+title: 한 입 크기로 잘라먹는 TS - 타입 추론
+date: "2023-06-02"
+description: 타입 추론이란 ❓
+tag: TS
+---
+
+> 이정환 님의 [한 입 크기로 잘라먹는 타입스크립트](https://www.inflearn.com/course/%ED%95%9C%EC%9E%85-%ED%81%AC%EA%B8%B0-%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/) 를 수강한 내용 입니다.
+
+## 타입 추론
+
+타입스크립트는 타입이 정의되어 있지 않은 변수의 타입을 자동으로 추론합니다.
+
+-   이런 기능을 **“타입 추론”** 이라고 합니다.
+
+![1](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/5afc8dd2-0e13-4ec3-bf9d-945eaecd64af)
+
+타입스크립트는 프로그래머에게 모든 변수에 일일이 타입을 정의하지 않아도 되는 편리함을 제공합니다.
+
+그러나 모든 상황에 타입을 잘 추론하는 것은 아닙니다.
+
+-   예를 들어 다음과 같이 `함수의 매개변수 타입`은 **자동으로 추론할 수 없습니다.**
+
+![2](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/b775e331-ada6-4f46-8beb-d929188d08e8)
+
+## ✅ 타입 추론이 가능한 상황들
+
+### 1. 변수 선언
+
+일반적인 변수 선언의 경우 `초기 값`을 기준으로 타입이 추론 됩니다.
+
+![4](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/3bb19c6b-1f0e-4bcc-8187-8012e3284f50)
+
+![3](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/f790e4af-4f52-4c71-8024-09e34f668701)
+
+### 2. 구조 분해 할당
+
+객체와 배열을 구조 분해 할당하는 상황에서도 타입이 잘 추론 됩니다.
+
+![5](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/05a026bf-b002-4348-8a21-0bcae95d9de6)
+
+![6](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/8d6d233e-6d06-4823-aa42-a43507db90ec)
+
+### 3. 함수의 반환 값
+
+함수 반환 값의 타입은 return 문을 기준으로 추론 됩니다.
+
+![8](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/42a11d99-d151-44d0-b1bb-d0b69f8d771a)
+
+![7](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/31e5aa26-7fc7-4da1-a4ba-20912992f36d)
+
+### 4. 기본 값이 설정된 매개변수
+
+기본 값이 설정된 매개변수의 타입은 기본 값을 기준으로 추론 됩니다.
+
+![10](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/169b1cb4-abb7-445b-aa93-19c4f171e08d)
+
+![9](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/749b2549-9702-4b24-a1f4-2fbf0f8b6aa9)
+
+## ⚠️ 주의해야 할 상황들
+
+### 1. 암시적인 any 타입(any 타입의 진화)
+
+변수를 선언할때 초기값을 생략하면 암시적인 any 타입으로 추론 됩니다.
+
+![12](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/9d4ce4b6-74a4-494d-a584-77a2fe0993b8)
+
+변수에 값을 할당하면 그 다음 라인부터 any 타입이 해당 값의 타입으로 변화합니다.
+
+![13](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/8f98d9ba-93e1-44ec-9f95-56deee71a41f)
+
+이렇게 암시적으로 추론된 any 타입은 코드의 흐름에 따라 타입이 계속 변화합니다.
+
+-   이를 `any`의 **진화**라고 표현하기도 합니다.
+
+### 2. const 상수의 추론
+
+`const`로 선언된 상수도 타입 추론이 진행됩니다.
+
+-   그러나 let으로 선언한 변수와는 다른 방식으로 추론됩니다.
+
+![14](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/64db0371-e888-4f38-b49e-391cae50fc06)
+
+상수는 초기화 때 설정한 값을 변경할 수 없기 때문에 특별히 **가장 좁은 타입**으로 추론됩니다.
+
+## 최적 공통 타입(Best Common Type)
+
+**다양한 타입의 요소를 담은 배열**을 변수의 초기값으로 설정하면, 최적의 **공통 타입**으로 추론됩니다.
+
+![15](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/ac7b5d1d-9cbf-4f0f-b0f1-104b5bdc110c)
+
+![16](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/d90a1b75-03dc-4ce7-b3d5-5b609669c121)

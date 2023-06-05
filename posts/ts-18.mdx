@@ -1,0 +1,93 @@
+---
+title: 한 입 크기로 잘라먹는 TS - 인터페이스의 기능
+date: "2023-06-09"
+description: 타입 별칭과 비슷하면서도 다른 문법
+tag: TS
+---
+
+> 이정환 님의 [한 입 크기로 잘라먹는 타입스크립트](https://www.inflearn.com/course/%ED%95%9C%EC%9E%85-%ED%81%AC%EA%B8%B0-%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/) 를 수강한 내용 입니다.
+
+## 인터페이스 확장
+
+하나의 인터페이스를 다른 인터페이스들이 `상속` 받아
+
+-   **중복된 프로퍼티를** 정의하지 않도록 도와주는 문법입니다.
+
+예시를 보며 살펴보겠습니다.
+
+![1](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/c9aaa4ab-144d-4218-9a60-2e4d322cd70c)
+
+Animal 타입을 기반으로 Dog, Cat, Chicken이 각각의 추가적인 프로퍼티를 갖고 있는 형태임을 알 수 있습니다.
+
+-   `name` 그리고 `age` 프로퍼티가 모든 타입에 중복해서 정의되어 있다는 점도 함께 발견하실 수 있습니다.
+
+중복 코드는 언제나 좋지 않습니다.
+
+**특정 인터페이스를 기반**으로 **여러 개의 인터페이스가 파생**되는 경우 중복 코드가 발생할 수 있는데 이럴 때에는 인터페이스의 `확장` 기능을 이용하면 좋습니다.
+
+### 사용하는 방법
+
+`interface 타입이름 extends 확장_할_타입이름` 의 형태
+
+-   extends 뒤에 **확장할 타입의 이름을 정의**하면 해당 타입에 정의된 모든 프로퍼티를 다 가지고 오게 됩니다.
+
+![2](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/58a44ab3-d2df-4cdb-b058-af36a5590abc)
+
+## 프로퍼티 재 정의하기
+
+확장과 동시에 프로퍼티의 타입을 재 정의 하는 것 또한 가능합니다.
+
+![3](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/67d13c66-a129-4506-a990-83e85ca5e39d)
+
+Dog 타입은 Animal 타입을 확장하며 동시에 name 프로퍼티의 타입을
+
+-   String 타입에서 “doldol” String Literal 타입으로 재정의 했습니다.
+-   이렇게 확장받는 타입에서 프로퍼티의 타입을 재정의 할 수 있습니다.
+
+### ⚠️ 주의할 점
+
+**원본 타입을 A**, **재 정의된 타입을 B**라고 하면 반드시 A가 B의 `슈퍼 타입`이 되도록 재정의 해야 합니다.
+
+따라서 다음과 같이 name을 Number 타입으로 재 정의 하는 것은 불가능합니다.
+
+![4](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/afc40c8d-c92b-4d2f-83d0-be8c5ddf7839)
+
+Dog 타입이 Animal 타입을 확장한 다는 것은 Animal 타입의 서브타입이 된다는 의미입니다.
+
+-   그런데 name 프로퍼티를 Number 타입으로 재 정의 해 버리면 이제는 Dog는 Animal의 **서브 타입**이 아니게 됩니다.
+
+따라서 이런 재 정의는 불가한 것 입니다.
+
+## 인터페이스의 타입 별칭 확장
+
+인터페이스는 인터페이스 뿐만 아니라 **타입 별칭으로 정의된 객체**도 확장할 수 있습니다.
+
+![5](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/e284e36a-d7cf-409d-ad4e-6cb7620a9cd8)
+
+## 다중 확장
+
+여러 개의 인터페이스를 확장하는 것 또한 가능합니다.
+
+![6](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/4444635d-8096-4faa-9b6f-b6d9e29eb1d7)
+
+## 인터페이스 선언 합치기
+
+타입 별칭은 동일한 스코프 내에 **중복된 이름으**로 선언할 수 없는 반면 **인터페이스는 가능** 합니다.
+
+![7](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/10d73c12-3d53-430c-8921-6e827a4f5aaf)
+
+동일한 이름의 인터페이스들이 합쳐지는 것을 **선언 합침(Declaration Merging)** 이라고 부릅니다.
+
+사용 예시
+
+![8](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/cd85101d-262f-4baf-b573-61887dfb9cdd)
+
+### ⚠️ 주의할 점
+
+동일한 이름의 인터페이스들이 동일한 이름의 프로퍼티를
+
+-   `서로 다른 타입`으로 **정의**한다면 오류가 발생합니다.
+
+![9](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/651411e7-2b4d-4c0f-bd7b-e7529f2620b7)
+
+동일한 프로퍼티의 타입을 다르게 정의한 상황을 ‘충돌’ 이라고 표현하며 선언 합침에서 이런 충돌은 허용되지 않습니다.

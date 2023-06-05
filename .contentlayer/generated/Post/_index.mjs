@@ -22,7 +22,13 @@ import next_11Mdx from './next-11.mdx.json' assert { type: 'json' }
 import next_12Mdx from './next-12.mdx.json' assert { type: 'json' }
 import next_13Mdx from './next-13.mdx.json' assert { type: 'json' }
 import next_14Mdx from './next-14.mdx.json' assert { type: 'json' }
+import next_15Mdx from './next-15.mdx.json' assert { type: 'json' }
+import next_16Mdx from './next-16.mdx.json' assert { type: 'json' }
+import next_17Mdx from './next-17.mdx.json' assert { type: 'json' }
+import next_18Mdx from './next-18.mdx.json' assert { type: 'json' }
+import next_19Mdx from './next-19.mdx.json' assert { type: 'json' }
 import next_2Mdx from './next-2.mdx.json' assert { type: 'json' }
+import next_20Mdx from './next-20.mdx.json' assert { type: 'json' }
 import next_3Mdx from './next-3.mdx.json' assert { type: 'json' }
 import next_4Mdx from './next-4.mdx.json' assert { type: 'json' }
 import next_5Mdx from './next-5.mdx.json' assert { type: 'json' }
@@ -57,11 +63,24 @@ import reactWanted_1Mdx from './react-wanted-1.mdx.json' assert { type: 'json' }
 import reactWanted_2Mdx from './react-wanted-2.mdx.json' assert { type: 'json' }
 import reactWanted_3Mdx from './react-wanted-3.mdx.json' assert { type: 'json' }
 import reactWanted_4Mdx from './react-wanted-4.mdx.json' assert { type: 'json' }
-import next_15Mdx from './next-15.mdx.json' assert { type: 'json' }
-import next_16Mdx from './next-16.mdx.json' assert { type: 'json' }
-import next_17Mdx from './next-17.mdx.json' assert { type: 'json' }
-import next_18Mdx from './next-18.mdx.json' assert { type: 'json' }
-import next_19Mdx from './next-19.mdx.json' assert { type: 'json' }
-import next_20Mdx from './next-20.mdx.json' assert { type: 'json' }
+import ts_0Mdx from './ts-0.mdx.json' assert { type: 'json' }
+import ts_1Mdx from './ts-1.mdx.json' assert { type: 'json' }
+import ts_2Mdx from './ts-2.mdx.json' assert { type: 'json' }
+import ts_3Mdx from './ts-3.mdx.json' assert { type: 'json' }
+import ts_4Mdx from './ts-4.mdx.json' assert { type: 'json' }
+import ts_5Mdx from './ts-5.mdx.json' assert { type: 'json' }
+import ts_6Mdx from './ts-6.mdx.json' assert { type: 'json' }
+import ts_7Mdx from './ts-7.mdx.json' assert { type: 'json' }
+import ts_8Mdx from './ts-8.mdx.json' assert { type: 'json' }
+import ts_9Mdx from './ts-9.mdx.json' assert { type: 'json' }
+import ts_10Mdx from './ts-10.mdx.json' assert { type: 'json' }
+import ts_11Mdx from './ts-11.mdx.json' assert { type: 'json' }
+import ts_12Mdx from './ts-12.mdx.json' assert { type: 'json' }
+import ts_13Mdx from './ts-13.mdx.json' assert { type: 'json' }
+import ts_14Mdx from './ts-14.mdx.json' assert { type: 'json' }
+import ts_15Mdx from './ts-15.mdx.json' assert { type: 'json' }
+import ts_16Mdx from './ts-16.mdx.json' assert { type: 'json' }
+import ts_17Mdx from './ts-17.mdx.json' assert { type: 'json' }
+import ts_18Mdx from './ts-18.mdx.json' assert { type: 'json' }
 
-export const allPosts = [jsArrayMdx, jsControlMdx, jsDataTypeMdx, jsExpressionMdx, jsFunctionMdx, jsGlobalVariableMdx, jsJavaScriptMdx, jsLetConstMdx, jsNumberMdx, jsObjectMdx, jsOperatorMdx, jsPremitiveMdx, jsScopeMdx, jsStartMdx, jsTypeMdx, jsVariableMdx, next_1Mdx, next_10Mdx, next_11Mdx, next_12Mdx, next_13Mdx, next_14Mdx, next_2Mdx, next_3Mdx, next_4Mdx, next_5Mdx, next_6Mdx, next_7Mdx, next_8Mdx, next_9Mdx, reactReactMemoMdx, reactComponentMdx, reactImmutabilityMdx, reactQuery_1Mdx, reactQuery_2Mdx, reactQuery_3Mdx, reactQuery_4Mdx, reactQuery_5Mdx, reactQuery_6Mdx, reactQuery_7Mdx, reactQueryToolMdx, reactReduxMdx, reactRenderingMdx, reactStartMdx, reactStatePropsMdx, reactUseCallbackMdx, reactUseContextMdx, reactUseEffectMdx, reactUseMemoMdx, reactUseReducerMdx, reactUseRefMdx, reactUseStateMdx, reactViteMdx, reactWanted_1Mdx, reactWanted_2Mdx, reactWanted_3Mdx, reactWanted_4Mdx, next_15Mdx, next_16Mdx, next_17Mdx, next_18Mdx, next_19Mdx, next_20Mdx]
+export const allPosts = [jsArrayMdx, jsControlMdx, jsDataTypeMdx, jsExpressionMdx, jsFunctionMdx, jsGlobalVariableMdx, jsJavaScriptMdx, jsLetConstMdx, jsNumberMdx, jsObjectMdx, jsOperatorMdx, jsPremitiveMdx, jsScopeMdx, jsStartMdx, jsTypeMdx, jsVariableMdx, next_1Mdx, next_10Mdx, next_11Mdx, next_12Mdx, next_13Mdx, next_14Mdx, next_15Mdx, next_16Mdx, next_17Mdx, next_18Mdx, next_19Mdx, next_2Mdx, next_20Mdx, next_3Mdx, next_4Mdx, next_5Mdx, next_6Mdx, next_7Mdx, next_8Mdx, next_9Mdx, reactReactMemoMdx, reactComponentMdx, reactImmutabilityMdx, reactQuery_1Mdx, reactQuery_2Mdx, reactQuery_3Mdx, reactQuery_4Mdx, reactQuery_5Mdx, reactQuery_6Mdx, reactQuery_7Mdx, reactQueryToolMdx, reactReduxMdx, reactRenderingMdx, reactStartMdx, reactStatePropsMdx, reactUseCallbackMdx, reactUseContextMdx, reactUseEffectMdx, reactUseMemoMdx, reactUseReducerMdx, reactUseRefMdx, reactUseStateMdx, reactViteMdx, reactWanted_1Mdx, reactWanted_2Mdx, reactWanted_3Mdx, reactWanted_4Mdx, ts_0Mdx, ts_1Mdx, ts_2Mdx, ts_3Mdx, ts_4Mdx, ts_5Mdx, ts_6Mdx, ts_7Mdx, ts_8Mdx, ts_9Mdx, ts_10Mdx, ts_11Mdx, ts_12Mdx, ts_13Mdx, ts_14Mdx, ts_15Mdx, ts_16Mdx, ts_17Mdx, ts_18Mdx]

@@ -1,0 +1,67 @@
+---
+title: 한 입 크기로 잘라먹는 TS - 함수 타입
+date: "2023-06-05"
+description: 함수 타입 선언
+tag: TS
+---
+
+> 이정환 님의 [한 입 크기로 잘라먹는 타입스크립트](https://www.inflearn.com/course/%ED%95%9C%EC%9E%85-%ED%81%AC%EA%B8%B0-%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/) 를 수강한 내용 입니다.
+
+## 함수 타입
+
+우선 기본적인 자바스크립트 함수 입니다.
+
+![1](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/14830395-6cfa-43df-acd9-ecab3b393112)
+
+그럼 타입스크립트에서는?
+
+![2](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/139bad8b-ed03-45af-b87f-a29d18083a9e)
+
+## 화살표 함수 타입 정의하기
+
+함수 선언식과 크게 다르지 않습니다.
+
+![3](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/caded1c5-9313-40c0-8de2-f6f0688b239e)
+
+## 매개변수 기본 값 설정하기
+
+함수의 매개변수에 기본값이 설정 되어있으면 **타입이 자동으로 추론** 됩니다.
+
+-   이럴 경우 타입 정의를 생략해도 됩니다.
+
+![4](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/9d9e33bb-d259-4f1e-ada8-73c9a3b74f21)
+
+## 선택적 매개변수 설정
+
+**매개변수의 이름 뒤**에 `물음표(?)`를 붙여주면 선택적 매개변수가 되어 생략이 가능합니다.
+
+![5](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/839bfe94-ba69-4b5a-a24b-0e8fc6a1b046)
+
+### ⚠️ 주의점
+
+위의 코드의 같은 **선택적 매개변수의 타입**은 자동으로 `undefined와 유니온 된 타입`으로 추론됩니다.
+
+-   따라서 tall의 타입은 현재 `number | undefined` 이 됩니다.
+-   그러므로 이 값이 number 타입의 값일 거라고 기대하고 사용하려면 다음과 같이 타입 좁히기가 필요합니다.
+
+![6](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/11a888ec-32eb-4c27-8c43-64a7973aef12)
+
+### ⚠️ 필수 매개변수 보다 앞으로 No
+
+선택적 매개변수는 필수 매개변수 앞에 올 수 없습니다.
+
+-   반드시 뒤에 배치해야 합니다.
+
+![7](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/63292fa9-a3cb-4ce4-b896-39b5cc6fa1fb)
+
+## 나머지 매개변수(...)
+
+자바스크립트의 rest 파라미터(나머지 매개변수) 관련 내용입니다.
+
+![8](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/25488654-8233-4151-8d14-838ea9bfb3bc)
+
+### 만약 나머지 매개변수의 길이를 고정하고 싶다면 ?
+
+-   **튜플 타입**을 사용하면 됩니다.
+
+![9](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/d569b38c-cfe7-47c4-a821-4459fd0e7025)

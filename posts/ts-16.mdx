@@ -1,0 +1,74 @@
+---
+title: 한 입 크기로 잘라먹는 TS - 함수 타입의 호환성
+date: "2023-06-07"
+description: 함수를 서로 호환해보자
+tag: TS
+---
+
+> 이정환 님의 [한 입 크기로 잘라먹는 타입스크립트](https://www.inflearn.com/course/%ED%95%9C%EC%9E%85-%ED%81%AC%EA%B8%B0-%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/) 를 수강한 내용 입니다.
+
+## 함수 타입의 호환성이란 ?
+
+함수 타입의 호환성이란 **특정 함수 타입**을 **다른 함수 타입**으로 **괜찮은지 판단**하는 것을 의미합니다.
+
+다음 2가지 기준으로 함수 타입의 호환성을 판단하게 됩니다.
+
+1. 두 함수의 반환 값 타입이 호환되는가?
+2. 두 함수의 매개변수의 타입이 호환되는가?
+
+### 1. 두 함수의 반환 값 타입이 호환되는가 ?
+
+A와 B 함수 타입이 있다고 가정할 때
+
+-   A 반환값 타입이 B 반환값 타입의 `슈퍼타입`이라면 두 타입은 호환됩니다.
+
+![1](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/cc2121fa-4eaa-4eef-bafc-24267a330745)
+
+A의 반환값 타입은 Number, B의 반환값 타입은 Number Literal 입니다.
+
+-   따라서 변수 a에 b를 할당하는 것은 가능하나 반대로는 불가능 합니다.(다운 캐스팅 ❌)
+-   `b = a` 를 넣는 것은, a가 b보다 큰 범주이므로 다운 캐스팅이 일어납니다.
+
+### 2. 두 함수의 매개변수의 타입이 호환되는가?
+
+### 2-1. 매개변수의 개수가 같을 때
+
+![2](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/3c08b027-3e6c-403f-b21f-eb394b36a22b)
+
+-   `c = d` 는 D 타입을 C 타입으로 취급하겠다는 말 입니다.
+-   C 타입은 Number, D 타입은 Number Literal 입니다.
+
+따라서 C 타입이 D 슈퍼타입이므로 D를 C로 취급하는것은 불가능하나 반대로는 가능합니다.
+
+> 이는 반환값 타입과 반대됩니다. 마치 **다운캐스팅**을 허용하는 것 같아 보입니다.
+
+좀 더 이해를 돕기 위해 객체 타입인 경우를 살펴보겠습니다.
+
+![3](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/ddbfa33b-9645-4c57-9836-18e574b13e93)
+
+animalFunc에 dogFunc를 할당하는 것은 불가능합니다.
+
+-   **Animal** 타입이 Dog 타입의 `슈퍼타입` 입니다.(조건이 더 적기 때문)
+
+`animalFunc = dogFunc`를 코드로 표현해보면 다음과 같습니다.
+
+![4](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/c1aafb0d-89a1-4f30-bdf3-d2e670037c83)
+
+dogFunc 함수 내부에서는 name과 color 프로퍼티에 접근합니다.
+
+-   따라서 이렇게 할당이 이루어지게 되면 `animal.color` 처럼 존재할거라고 `보장할 수 없는 프로퍼티에 접근`하게 됩니다.
+-   그래서 업 캐스팅을 차단 합니다.
+
+반대로 `dogFunc = animalFunc` 를 코드로 표현하면 다음과 같습니다.
+
+![5](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/8d9bbe29-8126-4991-a5de-425e37f94cb3)
+
+-   animalFunc 함수 내부에서는 `name 프로퍼티에만 접근` 합니다. 이 코드는 안전합니다.
+
+정리하자면, 매개변수의 개수가 같은 경우 업 캐스팅은 ❌, 다운 캐스팅 ✅
+
+![6](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/3524f087-1fc1-44dd-8315-d51a6ddeb9f0)
+
+### 2-2. 매개변수의 개수가 다를 때
+
+![7](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/eace06ba-c169-45fc-a5e6-51c0b8df2264)

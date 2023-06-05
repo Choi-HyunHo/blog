@@ -1,0 +1,80 @@
+---
+title: 한 입 크기로 잘라먹는 TS - 그 외의 타입들
+date: "2023-05-29"
+description: any, unknown, void, never ❓
+tag: TS
+---
+
+> 이정환 님의 [한 입 크기로 잘라먹는 타입스크립트](https://www.inflearn.com/course/%ED%95%9C%EC%9E%85-%ED%81%AC%EA%B8%B0-%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/) 를 수강한 내용 입니다.
+
+## any
+
+any 타입은 타입스크립트에서만 제공되는 특별한 타입으로 **타입 검사를 받지 않는** 특수한 타입 입니다.
+
+다음과 같은 변수가 있다고 가정해봅시다.
+
+![1](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/195d99fb-afc1-49bb-b19d-80660225eba7)
+
+타입스크립트에서는 **변수의 타입이 변수를 초기화할 때 초기화 하는 값을 기준**으로 추론하기 때문에 이렇게 하면 오류가 발생합니다.
+
+-   이럴 때 `any` 타입을 사용하면 어떠한 타입 검사도 받지 않습니다.
+-   즉, 아무 타입의 값을 받을 수 있고 관련 메서드도 호출 할 수 있습니다.
+
+![2](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/01a1d334-d03e-4ff0-a27b-dc9b94b6dc04)
+
+### 편한 만큼 위험한 any 타입
+
+위의 코드를 컴파일 하면 런타임 오류가 발생 합니다.
+
+-   any 타입은 타입 검사를 받지 않는 타입이므로 모든 타입스크립트의 문법과 규칙으로부터 자유롭지만 그만큼 위험한 타입입니다.
+-   any 타입을 많이 사용하면 타입 검사가 제대로 이루어지기 않기 때문에 타입스크립트를 사용하는 이유가 없습니다.
+
+![3](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/cfec4f2c-d9c0-400a-ac8e-c34a675e108f)
+
+## unknown 타입
+
+unknown 타입은 any 타입과 비슷하지만 보다 안전한 타입 입니다.
+
+-   unknown 타입의 변수는 다음과 같이 어떤 타입의 값이든 다 저장 할 수 있습니다.
+
+![4](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/370c1a4b-f811-4c55-9b09-3ed8c28bc4d5)
+
+### unknown 특징
+
+-   그러나 반대로 unknown 타입의 값은 **어떤 타입의 변수에도 저장할 수 없습니다.**
+-   또 unknown 타입의 값은 **어떤 연산에도 참여할 수 없으며**, **어떤 메서드도 사용할 수 없습니다.**
+
+![5](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/92ef1e37-f3a6-46c9-a390-740b44b07801)
+
+만약 위와 같이 unknown 타입의 값을 `number 타입의 값처럼 취급`하고
+
+-   곱셈 연산을 수행하게 하고 싶다면 다음과 같이 조건문을 이용해 이 값이 number 타입의 값 임을 보장 해줘야 합니다.
+
+![6](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/11856820-a339-4212-8ecf-9ca6bafd7da0)
+
+## any 보다 unknown ?
+
+특정 변수가 당장 어떤 값을 받게 될 지 모른다면
+
+-   any 타입으로 정의하는 것 보단 unknown 타입을 이용하는게 훨씬 안전한 선택이 됩니다.
+
+## void 타입
+
+void 타입은 **아무런 값도 없음**을 의미하는 타입 입니다.
+
+-   보통 **아무런 값도 반환하지 않는 함수**의 `반환 값 타입을 정의` 할 때 사용 합니다.
+
+![7](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/c5b2a0a2-1ed3-4b7d-8c52-03b8bc4ee667)
+
+## never 타입
+
+never 타입은 불가능을 의미하는 타입 입니다.
+
+-   다음과 같이 **함수가 어떠한 값도 반환할 수 없는 상황**일 때 해당 함수의 반환 값 타입을 정의할 때 사용됩니다.
+-   불가능 한 값의 타입을 정의할 때 never 타입 사용
+
+![8](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/dba9707c-ee30-4bf3-8342-5b53afbf88e0)
+
+또한 변수의 타입을 never로 정의하면 any를 포함해 그 어떠한 값도 담을 수 없습니다.
+
+![9](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/1adc89a3-8e8b-44f0-a4af-b0a70ed24f25)

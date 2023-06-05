@@ -1,0 +1,77 @@
+---
+title: 한 입 크기로 잘라먹는 TS - 대수 타입(Algebraic type)
+date: "2023-06-01"
+description: 대수 타입이란 ❓
+tag: TS
+---
+
+> 이정환 님의 [한 입 크기로 잘라먹는 타입스크립트](https://www.inflearn.com/course/%ED%95%9C%EC%9E%85-%ED%81%AC%EA%B8%B0-%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/) 를 수강한 내용 입니다.
+
+## 대수 타입(Algebraic type)이란
+
+대수 타입이란 **여러 개의 타입을 합성**해서 만드는 타입을 말합니다.
+
+대수 타입에는 합집합 타입과 교집합 타입이 존재합니다.
+
+-   **합집합**은 `Union` 타입
+-   **교집합**은 `Intersection` 타입이라고 부릅니다.
+
+## 합집합(Union) 타입
+
+string과 number의 유니온 타입을 정의할 수 있습니다.
+
+-   `|` 를 이용합니다.
+-   색칠한 범위가 집합에 포함되는 범위 입니다.
+
+![1](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/2bae75f4-7140-4073-a362-4c0257598a15)
+
+![2](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/3a79e299-e326-406f-8854-53fbbed8b845)
+
+변수 a에는 number 타입과 string 타입에 해당하는 값이라면 뭐든 저장할 수 있습니다.
+
+-   유니온 타입에 참여하는 타입들의 개수에는 제한이 없습니다.
+-   만약 boolean 타입도 함께 유니온 타입으로 구성하고 싶다면 다음과 같이 추가하면 됩니다.
+
+![3](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/34f98f90-9ef7-4c2a-83a3-006669605614)
+
+### Union 타입으로 배열 타입 정의하기
+
+![4](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/4f63342f-a63c-4b7f-bdd9-e5544b0d59ec)
+
+### Union 타입과 객체 타입
+
+다음과 같이 여러 개의 객체 타입의 유니온 타입도 얼마든지 정의할 수 있습니다.
+
+![5](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/094cd312-3aa9-41dd-baa4-4a0f15ddfeea)
+
+이렇게 정의된 Union1 타입은 다음과 같이 교집합이 존재하는 두 집합으로 표현할 수 있습니다.
+
+![6](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/3b007352-8996-40cd-ad1e-52e8a9ddfb2f)
+
+따라서 다음과 같은 객체 들을 포함하는 타입이 됩니다.
+
+![7](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/ecbae224-9260-4297-abfd-5d1be683fffc)
+
+![8](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/40c7172c-0092-4e36-a795-8c3792253691)
+
+-   unoin4 는 dog 타입과 person 타입 `name` 프로퍼티 밖에 없습니다.
+-   그러면 해당 객체는 `color` 가 없기 때문에 dog 타입에도 포함 될 수 없고
+-   `language` 도 없기 때문에 person 타입이 될 수도 없습니다.
+
+즉, 합집합의 범주에 포함 될 수 없습니다.
+
+## 교집합(Intersection) 타입
+
+`&` 을 이용합니다.
+
+![9](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/8dadc69f-06a1-4ee3-9812-80d19ec52a99)
+
+-   number 타입과 string 타입은 서로 교집합을 공유하지 않는 `서로소 집합`이므로 변수 variable의 타입은 결국 `never` 타입으로 추론됩니다.
+
+대다수의 기본 타입들 간에는 서로 공유하는 교집합이 없기 때문에 이런 인터섹션 타입은 보통 **객체 타입들에 자주 사용**됩니다.
+
+![10](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/b7483aeb-7d85-4193-9bbc-f9d1d2fbc581)
+
+intersection 으로 교집합 타입을 만들면 아래 그림처럼 됩니다.
+
+![11](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/f28c5010-03e2-43d1-b245-d50b7db2c945)

@@ -1,0 +1,73 @@
+---
+title: 한 입 크기로 잘라먹는 TS - 원시 타입과 리터럴 타입
+date: "2023-05-25"
+description: 원시 타입과 리터럴 타입 선언
+tag: TS
+---
+
+> 이정환 님의 [한 입 크기로 잘라먹는 타입스크립트](https://www.inflearn.com/course/%ED%95%9C%EC%9E%85-%ED%81%AC%EA%B8%B0-%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/) 를 수강한 내용 입니다.
+
+## 원시 타입
+
+**원시 타입(Primitive Type)** 은 동시에 `한 개의 값`만 저장할 수 있는 타입들을 말합니다.
+
+-   배열이나 객체 같은 비 원시 타입들은 동시에 여러 개의 값들을 저장할 수 있는 반면
+-   number, string, boolean 등의 원시 타입은 숫자면 숫자 문자열이면 문자열 딱 하나의 값만 저장할 수 있습니다.
+
+앞으로 변수의 이름 뒤에 `콜론(:)`과 함께 변수의 타입을 정의하는 문법을
+
+-   **‘타입 주석’** 또는 **‘타입 어노테이션’** 이라고 부릅니다.
+
+## number 타입
+
+![1](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/e8eb69bc-9348-4f65-887e-3e1cd9cecfd2)
+
+number 타입으로 정의한 변수에는
+
+-   number 타입을 제외한 값을 할당할 수 없으며
+-   number 타입의 값이 사용할 수 없는 toUpperCase 등의 메서드는 사용할 수 없습니다.
+
+## string 타입
+
+![2](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/0dc42516-b213-4cd2-85a2-b60a55b0a44a)
+
+string 타입은 문자열을 의미하는 타입입니다.
+
+-   단순 쌍따옴표 문자열 뿐만 아니라 작은 따옴표, 백틱, 템플릿 리터럴로 만든 모든 문자열을 포함합니다.
+
+## boolean 타입
+
+![3](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/8da2e016-027e-42f5-9a78-327742fe1aca)
+
+boolean 타입은 참과 거짓만을 저장하는 타입입니다.
+
+-   true 또는 false만 이 타입에 해당됩니다.
+
+## null 타입
+
+![4](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/a1b66209-77fc-485e-b8a0-0251813af687)
+
+null 타입은 오직 null 값만 포함하는 타입입니다.
+
+## undefined 타입
+
+![5](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/41b055d0-53f6-4851-abab-8a114d797159)
+
+undefined 타입 역시 null 타입과 마찬가지로
+
+-   오직 하나의 값 undefined만 포함하는 타입입니다.
+
+## 리터럴 타입
+
+타입스크립트에는 string, number 처럼 범용적으로 많은 값을 포함하는 타입 뿐만 아니라 딱 하나의 값만 포함하는 타입도 존재합니다.
+
+![6](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/d6f72f39-8400-4c12-9155-fbe34c74fd88)
+
+-   변수 numA의 타입을 숫자 10으로 설정했습니다.
+-   이렇게 설정하면 이제 numA에는 10 이외의 값을 저장할 수 없게 됩니다.
+
+> 하나의 값만 포함하도록 값 자체로 만들어진 타입을 타입스크립트에서는 ‘리터럴 타입’ 이라고 합니다.
+
+숫자 값 뿐만 아니라 문자열이나 불리언 타입의 값도 모두 리터럴 타입으로 만들 수 있습니다.
+
+![7](https://github.com/Choi-HyunHo/hyunho-gatsby-blog/assets/87301268/8bb4c6a0-9157-4f83-b783-d61440820a43)
