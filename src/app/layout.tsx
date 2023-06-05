@@ -7,7 +7,10 @@ import Provider from "@/components/Provider";
 const karla = Karla({ subsets: ["latin"] });
 
 export const metadata = {
-    title: "현호의 블로그",
+    title: {
+        default: "현호의 블로그",
+        template: "현호의 블로그 | %s",
+    },
     description: "개발자 최현호 입니다.",
     icons: {
         icon: "/favicon.ico",

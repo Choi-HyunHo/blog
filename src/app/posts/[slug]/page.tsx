@@ -2,6 +2,15 @@ import React from "react";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import { allPosts } from "contentlayer/generated";
 
+export async function generateMetadata({ params }: any) {
+    const post = allPosts.find((p) => p._raw.flattenedPath === params.slug);
+
+    return {
+        title: post?.title,
+        description: post?.description,
+    };
+}
+
 export default function Detail({ params }: any) {
     const post = allPosts.find((p) => p._raw.flattenedPath === params.slug);
 
