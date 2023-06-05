@@ -1,0 +1,10 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /exclude
+
+# Host
+Host: https://www.choi-hyunho.com/
+
+# Sitemaps
+Sitemap: https://www.choi-hyunho.com/sitemap.xml
