@@ -24,3 +24,7 @@ a:hover {
 .notion-title {
     @apply dark:text-white;
 }
+
+.prose a {
+    @apply underline decoration-pink-600;
+}
