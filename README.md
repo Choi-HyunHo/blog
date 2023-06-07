@@ -502,6 +502,67 @@ const tagList = ["All", "Next.js", "React", "TS", "JS", "CSS"]; // 태그 목록
 
 <br>
 
+## next-sitemap
+
+sitemap은 구글, 네이버와 같은 검색 사이트들의 크롤링 봇들에게 우리 서비스에서 사용할 수 있는 사이트 주소를 알려주기 위해 활용 합니다.
+
+> 이 부분은 직접 해보시는 것을 추천 드립니다(저도 아직 완벽하지는 않아서...)
+
+```
+yarn add next-sitemap -D
+```
+
+<br>
+
+### next-sitemap.config.js
+
+참고 : https://jforj.tistory.com/311
+
+```
+/** @type {import('next-sitemap').IConfig} */
+
+module.exports = {
+    siteUrl: "https://www.choi-hyunho.com/",
+    generateRobotsTxt: true, // robots.txt generate 여부 (자동생성 여부)
+    sitemapSize: 7000, // sitemap별 최대 크기 (최대 크기가 넘어갈 경우 복수개의 sitemap으로 분리됨)
+    changefreq: "daily", // 페이지 주소 변경 빈도 (검색엔진에 제공됨) - always, daily, hourly, monthly, never, weekly, yearly 중 택 1
+    priority: 1, // 페이지 주소 우선순위 (검색엔진에 제공됨, 우선순위가 높은 순서대로 크롤링함)
+    robotsTxtOptions: {
+        // 정책 설정
+        policies: [
+            {
+                userAgent: "*", // 모든 agent 허용
+                allow: "/", // 모든 페이지 주소 크롤링 허용
+                disallow: [
+                    "/exclude", // exclude로 시작하는 페이지 주소 크롤링 금지
+                ],
+            },
+            // 추가 정책이 필요할 경우 배열 요소로 추가 작성
+        ],
+    }, // robots.txt 옵션 설정
+};
+```
+
+<br>
+
+### package.json
+
+```
+  "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "postbuild": "next-sitemap" // ✅ 추가
+    },
+```
+
+<br>
+
+---
+
+<br>
+
 ## 🚀 트러블 슈팅
 
 ### Resume 페이지
@@ -517,3 +578,32 @@ next.js 는 정적 페이지를 만들 수 있기 때문에 빌드 시점에서 
 -   Next.js 13버전에서는 `fetch API` 를 사용하여 SSG, ISR, SSR 모두 구현이 가능 합니다.
 
 -   그 중 이력서 페이지는 SSG 로 되어있습니다.
+
+<br>
+
+---
+
+<br>
+
+## 💡 Vercel 배포 참고용
+
+순서대로 따라하면 어렵지 않게 할 수 있습니다.
+
+<table>
+  <tr>
+    <td><img width="1000" src="https://github.com/Choi-HyunHo/blog/assets/87301268/a53c244e-05b4-4a6e-9924-a6eaaf83b6fd"></td>
+    <td><img width="1000" src="https://github.com/Choi-HyunHo/blog/assets/87301268/63cf1e93-17e7-4542-b307-fa78074ab4d8"></td>
+  </tr>
+  <tr>
+    <td><img width="1000" src="https://github.com/Choi-HyunHo/blog/assets/87301268/0af1f1bf-2469-4b21-b824-a43025ed683c"></td>
+    <td><img width="1000" src="https://github.com/Choi-HyunHo/blog/assets/87301268/2c6e6d83-d8e4-4086-9c0b-3ef000b35cd8"></td>
+  </tr>
+  <tr>
+    <td><img width="1000" src="https://github.com/Choi-HyunHo/blog/assets/87301268/5cbb2691-0b03-4543-ac74-9b58ba4e0bbe"></td>
+    <td><img width="1000" src="https://github.com/Choi-HyunHo/blog/assets/87301268/eb834d3b-3e11-46a8-a6cf-a2458eb4acba"></td>
+  </tr>
+    <tr>
+    <td><img width="1000" src="https://github.com/Choi-HyunHo/blog/assets/87301268/5d5f3f11-3dad-47ce-8728-2f38d3dff9c6"></td>
+    <td><img width="1000" src="https://github.com/Choi-HyunHo/blog/assets/87301268/27e7ed6d-6084-4b4d-a576-66a53b4e99ea"></td>
+  </tr>
+</table>
