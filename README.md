@@ -47,7 +47,9 @@
 
 3. 많은 기능보다는 블로그에 필요한 기능만 만들자 → 해당 블로그를 사용하는 누구나 커스텀이 쉽도록
 
-4. 검색 엔진 최적화
+4. 검색 엔진 최적화 → 각 페이지 마다 metedata 가 설정되어 있습니다.
+
+5. 모바일 화면까지 반응형을 지원 합니다.
 
 <br>
 
@@ -326,7 +328,7 @@ https://actually-nemophila-cf3.notion.site/Choi-Hyun-Ho-e2fe264b22184e0785ef4af5
 
 ### src/service/notion.ts
 
-해당 페이지의 데이터를 fetch 를 통해서 불러옵니다.
+해당 페이지의 데이터를 `fetch API` 를 통해서 불러옵니다.
 
 ```
 export const getNotion = async () => {
@@ -432,7 +434,7 @@ module.exports = withContentlayer({
 
 제 블로그 기준 입니다.
 
--   Post 의 fields 와 동일한 형식으로 맞춰줍니다.
+-   contentlayer.config.ts > Post 의 fields 와 동일한 형식으로 맞춰줍니다.
 
 ```
 ---
@@ -500,13 +502,18 @@ const tagList = ["All", "Next.js", "React", "TS", "JS", "CSS"]; // 태그 목록
 
 <br>
 
-## 트러블 슈팅
+## 🚀 트러블 슈팅
 
-### /resume 페이지
+### Resume 페이지
 
-노션 페이지를 불러올 때 useEffect 를 사용해서 가져오면 렌더링 될 때 마다 데이터를 불러오게되어 <br>
-사용자에게 깜빡이는 화면이 보이는 등 사용자 경험 측면에서 좋지 않다고 생각 했습니다. <br>
-하지만 next.js 는 정적 페이지를 만들 수 있기 때문에 빌드 시점에서 미리 렌더링해서 사용자 경험을 개선했습니다.
+노션 페이지를 불러올 때 해당 화면 컴포넌트에서 useEffect 를 통해 가져오면 렌더링 될 때 마다 데이터를 불러오게 되어 <br>
+사용자에게 깜빡이는 화면이 보이는 등 사용자 경험 측면에서 좋지 않았습니다. <br>
+
+이력서는 데이터가 자주 바뀌지 않는 화면이기 때문에 정적 페이지로 만들면 위의 이슈와 여러 이점들을 가져갈 수 있습니다. <br>
+next.js 는 정적 페이지를 만들 수 있기 때문에 빌드 시점에서 미리 렌더링해서 사용자 경험을 개선했습니다.
+
+-   [SSG 렌더링 정리 글](https://www.choi-hyunho.com/posts/next-2)
 
 -   Next.js 13버전에서는 `fetch API` 를 사용하여 SSG, ISR, SSR 모두 구현이 가능 합니다.
+
 -   그 중 이력서 페이지는 SSG 로 되어있습니다.
