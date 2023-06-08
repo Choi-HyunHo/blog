@@ -502,7 +502,9 @@ const tagList = ["All", "Next.js", "React", "TS", "JS", "CSS"]; // 태그 목록
 
 <br>
 
-## next-sitemap
+## ~~next-sitemap~~
+
+⚠️ **Next.js 13버전에서 제공하는 방법으로 사용하시는걸 권장 합니다.(트러블 슈팅란에 링크 있습니다.)**
 
 sitemap은 구글, 네이버와 같은 검색 사이트들의 크롤링 봇들에게 우리 서비스에서 사용할 수 있는 사이트 주소를 알려주기 위해 활용 합니다.
 
@@ -578,6 +580,20 @@ next.js 는 정적 페이지를 만들 수 있기 때문에 빌드 시점에서 
 -   Next.js 13버전에서는 `fetch API` 를 사용하여 SSG, ISR, SSR 모두 구현이 가능 합니다.
 
 -   그 중 이력서 페이지는 SSG 로 되어있습니다.
+
+<br>
+
+### sitemap, robots(v.1.3.0)
+
+sitemap은 구글, 네이버와 같은 검색 사이트들의 크롤링 봇들에게 우리 서비스에서 사용할 수 있는 사이트 주소를 알려주기 위해 활용 합니다.
+
+블로그 만들 당시 `next-sitemap` 라이브러리를 사용해서 만들었습니다.
+
+하지만 next 의 공식문서를 더 살펴보니까 **sitemap** 과 **robots** 을 자체적으로 사용할 수 있는 방법을 찾았습니다.
+
+-   [sitemap](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap)
+
+-   [robots](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/robots)
 
 <br>
 
