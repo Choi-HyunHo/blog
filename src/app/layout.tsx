@@ -7,30 +7,42 @@ import Provider from "@/components/Provider";
 const karla = Karla({ subsets: ["latin"] });
 
 export const metadata = {
-    title: {
-        default: "현호의 블로그",
-        template: "현호의 블로그 | %s",
-    },
-    description: "개발자 최현호 입니다.",
-    icons: {
-        icon: "/favicon.ico",
-    },
+	title: {
+		default: "현호의 블로그",
+		template: "현호의 블로그 | %s",
+	},
+	description: "개발자 최현호 입니다.",
+	icons: {
+		icon: "/favicon.ico",
+	},
+	metadataBase: new URL("https://www.choi-hyunho.com/"),
+	alternates: {
+		canonical: "/",
+	},
+	openGraph: {
+		images: "/og-image.png",
+	},
+	generator: "Next.js",
+	referrer: "origin-when-cross-origin",
+	keywords: ["Next.js", "React", , "TypeScript", "JavaScript", "개발자"],
+	authors: [{ name: "choihyunho", url: "https://www.choi-hyunho.com" }],
+	creator: "hyunho Choi",
 };
 
 export default function RootLayout({
-    children,
+	children,
 }: {
-    children: React.ReactNode;
+	children: React.ReactNode;
 }) {
-    return (
-        <html lang="ko">
-            <body className={karla.className}>
-                <Provider>
-                    <Header />
-                    {children}
-                    <Footer />
-                </Provider>
-            </body>
-        </html>
-    );
+	return (
+		<html lang="ko">
+			<body className={karla.className}>
+				<Provider>
+					<Header />
+					{children}
+					<Footer />
+				</Provider>
+			</body>
+		</html>
+	);
 }
