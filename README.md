@@ -107,14 +107,15 @@ yarn dev
 ├── postcss.config.js
 ├── posts                      # 포스팅 하는 글 쓰는 폴더(.mdx)
 ├── public                     # 사용되는 이미지들
-│   ├── images
-│   │   ├── logo.png
-│   │   ├── overview.gif
-│   │   └── profile.jpg
-│   ├── sitemap-0.xml
-│   └── sitemap.xml
+│   └── images
+│      ├── logo.png
+│      ├── overview.gif
+│      └── profile.jpg
+│
 ├── src
 │   ├── app
+│   │   ├── robots.ts          # metadata
+│   │   ├── sitemap.ts         # metadata
 │   │   ├── favicon.ico
 │   │   ├── globals.css
 │   │   ├── layout.tsx         # 전반적인 레이아웃
@@ -583,7 +584,7 @@ next.js 는 정적 페이지를 만들 수 있기 때문에 빌드 시점에서 
 
 <br>
 
-### sitemap, robots(v.1.3.0)
+### sitemap, robots(v1.3.0)
 
 sitemap은 구글, 네이버와 같은 검색 사이트들의 크롤링 봇들에게 우리 서비스에서 사용할 수 있는 사이트 주소를 알려주기 위해 활용 합니다.
 
@@ -594,6 +595,40 @@ sitemap은 구글, 네이버와 같은 검색 사이트들의 크롤링 봇들�
 -   [sitemap](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap)
 
 -   [robots](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/robots)
+
+<br>
+
+**동적 sitemap 만드는 예시(v1.3.1)**
+
+```
+import { MetadataRoute } from "next";
+import { getPosts } from "@/service/posts";
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+	const data = await getPosts();
+
+	const postUrls = data.map((post) => ({
+		url: `https://www.choi-hyunho.com/posts/${post._id}`,
+		lastModified: new Date(),
+	}));
+
+	return [
+		{
+			url: "https://www.choi-hyunho.com",
+			lastModified: new Date(),
+		},
+		{
+			url: "https://www.choi-hyunho.com/resume",
+			lastModified: new Date(),
+		},
+		{
+			url: "https://www.choi-hyunho.com/posts",
+			lastModified: new Date(),
+		},
+		...postUrls,
+	];
+}
+```
 
 <br>
 
