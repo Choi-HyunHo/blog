@@ -19,9 +19,6 @@ export const metadata = {
 	alternates: {
 		canonical: "/",
 	},
-	openGraph: {
-		images: "/og-image.png",
-	},
 	generator: "Next.js",
 	referrer: "origin-when-cross-origin",
 	keywords: ["Next.js", "React", , "TypeScript", "JavaScript", "개발자"],
