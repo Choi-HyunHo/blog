@@ -8,10 +8,10 @@ const karla = Karla({ subsets: ["latin"] });
 
 export const metadata = {
 	title: {
-		default: "현호의 블로그",
+		default: "개발자 현호의 블로그 입니다.",
 		template: "현호의 블로그 | %s",
 	},
-	description: "개발자 최현호 입니다.",
+	description: "Frontend Developer 최현호 입니다.",
 	icons: {
 		icon: "/favicon.ico",
 	},
