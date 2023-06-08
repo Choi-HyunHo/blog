@@ -8,7 +8,7 @@ export default function NotFound() {
         <section>
             <Image src={Human} alt="404" width={1000} height={100} />
             <div className="flex flex-col justify-center items-center">
-                <h1 className="mb-2">존재하지 않는 페이지 입니다.</h1>
+                <h1 className="my-10">존재하지 않는 페이지 입니다.</h1>
                 <Link href="/">
                     <AiOutlineArrowRight className="inline" /> Go Home
                 </Link>

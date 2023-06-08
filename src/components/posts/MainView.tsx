@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import BlogPost from "./BlogPost";
 import Tags from "./Tags";
 import Title from "../ui/Title";
+import { notFound } from "next/navigation";
 
 export default function MainView({ data }: any) {
     const [filteredPosts, setFilteredPosts] = useState(data); // 필터링된 포스트 목록을 저장하는 상태
@@ -19,9 +20,7 @@ export default function MainView({ data }: any) {
         setFilteredPosts(data);
     };
 
-    if (!filteredPosts) {
-        return <div>페이지를 찾을 수 없습니다.</div>;
-    }
+    if (!filteredPosts) notFound();
 
     return (
         <div>
