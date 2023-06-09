@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-    @apply max-w-screen-md flex flex-col px-4 m-auto dark:bg-[#22272e];
+	@apply max-w-screen-md flex flex-col px-4 m-auto dark:bg-[#22272e];
 }
 
 h1,
@@ -14,17 +14,37 @@ p,
 a,
 strong,
 code {
-    @apply dark:text-white;
+	@apply dark:text-white;
 }
 
 a:hover {
-    @apply hover:text-red-400 ease-in duration-150;
+	@apply hover:text-red-400 ease-in duration-150;
 }
 
 .notion-title {
-    @apply dark:text-white;
+	@apply dark:text-white;
 }
 
 .prose a {
-    @apply underline decoration-pink-600;
+	@apply underline decoration-pink-600;
+}
+
+.contact-text {
+	@apply after:content-['*'] after:ml-0.5 after:text-red-500 block text-lg  text-slate-700 dark:text-white;
+}
+
+.contact-input {
+	@apply mt-1 mb-6 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-80 rounded-md sm:text-sm focus:ring-1;
+}
+
+.contact-btn-container {
+	@apply absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-black group-hover:-translate-x-0 group-hover:-translate-y-0;
+}
+
+.contact-btn-inner {
+	@apply absolute inset-0 w-full h-full bg-white border-2 border-black group-hover:bg-black;
+}
+
+.contact-btn {
+	@apply relative text-black group-hover:text-white;
 }
