@@ -100,7 +100,6 @@ yarn dev
 ├── README.md
 ├── contentlayer.config.ts     # next-contentlayer
 ├── next-env.d.ts
-├── next-sitemap.config.js     # next-sitemap
 ├── next.config.js             # next 설정
 ├── package-lock.json
 ├── package.json
@@ -125,7 +124,7 @@ yarn dev
 │   │   │   │   └── page.tsx   # /posts/[slug] 페이지
 │   │   │   └── page.tsx       # /posts 페이지
 │   │   ├── resume
-│   │   │    └── page.tsx      # /resume 페이지
+│   │   │   └── page.tsx       # /resume 페이지
 │   │   └── contact
 │   │       └── page.tsx       # /contact 페이지
 │   ├── components
