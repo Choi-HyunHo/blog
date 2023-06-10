@@ -124,8 +124,10 @@ yarn dev
 │   │   │   ├── [slug]
 │   │   │   │   └── page.tsx   # /posts/[slug] 페이지
 │   │   │   └── page.tsx       # /posts 페이지
-│   │   └── resume
-│   │       └── page.tsx       # /resume 페이지
+│   │   ├── resume
+│   │   │    └── page.tsx      # /resume 페이지
+│   │   └── contact
+│   │       └── page.tsx       # /contact 페이지
 │   ├── components
 │   │   ├── Provider.tsx       # next-themes Provider
 │   │   ├── posts              # /posts, /posts/[slug] 관련 컴포넌트
