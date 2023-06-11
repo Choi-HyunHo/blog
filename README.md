@@ -113,6 +113,9 @@ yarn dev
 │
 ├── src
 │   ├── app
+│   │   ├── api
+│   │   │   └── contact
+│   │   │       └── route.ts   # email API
 │   │   ├── robots.ts          # metadata
 │   │   ├── sitemap.ts         # metadata
 │   │   ├── favicon.ico
@@ -143,6 +146,8 @@ yarn dev
 │   │       ├── Hero.tsx
 │   │       └── Title.tsx
 │   └── service                # 서비스 관련 API
+│       ├── email.ts
+│       ├── nodemail.ts
 │       ├── notion.ts
 │       └── posts.ts
 ├── tailwind.config.js         # tailwind 설정
@@ -567,7 +572,7 @@ module.exports = {
 
 <br>
 
-## 🚀 트러블 슈팅
+## 🚀 트러블 슈팅 및 기능 관련
 
 ### Resume 페이지
 
@@ -632,6 +637,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 ```
 
 <br>
+
+### contact 페이지 및 이메일 전송 기능 추가(v1.4,2)
+
+정리 : [v1.4.2](https://github.com/Choi-HyunHo/blog/releases/tag/v1.4.2)
+
+-   유효성 검사 : yup
+-   메일 전송 : nodemailer
 
 ---
 
