@@ -7,7 +7,7 @@ interface Props {
     onClearFilter: () => void;
 }
 
-const tagList = ["All", "Next.js", "React", "TS", "JS", "CSS"]; // 태그 목록 배열
+const tagList = ["All", "Next.js", "React", "TS", "JS", "CSS", "Review"]; // 태그 목록 배열
 
 const Tags = ({ onFilter, onClearFilter }: Props) => {
     const [selectedTag, setSelectedTag] = useState("All"); // 선택된 태그를 저장하는 상태
