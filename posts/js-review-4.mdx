@@ -1,0 +1,107 @@
+---
+title: JavaScript Review 👀 - 4화
+date: "2023-06-15"
+description: let의 친구 const 그리고 동적 타입
+tag: JS
+---
+
+> 변수는 값을 저장하는 공간 또는 값을 저장할 수 있는 이름이 주어진 공간
+
+변수를 사용할 때 쓰는 키워드인 `let` 은 **재할당이 가능**했습니다.
+
+이번에는 let 의 친구 `const` 에 대해 알아보겠습니다.
+
+## const 란
+
+const 는 상수라고 부르기도 하고, 변수라고 부르기도 합니다.
+
+### const 특징
+
+let은 재할당이 가능했지만 `const` 는 **재할당이 불가능** 합니다.
+
+```js
+// let 재할당 가능
+let a = 1;
+b = 2; // ✅
+
+// cosnt 재할당 불가능
+const myName = "hello";
+myName = "ho"; // ❌ TypeError : Assignment to constant variable.
+```
+
+### const 사용하는 예시
+
+1. 상수
+
+```js
+const MAX_COUNT = 10;
+```
+
+2. 재할당 불가능한 변수
+
+```js
+const apple = {
+    name: "apple",
+};
+
+// apple = {} ❌
+```
+
+⚠️ **특이점**
+
+위의 `const apple` 이라는 변수에 다른 객체로 할당은 안되지만(apple 에는 메모리 주소가 할당) <br/>
+이름을 바꾸면 변하는 걸 볼 수 있습니다.
+
+```js
+const apple = {
+    name: "apple",
+};
+
+apple.name = "banana";
+console.log(apple.name); // banana
+```
+
+💭 **왜 그럴까**
+
+apple 은 객체임으로 `heap` 에 보관되어 있고 apple 은 객체가 저장된 **메모리 주소**를 가르키고 있습니다.
+
+`let apple = {}` 으로 객체를 선언하면 apple 에 저장 되어있는 **메모리 주소를 추적**해서 <br/> **그 안에 데이터**를 바꾸게 됩니다.
+
+-   즉, **메모리 주소를 바꾸는 것이 아닙니다.**
+
+`const apple = {}` 를 사용하여 재할당을 막는 것은 메모리 셀에 **다른 메모리 주소를 담을 수 없음**을 뜻합니다.
+
+-   하지만 동일하게 객체의 값들은 변경이 가능 합니다.
+-   재할당만 안됩니다.
+
+## let vs const
+
+-   재할당 : let 만 가능
+-   변경 : 둘 다 가능(변수가 가르키고 있는 주소가 아닌 내부 데이터)
+
+## 자바스크립트는 동적 타입이다.
+
+> 자바스크립트의 엔진은 인터프리터 입니다. 즉, 런타임 시 동적으로 코드를 한줄씩 번역하면서 실행하므로 타입들이 동적으로 결정이 됩니다.
+
+`typeof` 는 값의 타입을 확인 할 수 있는 키워드 입니다.
+
+```js
+let a;
+console.log(typeof a) // undefined
+
+a = 'hi;
+console.log(typeof a) // string
+
+a = 123;
+console.log(typeof a) // number
+
+a = {};
+console.log(typeof a) // object
+
+a = function(){};
+console.log(typeof a) // function
+```
+
+### 요약
+
+자바스크립트의 타입은 동적으로 결정이 되고, 타입이 한 번 할당되면 계속 그 타입을 유지하는 것이 아니라 <br/> 값의 타입에 따라서 타입이 달라지는 언어 입니다.
