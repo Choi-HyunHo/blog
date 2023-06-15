@@ -1,0 +1,131 @@
+---
+title: JavaScript Review 👀 - 8화
+date: "2023-06-19"
+description: 객체(object)와 친해지기
+tag: JS
+---
+
+## 객체(Object)
+
+객체는 복합 데이터 입니다.
+
+서로 연관있는 **속성(프로퍼티)** 과 **행동(메서드(함수))** 을 묶어 주기 위해 사용합니다.
+
+```js
+let colorInfo = {
+    name: "red", // 속성
+    number: 1234,
+    change: function () {
+        // 메서드
+        console.log(1);
+    },
+};
+
+colorInfo.name; // 속성에 접근하는 방법
+```
+
+-   `{key : value}` 의 형태를 가집니다.
+-   `heap` 이라는 메모리 공간에 들어있고 colorInfo 는 메모리의 주소를 가지고 있습니다.
+-   `colorInfo.name` 은 객체가 들어있는 메모리를 찾아서 해당 값을 출력 합니다.
+
+### 객체 만드는 방법
+
+#### Object literal
+
+```js
+let self = {
+    name: "hyunho",
+    age: 27,
+};
+
+self.name; // 속성에 접근하는 방법 - 점 표기법
+self["name"]; // 속성에 접근하는 방법 - 대괄호 표기법
+
+self.job = "dev"; // 속성 추가
+console.log(self.job); // 'dev'
+console.log(self['job]'); // 'dev'
+
+delete self.job // 속성 삭제
+console.log(self) // { name: "hyunho", age: 27}
+```
+
+#### 생성자 함수
+
+**new** 와 **대문자**로 시작하는 함수를 만들어 객체를 만들 수 있습니다.
+
+`this` 키워드는 객체 자신을 가르킵니다.
+
+-   this.name 을 하면 name 이라는 key가 만들어집니다.
+
+```js
+function Colors(name, num) {
+    this.name = name;
+    this.num = num;
+}
+
+const blue = new Colors("blue", 123);
+```
+
+### 동적으로 객체에 접근하기
+
+주로 대괄호 표기법을 사용합니다.
+
+```js
+let self = {
+    name: "hyunho",
+    age: 27,
+};
+
+// 이미 정의되어있어 정적으로 접근이 가능 할 때
+self.name;
+self.age;
+
+// 동적으로 속성에 접근하고 싶은 경우 대괄호 표기법 사용
+function addObj(obj, key, value) {
+    obj[key] = value;
+}
+
+addObj(obj, "hobby", "game");
+```
+
+### 객체 축약 버전
+
+key 와 value 의 이름이 같다면 생략이 가능 합니다.
+
+```js
+const x = 0;
+const y = 0;
+const shortObj = { x, y };
+console.log(shortObj); // {x : 0, y : 0}
+
+function shortObj2(name, age){
+    return {
+        name : name,
+        age : age
+    }
+}
+
+---- 아래와 동일
+
+function shortObj2(name, age){
+    return {
+        name,
+        age
+    }
+}
+```
+
+### 메서드 사용
+
+객체 안에서 자신의 데이터에 접근 할 때는 `this.key` 형태로 사용 합니다.
+
+```js
+const self = {
+    name: "hyunho",
+    info: function () {
+        console.log(`{this.name} : `student`);
+    },
+};
+
+self.info() // 호출
+```
