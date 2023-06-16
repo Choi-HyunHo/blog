@@ -134,6 +134,7 @@ yarn dev
 │   │   ├── Provider.tsx       # next-themes Provider
 │   │   ├── posts              # /posts, /posts/[slug] 관련 컴포넌트
 │   │   │   ├── BlogPost.tsx
+│   │   │   ├── FeaturePost.tsx
 │   │   │   ├── MainView.tsx
 │   │   │   ├── Recent.tsx
 │   │   │   └── Tags.tsx
