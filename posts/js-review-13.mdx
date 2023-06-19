@@ -1,0 +1,91 @@
+---
+title: JavaScript Review 👀 - 13화
+date: "2023-06-24"
+description: 자바스크립트 실행 순서 ❗️
+tag: JS
+---
+
+자바스크립트가 동작하는 런타임 환경에는 자바스크립트 엔진이 필요합니다.
+
+자바스크립트가 런타임시 어떻게 동작하는지 살펴보겠습니다. <br/>
+좋은 자료와 영상을 접하게 되어 그 자료들 기반의로 포스팅 하였습니다.
+
+➡ [자료 및 영상 참고](https://www.youtube.com/watch?v=8aGhZQkoFbQ&t=334s)
+
+먼저 동적으로 **객체를 생성하는 경우**에 `Memory heap` 공간에 생성이 됩니다. <br/>
+그리고 `Call Stack` 이라는 곳이 있는데 **함수의 실행 순서** 를 기억 합니다.
+
+자바스크립트는 기본적으로 `싱글 스레드 프로그래밍 언어` 입니다.
+
+> 여기서 싱글 스레드라는 것은 **한 번에 하나의 작업**만 할 수 있다는 뜻 입니다.
+>
+> 그렇기에 기본적으로 동기적으로 진행 된다고 볼 수 있습니다.
+
+1. 함수를 실행하면 함수 호출이 스택에 순차적으로 쌓이고
+2. 스택의 맨 위에서부터 **차례대로 한 번에 하나의 함수만 처리**할 수 있습니다.
+
+![](https://github.com/Choi-HyunHo/blog/assets/87301268/3882ac4d-bc67-4eb8-9bf7-e157998a9cc1)
+
+Stack 에 함수를 넣는 것을 `push`, 함수가 값을 리턴하거나 종료하면 `pop` 이라는 과정을 진행 합니다.
+
+**[PUSH]**
+
+1. 위 코드를 실행하면 일단 저 함수들을 감싸고 있는 main() 함수를 스택에 넣습니다.
+2. 그리고 printSquare(4) 함수가 실행되므로 printSquare(4)를 스택에 넣습니다.
+3. printSquare() 함수 내부에서 square(n) 함수를 실행하므로 스택에 square(n)을 넣습니다.
+4. square(n) 함수 내부에서 실행되는 multiply(a, b)를 스택에 넣습니다.
+   33
+   **[POP]**
+
+5. 드디어 처음으로 리턴이 됩니다. multiply(a, b)가 값을 리턴하며 스택에서 나옵니다.
+6. square(n)도 값을 리턴하고 나옵니다.
+7. printSquare(n)에서 console.log(squared)를 스택에 push하고 실행한 후 빠져나옵니다.
+8. printSquare(n) 함수가 종료되었으므로 stack에서 나옵니다.
+9. main() 함수가 종료되었으므로 스택이 종료됩니다.
+
+> 만약 함수 내부에서 오래걸리는 일을 수행하면 **전체적인 성능에 영향을 미칩니다.**
+
+<br />
+
+자바스크립트가 싱글 스레드 언어임에도 불구하고 우리가 웹 사이트에서 끊김없이 <br />
+여러 작업을 동시에 할 수 있는 것은 바로 **브라우저가 Web APIs 같은 것들을 제공**하여 <br />
+**비동기 작업**을 가능하게 해줍니다.
+
+### 동작 원리 그림
+
+![](https://github.com/Choi-HyunHo/blog/assets/87301268/176724c8-e104-4221-a095-afb4f221b7bd)
+
+1. 함수를 동기 호출하게 되면 **call stack에 차곡차곡 쌓여 순차적으로 실행** 됩니다.
+2. 이 때 만약에 우리가 AJAX나 setTimeout 혹은 **DOM API 함수를 실행**하면
+3. 자바스크립트 엔진은 **call stack에서 해당 event 를 Web APIs로 보내고**
+4. 정해진 시간 혹은 이벤트가 발생한 순간에 **순차적으로 callback queue에 적재** 합니다.
+5. `Event Loop` 라는 녀석이 **call stack** 과 **callback queue**를 감시하면서 **call stack 이 비워져있다면**
+6. callback queue 에 있는 함수를 **call stack 에 가져와서** call stack 에서 함수를 실행 합니다.
+
+### 예시
+
+![](https://github.com/Choi-HyunHo/blog/assets/87301268/b8fbd01c-2f5f-4609-a624-246cec34af2d)
+
+1. 먼저 main() 함수가 실행되고, **console.log(1)** 이 스택에 쌓입니다.
+2. console.log(1)이 실행되어 콘솔 창에 1이 출력되고 **setTimeout의 콜백 함수인 cb가 스택에 쌓이는데**
+3. setTimeout은 **브라우저에 의해 제공된 API**로 자바스크립트 엔진에서 처리하지 않고 바로 **web APIs로 넘어갑니다.**
+4. 그러면 브라우저는 마치 **setTimeout 함수가 완료된 것처럼 스택에서 pop**하고 다음 작업을 진행하므로 **console.log(3)이 실행**되어 콘솔 창에 3이 출력 됩니다.
+5. 모든 코드가 실행되었으므로 main() 함수가 스택에서 제거되고,
+6. 5초 동안 대기하고 있던 cb 함수가 **5초가 지난 시점에 task queue(callback queue)** 에 들어옵니다.
+7. **stack**이 비어있으므로 cb 함수를 **stack에 적재**하고 **console.log(2)를 실행**하게 됩니다.
+
+[직접 해보기](http://latentflip.com/loupe/?code=JC5vbignYnV0dG9uJywgJ2NsaWNrJywgZnVuY3Rpb24gb25DbGljaygpIHsKICAgIHNldFRpbWVvdXQoZnVuY3Rpb24gdGltZXIoKSB7CiAgICAgICAgY29uc29sZS5sb2coJ1lvdSBjbGlja2VkIHRoZSBidXR0b24hJyk7ICAgIAogICAgfSwgMjAwMCk7Cn0pOwoKY29uc29sZS5sb2coIkhpISIpOwoKc2V0VGltZW91dChmdW5jdGlvbiB0aW1lb3V0KCkgewogICAgY29uc29sZS5sb2coIkNsaWNrIHRoZSBidXR0b24hIik7Cn0sIDUwMDApOwoKY29uc29sZS5sb2coIldlbGNvbWUgdG8gbG91cGUuIik7!!!PGJ1dHRvbj5DbGljayBtZSE8L2J1dHRvbj4%3D)
+
+이상, 자바스크립트 동작 원리 였습니다.
+
+<br />
+
+### 동기, 비동기 예시 ❗️
+
+[동기]
+
+-   사용자가 데이터를 서버에게 요청한다면 그 서버가 데이터 요청에 따른 응답을 사용자에게 다시 리턴해주기 전까지 사용자는 다른 활동을 할 수 없으며 기다려야만 합니다.
+
+[비동기]
+
+-   서버에게 데이터를 요청한 후 요청에 따른 응답을 계속 기다리지 않아도되며 다른 외부 활동을 수행하여도되고 서버에게 다른 요청사항을 보내도 상관 없습니다
