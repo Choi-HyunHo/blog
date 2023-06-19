@@ -1,0 +1,112 @@
+---
+title: JavaScript Review 👀 - 11화
+date: "2023-06-22"
+description: 스프레드 연산자 & 구조분해할당
+tag: JS
+---
+
+## 스프레드(Spread) 연산자
+
+> 영어 뜻 그대로 spread 즉, 펼치다는 의미이며 객체나 배열을 펼쳐서 나열 할 수 있습니다.
+
+스프레드 연산자를 사용하면 기존 배열이나 객체의 전체 또는 일부를 다른 배열이나 객체로 빠르게 복사할 수 있습니다.
+
+예시를 통해 알아봅시다
+
+```js
+function add(a, b, c) {
+  return a + b + c;
+}
+
+const nums = [1, 2, 3];
+console.log(add(...nums)); // 6
+
+-----
+
+function sum(first, second, ...nums) {
+  console.log(first); // 1
+  console.log(second); // 2
+  console.log(nums); // [0,1,2,4]
+}
+sum(1, 2, 0, 1, 2, 4);
+
+-----
+
+# 배열 합치기
+
+const numArr1 = [1, 2];
+const numArr2 = [3, 4];
+let arr = numArr1.concat(numArr2);
+console.log(arr); // [1,2,3,4]
+arr = [...numArr1, ...numArr2];
+console.log(arr); // [1,2,3,4]
+
+-----
+
+# 객체에 값 변경 하거나 추가
+
+const colors = { name: 'blue', num : 12 };
+const updated = {
+  ...colors,
+  next: 'sky blue',
+};
+const newColor = {
+    ...colors,
+    name : 'red'
+}
+console.log(colors); // { "name": 'blue', "num" : 12 }
+console.log(updated); // { "name": "blue", "num": 12, "next": "sky blue"}
+console.log(newColor) // { "name": "red", "num": 12 }
+```
+
+<br />
+
+## 구조분해할당
+
+데이터 뭉치를 쉽게 분해하여 그룹화 할 수 있습니다.
+
+참고로.. React 사용하며 `props` 로 **데이터를 받아서 펼칠 때** 유용하게 사용하곤 합니다.
+
+```js
+const numbers = [1, 2, 3, 4];
+
+const [first, second, ...other] = numbers;
+console.log(first); // 1
+console.log(second); // 2
+console.log(other); // [3,4]
+
+-----
+
+const numbers = () => {
+    return [1,2,3]
+}
+
+const [first, second, ...other] = numbers()
+console.log(first); // 1
+console.log(second); // 2
+console.log(other); // [3]
+
+-----
+
+# 객체 분해(리액트에서 자주 사용)
+const colors = { name: 'blue', num: 12, next: 'sky blue' };
+
+const view = ({ name, num, next }) => {
+    console.log(name); // 'blue'
+    console.log(num); // 12
+    console.log(next); // 'sky blue'
+};
+
+view(colors);
+
+-----
+
+# 변수에 할당 그리고 이름 커스텀
+const colors = { name: 'blue', num: 12, next: 'sky blue' };
+
+const {name, num, next: newColor, size = 20} = colors;
+console.log(name) // "blue"
+console.log(num) // 12
+console.log(newColor) // next의 이름을 newColor 로 변환 - "sky blue"
+console.log(size) // 20
+```
