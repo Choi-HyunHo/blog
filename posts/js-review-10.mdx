@@ -1,0 +1,181 @@
+---
+title: JavaScript Review 👀 - 10화
+date: "2023-06-21"
+description: 배열과 고차함수 ❓
+tag: JS
+---
+
+## 고차함수(High-order function)
+
+다른 함수를 인자로 받거나 반환하는 함수 입니다.
+
+-   콜백함수를 인자로 받으면 함수안에서 필요한 순간에 인자로 전달받은 콜백 함수를 호출 할 수 있습니다.
+
+배열에서 사용할 수 있는 고차함수들이 있습니다.
+
+### .forEach
+
+배열의 요소를 하나씩 출력할 경우
+
+```js
+const numbers = [1,2,3,4];
+
+# 1
+numbers.forEach(function (value, index, array) {
+  console.log(value); // 배열의 값(1,2,3,4)
+  console.log(index); // 인덱스(0,1,2,3)
+  console.log(array); // [1,2,3,4]
+});
+
+# 2
+numbers.forEach((value) => console.log(value));
+```
+
+<br />
+
+### .find
+
+가장 먼저 조건에 맞는 첫 번째 요소를 반환
+
+```js
+const numbers = [1, 2, 3, 4];
+
+const numberValue = numbers.find((value) => value === 3);
+console.log(numberValue); // 3 ✅
+
+// 동일한 표현
+const numberValue = numbers.find((value) => {
+    return value === 3; // 3 ✅
+});
+```
+
+<br />
+
+### .findIndex
+
+가장 먼저 조건에 맞는 요소의 인덱스를 반환
+
+```js
+const numbers = [1, 2, 3, 3];
+
+const numberIndex = numbers.findIndex((value) => value === 3);
+console.log(numberIndex); // 2
+```
+
+<br />
+
+### .some
+
+배열의 요소들이 부분적으로 조건에 맞는지 확인
+
+-   하나라도 맞으면 true
+
+```js
+const numbers = [1, 2, 3, 4];
+
+const numberBoolean = numbers.some((value) => value === 3);
+console.log(numberBoolean); // true
+```
+
+<br />
+
+### .every
+
+배열의 요소들이 모두 조건에 맞는지 확인
+
+-   모두 조건에 맞아야 true
+
+```js
+const numbers = [1, 2, 3, 4];
+
+const numberBoolean = numbers.every((value) => value === 3);
+console.log(numberBoolean); // false
+```
+
+<br />
+
+### .filter
+
+조건에 맞는 모든 요소들을 새로운 배열로 반환
+
+```js
+const numbers = [1, 2, 3, 4, 3, 3];
+
+const numberArr = numbers.filter((value) => value === 3);
+console.log(numberArr); // [3,3,3]
+```
+
+<br />
+
+### .map
+
+배열안의 요소들을 각각 다른 요소로 매핑하여 변환하고 새로운 배열로 반환
+
+```js
+const numbers = [1, 2, 3, 4];
+
+let val = numbers.map((value) => value * 2);
+console.log(val); // [2,4,6,8]
+
+val = numbers.map((value) => {
+    return value % 2 === 1 ? value * 3 : value * 2; // [3,4,9,8]
+});
+
+# {}을 하고 return 을 사용하지 않으면
+val = numbers.map((value) => {
+    return value % 2 === 1 ? value * 3 : value * 2; // [undefined,undefined,undefined,undefined]
+});
+```
+
+<br />
+
+### .sort
+
+배열의 요소들을 정렬
+
+-   **기존의 배열을 변경**
+-   sort 만 사용하면 문자열 형태의 **오름차순**으로 정렬
+-   sort 만 사용하여 숫자를 정렬하면 숫자 앞 맨 숫자가 작은 순서대로 오름차순으로 정렬 합니다.
+
+```js
+const txt = ["hello", "apple"];
+txt.sort();
+console.log(txt); // ["apple","hello"]
+
+const numbers = [1, 2, 8, 10, 4, 6];
+numbers.sort();
+console.log(numbers); // [1,10,2,4,6,8]
+```
+
+**sort 비교하기**
+
+두 개의 인자를 사용하여 비교
+
+1. a - b 가 0 보다 작으면 ? a가 앞으로 정렬
+2. a - b 가 0 보다 크면 ? b가 앞으로 정렬
+
+```js
+const numbers = [1, 2, 8, 10, 4, 6];
+numbers.sort((a, b) => a - b);
+console.log(numbers); // [1,2,4,6,8,10]
+```
+
+<br />
+
+### .reduce
+
+배열 내부의 요소에 대한 연산을 쉽게 가능
+
+```js
+const numbers = [1, 2, 3, 4];
+
+const val = numbers.reduce((sum, value) => {
+    return (sum += value); // 10
+}, 0);
+
+--------
+
+const val = numbers.reduce((1.계속 연산되는 값을 저장하는 인자, 2.각 요소를 전달받을 인자) => {
+    return (1번 += 2번);
+}, 3. 1번의 초기값);
+```
