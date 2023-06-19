@@ -1,0 +1,85 @@
+---
+title: JavaScript Review 👀 - 12화
+date: "2023-06-23"
+description: 단축평가 및 옵셔널 체이닝
+tag: JS
+---
+
+## 단축 평가
+
+`논리연산자(&&,||)` 는 단축평가가 되는 특징이 있습니다.
+
+-   `&&` : 조건이 모두 true → true
+-   `||` : 조건이 하나라도 true → true
+
+```js
+const person = { name: "ho", age: 11 };
+const person2 = { name: "hhhh", age: 21 };
+
+let val = person && person2;
+console.log(val); // { "name": "hhhh", "age": 21 }
+
+// 이미 person 이 true 이고 나머지 하나는 굳이 boolean 으로 평가 하지 않아도 됩니다.
+// 그리하여 평가가 단축 됩니다. 대신 뒤에 있는 것은 변수에 할당 합니다.
+
+-----
+
+val = person || person2;
+console.log(val); // { "name": "ho", "age": 11 }
+
+// person 값이 이미 true 이므로 조건이 성립합니다.
+// 굳이 뒤의 값을 확인할 필요가 없기 때문에 앞의 값을 변수에 할당 합니다.
+```
+
+#### null 또는 undefined 인 경우를 확인 할 때 유용 합니다.
+
+-   React 에서 조건부 렌더링을 할 때 많이 사용 합니다.
+
+```js
+let item;
+const product = item.price; // ❌
+console.log(product); // error
+
+-----
+
+let item;
+const product = item && item.price; // ✅
+console.log(product); // item 이 없기 때문에 undefined
+```
+
+<br />
+
+## 옵셔널 체이닝
+
+`null` 또는 `undefined` 인 경우를 확인 할 때 좀 더 편하게 할 수 있는 방법 입니다.
+
+-   `?.` 을 사용 합니다.
+-   **해당 요소가 있으면 접근을 하고 없으면 접근 하지 않습니다.**
+-   접근 해야 될 요소의 깊이가 깊을 수록 반복되는 코드 작성을 줄여줍니다.
+    -   ex) item && item.info && item.info.price → **item?.info?.price**;
+
+```js
+let item;
+const product = item && item.price; // ✅
+console.log(product);
+
+-----
+
+# 옵셔널 체이닝
+let item;
+const product = item?.price; // ✅
+console.log(product);
+```
+
+<br />
+
+## null 체크(Nullish Coalescing Operator)
+
+`??` 을 사용 합니다.
+
+-   ?? 앞에 값이 있는 경우 해당 값을 사용하고, `null` 과 `undefined` 인 경우에는 뒤에오는 값을 사용 합니다.
+
+```js
+let num;
+console.log(num ?? 123); // 123
+```
