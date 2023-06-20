@@ -1,0 +1,82 @@
+---
+title: JavaScript Review 👀 - 15화
+date: "2023-06-26"
+description: Promise 를 더 간결하게 async/await 😎
+tag: JS
+---
+
+이전 Promise 포스팅에서 사용하던 코드를 `async/await` 로 바꿔보겠습니다.
+
+## async/await ❓
+
+async/await는 ES2017에 도입된 문법으로서, Promise 로직을 더 쉽고 간결하게 사용할 수 있게 해줍니다.
+
+중요한 점은
+
+-   async/await가 Promise를 대체하기 위한 기능이 아니라는 것
+-   내부적으로는 여전히 Promise를 사용해서 비동기를 처리하고 <br/> 단지 코드 작성 부분을 프로그래머가 유지보수하게 편하게 보이는 문법만 다르게 해줄 뿐
+
+사용법(`async`)
+
+-   함수 앞에다 `async` 키워드를 사용하면 해당 함수는 **비동기 함수** 라고 지정합니다.
+-   즉, 해당 함수를 실행하면 Promise 가 return 이 됩니다.
+
+사용법(`await`)
+
+-   `await` 는 비동기 처리가 완료될때 까지 코드 실행을 일시 중지하고 wait 한다는 뜻 입니다.
+
+```js
+function getBanana() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve("🍌");
+        }, 1000);
+    });
+}
+
+function getApple() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve("🍎");
+        }, 4000);
+    });
+}
+
+function getOrange() {
+    return Promise.reject(new Error("no orange"));
+}
+
+# 기존 Promsie 코드
+getBanana()
+    .then((banana) =>
+        getApple()
+            .then((apple) => [banana, apple])
+    )
+    .then(console.log);
+
+-----
+
+# async/await
+async function fruits(){
+    const apple = await getApple();
+    const banana = await getBanana();
+    return [apple, banana]
+}
+
+fruits().then(res => console.log(res))
+```
+
+## 정리
+
+Promise 를 사용하며 중첩으로 .then() 을 사용해서 엮어나가는 것이 아니라 <br/>
+`async` 를 사용하면 비동기 코드를 절차적으로 사용 할 수 있습니다.
+
+단, Promise 를 return 하는 함수 호출을 하는 경우 `await` 키워드를 사용해서 기댜렸다가 <br/>
+Promise 값이 resolve 가 되면 그 값을 변수에 할당 합니다.
+
+<br />
+
+## 참고하면 좋은 글
+
+-   [https://springfall.cc/post/7](https://springfall.cc/post/7)
+-   [inpa.tistory](https://inpa.tistory.com/entry/JS-%F0%9F%93%9A-%EB%B9%84%EB%8F%99%EA%B8%B0%EC%B2%98%EB%A6%AC-async-await)
