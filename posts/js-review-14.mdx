@@ -1,0 +1,194 @@
+---
+title: JavaScript Review 👀 - 14화
+date: "2023-06-25"
+description: 비동기의 시작, Promise ❗️
+tag: JS
+---
+
+### Promise 는 객체 입니다.
+
+**비동기적으로 수행하는 그 결과 값**을 `성공`인지 `실패`인지 알려줍니다.
+
+### Promise 의 상태
+
+-   `pending` : 이제 막 시작된 초기 상태
+-   `fulfilled` : 비동기 코드가 성공적으로 수행된 상태
+-   `rejected` : 실패한 상태
+
+### Promise 문법
+
+`new Promise()` 를 사용합니다.
+
+-   두 가지 인자를 전달받습니다.
+-   성공적으로 수행 한 경우 .then 을 호출할 때 사용할 `resolve` 라는 함수
+-   실패한 경우를 알려주는 `reject` 를 받아야 합니다.
+
+```js
+function relay(seconds){
+    return new Promise((resolve, reject) => {
+        if(!seconds || seconds < 0){
+            reject(new Error('0보다 큰 수 입력'))
+        }
+        setTimeout(resolve, seconds*10) // 함수의 인자로 아무것도 전달하지 않아서 축약형 사용
+    });
+}
+
+relay(3)
+    .then(() => {console.log('success')})
+    .catch(error => console.log(error))
+    .finally(() => console.log('end'))
+
+-----
+
+relay(3)
+    .then(성공적이라면 필요한 동작)
+    .catch(에러가 발생했다면 예외처리)
+    .finally(성공여부와 상관없이 최종적으로 무조건 호출)
+```
+
+### Promise.resolve()
+
+Promise 를 만들고나서 즉각적으로 resolve 할 수 있습니다.
+
+```js
+function infoName(name) {
+    return Promise.resolve(`Hello, ${name}`);
+}
+
+infoName("hyunho").then((res) => console.log(res)); // "Hello, hyunho"
+```
+
+-   infoName 함수에서 바로 Promise.resolve 를 호출하여 문자열을 반환하고
+-   .then 에서는 합쳐진 문자열을 출력합니다.
+
+### 체이닝
+
+```js
+function infoFirstName(first) {
+    return Promise.resolve(`${first}`);
+}
+
+function infoLastName(last) {
+    return Promise.resolve(`${last}, hyunho`);
+}
+
+function infoEnd(end) {
+    return Promise.resolve(`Hello ${end}`);
+}
+
+function infoName() {
+    return Promise.resolve(`Choi`);
+}
+
+infoName() // infoName 의 값 'Choi' 를 가지고와서
+    .then((first) => infoFirstName(first)) // first 에 'Choi' 가 들어가고
+    .then((last) => infoLastName(last)) // last 에 'Choi' 가 들어가고 → Choi, hyunho
+    .then((end) => infoEnd(end)) // end 에 Choi, hyunho 가 전달 됩니다.
+    .then(console.log); // "Hello Choi, hyunho"
+
+-----
+
+# 전달하는 인자와 호출하는 인자가 동일하여 생략 가능
+infoName()
+    .then(infoFirstName)
+    .then(infoLastName)
+    .then(infoEnd)
+    .then(console.log); // "Hello Choi, hyunho"
+```
+
+### Promise.all
+
+아래 코드는 결과 값을 가져오는데 총 5초가 걸립니다.
+
+```js
+function getBanana() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve("🍌");
+        }, 1000);
+    });
+}
+
+function getApple() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve("🍎");
+        }, 4000);
+    });
+}
+
+function getOrange() {
+    return Promise.reject(new Error("no orange"));
+}
+
+// 바나나과 사과를 같이 가지고 오기
+getBanana() //
+    .then((banana) =>
+        getApple() //
+            .then((apple) => [banana, apple])
+    )
+    .then(console.log); // 총 5초
+```
+
+-   순차적으로 Promise 를 진행하기 때문 입니다.
+-   상대적으로 작업 시간이 긴 Promise 가 같이 작업 될 경우 전체적으로 느리게 응답을 받게 될 수 있습니다.
+
+해결 방안으로 병렬적으로 Promise 를 진행 할 수 있는 `Promise.all` 이 있습니다.
+
+> Promise.all 은 병렬적으로 한 번에 모든 Promise 를 실행 합니다.
+
+```js
+Promise.all([배열로 함수 전달])
+    .then(res => console.log(res)) // 성공적으로 된다면 배열로 받아옵니다.
+```
+
+```js
+Promise.all([getBanana(), getApple()]) // 병렬적으로 동시에 시작해서 총 4초 후 실행 됩니다.
+    .then((fruits) => console.log("all", fruits));
+```
+
+<br />
+
+### 그 외 Promise 함수들
+
+### Promise.race
+
+주어진 Promise 중에 가장 빨리 수행되는 것이 실행
+
+```js
+Promise.race([getBanana(), getApple()]) // banana 만 출력
+    .then((fruit) => console.log("race", fruit));
+```
+
+### Promise.allSettled
+
+오류를 발생시키는 코드를 `Promise.all` 로 묶어서 통신하면 에러가 발생 합니다.
+
+```js
+Promise.all([getBanana(), getApple(), getOrange()])
+    .then((fruits) => console.log("error", fruits))
+    .catch(console.log);
+```
+
+-   당연히 `.catch` 를 통해 오류 처리를 해야 합니다.
+
+만약 실패한 결과에 대해서도 받아오고 싶다면 `Promise.allSettled` 를 사용 합니다.
+
+```js
+Promise.allSettled([getBanana(), getApple(), getOrange()])
+    .then((fruits) => console.log("settle", fruits))
+    .catch(console.log);
+```
+
+<br />
+
+### 정리
+
+`Promise` 는 콜백함수를 사용하지 않고 비동기 통신을 위한 코드를 깔끔하게 사용 할 수 있습니다.
+
+다음 포스팅은 `Promise` 로직을 더 쉽고 간결하게 사용 할 수 있는 `async/await` 에 대해 알아보겠습니다.
+
+### 참고하면 좋은 글
+
+-   [https://springfall.cc/post/7](https://springfall.cc/post/7)
+-   [inpa.tistory](https://inpa.tistory.com/entry/JS-%F0%9F%93%9A-%EB%B9%84%EB%8F%99%EA%B8%B0%EC%B2%98%EB%A6%AC-async-await)
