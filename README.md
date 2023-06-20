@@ -1,3 +1,7 @@
+## If this document was helpful to you, please give it a star ⭐️
+
+<br>
+
 # 🎉 introduce
 
 **Next.js + typescript** 의 블로그를 소개합니다.
