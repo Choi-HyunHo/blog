@@ -49,6 +49,7 @@ header,footer, form, table과 같이 어떤 데이터를 담을 컨텐츠인지 
 
 <br />
 
-### **💡 position 속성과 z-index 속성의 연관성에 대해 설명하세요.**
+### 💡 z-index 란
 
-> z-index는 element의 배치 순서이며 숫자가 높을 수록 상단에 배치되며 기본적으로 뒤에 나오는 태그가 먼저 나오는 태그보다 위에 위치합니다. 만약 먼저 나오는 태그를 위에 위치하고 싶다면 position 속성을 사용할 수 있습니다. position 속성을 부여하면 position 속성이 없는 태그들보다 위에 위치됩니다. 하지만 부모 속성에 z-index가 있는 경우에는 자식 요소의 z-index는 부모의 z-index를 따릅니다.
+> z-index 속성은 `겹치는 요소의 쌓임 순서를 제어` 합니다. `position: static이 아닌 값`을 갖는 요소에만 영향을 줍니다.
+> z-index 값이 없으면 DOM이 나타나는 순서대로 요소가 쌓입니다.
