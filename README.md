@@ -113,7 +113,10 @@ yarn dev
 │   └── images
 │      ├── logo.png
 │      ├── overview.gif
+│      └── 404.jpg
+│      └── overview.jpg
 │      └── profile.jpg
+│      └── human.jpg
 │
 ├── src
 │   ├── app
@@ -122,13 +125,16 @@ yarn dev
 │   │   │       └── route.ts   # email API
 │   │   ├── robots.ts          # metadata
 │   │   ├── sitemap.ts         # metadata
+│   |   ├── not-found.tsx      # 404 커스텀 페이지
 │   │   ├── favicon.ico
 │   │   ├── globals.css
 │   │   ├── layout.tsx         # 전반적인 레이아웃
 │   │   ├── page.tsx           # 메인 페이지
 │   │   ├── posts
-│   │   │   ├── [slug]
-│   │   │   │   └── page.tsx   # /posts/[slug] 페이지
+│   │   │   ├── [tag]
+│   │   │   │    └── page.tsx
+│   │   │   │        └── [slug]
+│   │   │   │             └── page.tsx
 │   │   │   └── page.tsx       # /posts 페이지
 │   │   ├── resume
 │   │   │   └── page.tsx       # /resume 페이지
@@ -142,14 +148,18 @@ yarn dev
 │   │   │   ├── MainView.tsx
 │   │   │   ├── Recent.tsx
 │   │   │   └── Tags.tsx
+│   │   │   └── TagView.tsx    # /post/[tag] 페이지 컴포넌트
 │   │   ├── resume             # /resume 컴포넌트
 │   │   │   └── Notion.tsx
+│   │   ├── contact            # /contact 컴포넌트
+│   │   │   └── ContactForm.tsx
 │   │   └── ui                 # UI 컴포넌트
 │   │       ├── Button.tsx
 │   │       ├── Footer.tsx
 │   │       ├── Header.tsx
 │   │       ├── Hero.tsx
 │   │       └── Title.tsx
+│   │       └── Banner.tsx
 │   └── service                # 서비스 관련 API
 │       ├── email.ts
 │       ├── nodemail.ts
@@ -649,6 +659,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
 -   유효성 검사 : yup
 -   메일 전송 : nodemailer
+
+<br>
+
+### 특정 포스트(Featured)를 메인 화면에 고정(v1.5,2)
+
+정리 : [v1.5.2](https://github.com/Choi-HyunHo/blog/releases/tag/v1.5.2)
+
+<br>
+
+### v1.6.2 convert tag value to param value
+
+정리 : [v1.6.2](https://github.com/Choi-HyunHo/blog/releases/tag/v1.6.2)
 
 ---
 
