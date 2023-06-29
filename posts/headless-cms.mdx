@@ -1,0 +1,45 @@
+---
+title: Headless CMS 란❓
+date: "2023-06-28"
+description: 프로젝트를 할 때 화면에 보이는 데이터를 별도로 관리하고 싶다..!
+tag: Next.js
+---
+
+Next.js & React 로 프로젝트를 만들다보면 화면에 보여지는 데이터가 필요하고 저장할 공간이 필요 합니다.
+
+그렇다고 데이터베이스를 직접 만들면서 구축하기에는 지금 당장 시간에 비해 공부해야 할 게 많다고 생각하고 <br/>
+프론트엔드 개발자로서 Next.js & React & TypeScript 에 집중해도 모자를 시간이라 배보다 배꼽이 커질 것 같다는 생각이 들었습니다..
+
+이전에 Firebase 를 사용해서 실시간 데이터베이스를 통해 데이터를 저장하고 API를 호출하는 식으로 만든 적이 있는데 <br/>
+이번에 만드는 서비스는 나도 직접 사용하면서 여러 사람들에게 공개 후 피드백을 받아보고 싶은 계획이라 조금 더 체계적인 방법으로 하고 싶었습니다.
+
+그래서 검색을 하던 중 CMS 에 대해 찾게 되었고, Headless CMS 라는 것도 알게되어 정리해보려고 합니다.👍
+
+![](https://github.com/Choi-HyunHo/blog/assets/87301268/75666c01-08f6-4f81-ade0-ed6ce9101e5e)
+
+## CMS?
+
+> Content Management System 의 약자 입니다.
+
+Content 관리만을 위한 서비스 입니다.
+
+-   기본 CMS는 head 와 back 이 결합 되어있습니다.(아래 Headless CMS 부분을 보시면 됩니다)
+-   즉, 데이터를 저장하는 것 뿐만 아니라 어떻게 보여질 것인지도 같이 담당하고 있었습니다.
+
+## 그렇다면 Headless 는
+
+> 말 그래도 머리가 없다는 뜻 입니다.
+
+## Headless CMS?
+
+웹 개발을 사람으로 통해 비유하면 body 를 back-end, head 를 front-end 라고 말하기도 합니다.
+
+즉, Headless CMS 는 front-end 가 없는 Content Management System 입니다.
+
+-   CMS는 데이터 저장을 담당하는 역할(back-end)
+-   데이터가 화면에 어떻게 나타내는지는 전혀 관여하지 않습니다.
+-   데이터를 저장하고 화면에 표기하려면 API를 사용해야 합니다.
+
+**그렇기에 front-end 부분을 원하는대로 바꿔서 보여줄 수 있습니다.(web, ios, aos 등)**
+
+이번에는 그 중 `SANITY` 를 사용해서 그 방법들을 정리 하겠습니다.
