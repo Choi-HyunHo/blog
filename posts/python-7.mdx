@@ -1,0 +1,94 @@
+---
+title: Python 의 조건문
+date: "2023-04-26"
+description: Python 7화 - 조건문
+tag: Python
+---
+
+조건문은 주어진 조건이 참(True) 또는 거짓(False)을 판별하고 <br/> 판별 값에 따라 특정 행동을 수행 할 수 있게 합니다.
+
+## if문
+
+```python
+if 조건문:
+    수행할 문장1
+    수행할 문장2
+    ...
+else:
+    수행할 문장A
+    수행할 문장B
+    ...
+```
+
+조건문을 테스트해서 참이면 if문 바로 다음 문장들을 수행하고 <br/> 조건문이 거짓이면 else문 다음 문장을 수행 합니다.
+
+-   **else문은 if문 없이 독립적으로 사용할 수 없습니다.**
+-   if문에 속하는 모든 문장은 **들여쓰기를 해야 합니다.**
+
+```python
+# 올바르게 들여쓰기 한 경우
+
+if 조건문:
+    수행할 문장1
+    수행할 문장2
+    수행할 문장3
+
+# '수행할 문장2'를 들여쓰기 하지 않아 오류 발생
+
+if 조건문:
+    수행할 문장1
+수행할 문장2
+    수행할 문장3
+```
+
+-   참일 경우 코드블럭을 실행하고, 거짓인 경우 코드블럭을 넘어갑니다.
+
+```python
+name = 'hyunho'
+if name == 'hyunho':
+    print('당신이 hyunho ?') # 당신이 hyunho ?
+    print('만나서 반가워요 hyunho.') # 만나서 반가워요 hyunho.
+else :
+    print('당신은 이름이 다르군요')
+```
+
+<br />
+
+## else, elif
+
+-   `else` : 이전의 if or elif 가 모두 거짓인 경우 **else** 로 넘어갑니다.
+-   `elif` : 이전의 if나 elif가 거짓일 경우 **elif의 조건문**으로 넘어갑니다.
+
+```python
+if 조건:
+    수행할 문장1
+    수행할 문장2
+elif 조건:
+    수행할 문장A
+    수행할 문장B
+```
+
+```python
+my_name = 'hyunho'
+if my_name == 'Alice':
+    print('당신이 Ailce이군요.')
+else:
+    print('누구!?') # 출력
+
+
+if my_name == 'Alice':
+    print('당신이 Ailce이군요.')
+elif my_name == 'Bob':
+    print('당신이 Bob이군요.')
+else:
+    print('아니 당신은!?') # 출력
+```
+
+<br />
+
+## 참고
+
+-   [김왼손의 왼손코딩](https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EA%B8%B0%EC%B4%88-%EA%B0%95%EC%A2%8C)
+-   http://pythonstudy.xyz/python/article/10-%EC%A1%B0%EA%B1%B4%EB%AC%B8
+-   https://velog.io/@nayeo0on/Python-%EA%B8%B0%EC%B4%88-08.if%EB%AC%B8
+-   https://plan2018.tistory.com/192
