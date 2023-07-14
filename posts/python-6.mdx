@@ -1,0 +1,153 @@
+---
+title: Python 의 연산자
+date: "2023-04-25"
+description: Python 6화 - 연산자
+tag: Python
+---
+
+## 할당
+
+python에서 `=`은 할당 연산자 입니다.
+
+-   오른쪽 값을 왼쪽의 변수에 할당 합니다.
+
+```python
+my_int = 1
+my_float = 2.0
+my_list = []
+```
+
+<br />
+
+## 산술
+
+숫자끼리 연산을 할 수 있게 해주는 연산자 입니다.
+
+-   수학의 사칙연산이 가능 합니다.
+
+```python
+print(1 + 2) # 3
+print(14 - 5) # 9
+print(2 * 2) # 4
+print(12 / 3) # 4.0
+```
+
+<br />
+
+### 특수 연산자
+
+```python
+print(2 ** 2) # 2의 2제곱 : 4
+print(8 // 3) # 8 나누기 3의 몫 : 2
+print(8 % 2) # 8 나누기 2의 나머지 : 0
+```
+
+<br />
+
+### 홀짝 구분하기
+
+`%` 를 사용해서 나머지 값에 따라 홀짝을 구분 할 수 있습니다.
+
+```python
+numbers = [1, 2, 3, 4, 5, 6, 7]
+for number in numbers:
+    if number % 2 == 1:
+        print(number, ': 홀수')
+    else:
+        print(number, ': 짝수')
+
+        # 1 : 홀수
+        # 2 : 짝수
+        # 3 : 홀수
+        # 4 : 짝수
+        # 5 : 홀수
+        # 6 : 짝수
+        # 7 : 홀수
+```
+
+<br />
+
+## 문자열 연산
+
+-   `+` 를 사용하면 문자열을 서로 연결 합니다.
+-   `*` 를 사용하면 특정 문자열을 반복 할 수 있습니다.
+
+```python
+print('hello' + 'world') # helloworld
+print('hello' + ' ' + 'world') # hello world
+
+print(('hello' + ' ' + 'world') * 3) # hello worldhello worldhello world
+```
+
+<br />
+
+## 비교 연산자
+
+비교의 결과는 참(True) 과 거짓(False) 입니다.
+
+<img
+    width="324"
+    alt="image"
+    src="https://github.com/Choi-HyunHo/blog/assets/87301268/6c0c6906-3572-4073-a217-593188776204"
+/>
+
+```python
+print(3 < 4) # True
+print(1 > 2) # False
+print(11 == 11) # True
+print(12 != 1) # True
+print(4 <= 6) # True
+print(7 <= 5) # False
+```
+
+<br />
+
+## 논리 연산자
+
+python의 논리 연산자는 `and`, `or`, `not` 으로 나타냅니다.
+
+<img
+    width="298"
+    alt="image"
+    src="https://github.com/Choi-HyunHo/blog/assets/87301268/0bb10bf3-4168-4286-aef3-ea66ebcf6cc1"
+/>
+
+```python
+print(True and True) # True
+print(True and False) # False
+print(False and True) # False
+print(False and False) # False
+
+print(True or True) # True
+print(True or False) # True
+print(False or True) # True
+print(False or False) # False
+
+print(not False) # True
+print(not True) # False
+```
+
+<br />
+
+## 포함 연산자
+
+포함, 불포함을 확인할 수 있는 `in`, `not in` 연산자가 있습니다.
+
+-   `in` : 확인하고자 하는 데이터가 있는 경우 True, 없는 경우 False를 반환
+-   `not in` : 확인하고자 하는 데이터가 있으면 False, 없으면 True를 반환
+
+```python
+nums = [1,2,3,4,5]
+print(1 in nums) # True
+print(2 not in nums) # False
+print(3 in nums) # True
+print(4 not in nums) # False
+```
+
+<br />
+
+## 참고
+
+-   [김왼손의 왼손코딩](https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EA%B8%B0%EC%B4%88-%EA%B0%95%EC%A2%8C)
+-   https://wikidocs.net/1164
+-   http://pythonstudy.xyz/python/article/8-%EC%97%B0%EC%82%B0%EC%9E%90
