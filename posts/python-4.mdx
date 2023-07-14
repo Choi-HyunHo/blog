@@ -1,0 +1,151 @@
+---
+title: Python 의 리스트에 대해서
+date: "2023-04-23"
+description: Python 4화 - 리스트
+tag: Python
+---
+
+## 리스트(List)는
+
+원소들이 **연속적으로 저장되는 형태의 자료형** 입니다.
+
+-   저장되는 요소들이 **모두 같은 자료형일 필요는 없습니다.**
+-   대괄호`[]`를 사용하여 나타내고, 0개 이상의 원소가 저장 될 수 있습니다.
+-   가변의 특징을 가집니다.(값을 변경 할 수 있다.)
+
+<br />
+
+## 리스트 만들어보기
+
+### 빈 리스트 만들기
+
+```python
+list1 = []
+print(type(list1)) # <class 'list'>
+```
+
+<br />
+
+### 값을 가지고 있는 리스트 만들기
+
+```python
+list2 = ['a','b','c']
+print(list2) # ['a', 'b', 'c']
+
+```
+
+<br />
+
+## .append()
+
+리스트에 값을 추가하는 함수 입니다.
+
+```python
+list3 = [1,2,3]
+list3.append(4)
+list3.append(5)
+list3.append(6)
+list3.append('hi')
+print(list3) # [1, 2, 3, 4, 5, 6, 'hi']
+```
+
+<br />
+
+## 리스트의 인덱싱, 슬라이싱
+
+인덱싱, 슬라이싱 방식은 문자열과 유사 합니다.
+
+-   위치를 이용해서 값에 접근하는 것
+-   인덱싱은 1이 아닌 0부터 시작한다는 점을 항상 유의
+
+<br />
+
+### 인덱싱
+
+```python
+list4 = [1,2,3,4,5]
+print(list4[0]) # 1
+print(list4[2]) # 3
+
+# 마이너스를 사용하면 뒤에서부터 순서대로 가져옵니다.
+print(list4[-1]) # 5
+print(list4[-3]) # 3
+```
+
+<br />
+
+### 슬라이싱
+
+주의해야 할 점은 [0:3] 의미는 3번째 값까지가 아닌 3번째 전 값(2번째 값) 이라는 의미 입니다.
+
+```python
+list5 = [1,2,4,5,6,7]
+print(list5[0:3]) # [1,2,4]
+print(list5[1:5]) # [2,4,5,6]
+print(list5[4:]) # [6,7]
+print(list5[:3]) # [1,2,4]
+```
+
+<br />
+
+슬라이싱을 활용해서 list 중간에 데이터를 삽입할 수 있습니다. <br/>
+또한 [::2] 의미는 시작과 종료 값이 없고 `step` 이라고 `2씩 건너뛰어 가져온다`는 의미 입니다.
+
+```python
+list5 = [1,2,4,5,6,7]
+print(list5[::2]) # [1, 4, 6]
+
+list5[2:4] = [99,100]
+print(list5) # [1, 2, 99, 100, 6, 7]
+```
+
+<br />
+
+### 정렬
+
+1. 리스트 본체 정렬
+
+-   `reverse` : 리스트를 거꾸로 뒤집습니다.
+
+-   `sort` : 정렬, 기본 값은 오름차순, `reverse=True`는 내림차순 정렬
+
+```python
+list6 = [1,2,6,4,5]
+list6.reverse()
+print(list6) # [5, 4, 6, 2, 1]
+
+list6.sort()
+print(list6) # [1, 2, 4, 5, 6]
+
+list6.sort(reverse=True)
+print(list6) # [6, 5, 4, 2, 1]
+```
+
+<br />
+
+2. 리스트 정렬된 결과 값 반환
+
+-   `sorted` : 순서대로 정렬, 정렬된 리스트 반환
+
+```python
+list6 = [1,2,6,4,5]
+
+a = sorted(list6)
+print(a) # [1, 2, 4, 5, 6]
+print(list6) # [1, 2, 6, 4, 5]
+```
+
+<br />
+
+## 후기
+
+리스트를 활용하기 위한 메서드 종류는 훨씬 많습니다. <br/>
+지금은 이렇구나 정도로 보고, 알고리즘 공부를 하며 더 추가하겠습니다.
+
+<br />
+
+## 참고
+
+-   [김왼손의 왼손코딩](https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EA%B8%B0%EC%B4%88-%EA%B0%95%EC%A2%8C)
+-   https://wikidocs.net/16040
+-   https://mimah.tistory.com/entry/Python-List-%EA%B8%B0%EB%B3%B8-%EA%B0%9C%EB%85%90%EA%B3%BC-%EC%8A%AC%EB%9D%BC%EC%9D%B4%EC%8B%B1slicng
