@@ -1,0 +1,84 @@
+---
+title: Python 의 while 문
+date: "2023-04-27"
+description: Python 8화 - 반복문
+tag: Python
+---
+
+for, while 반복문 중에서 while 문에 대해 알아보겠습니다.
+
+## while
+
+```python
+while 조건 :
+    실행할 문장 1
+    실행할 문장 2
+    ...
+```
+
+-   조건이 **참(True)인 경우 내부 실행할 문장을 진행**하고 <br/> 거짓(False)인 경우 while문을 빠져나갑니다.
+-   while 조건문 끝에는 꼭 **클론(:)** 을 붙여야 합니다.
+-   while **반복문의 실행할 명령 부분은 들여쓰기를 통해 구분**을 합니다.
+-   while 반복문은 중첩해서 사용이 가능합니다.
+
+```python
+count = 0
+while count < 5:
+    print('반복 ', count)
+    count += 1
+
+    # 반복  0
+    # 반복  1
+    # 반복  2
+    # 반복  3
+    # 반복  4
+```
+
+<br />
+
+## break
+
+break문은 while문,for문과 같은 반복문 안에서 특정 조건에서 반복문을 <br/> **중단 시키고 빠져나올때 사용합니다.**
+
+```python
+num = 0
+while num < 5:
+    num += 1
+    if(num == 3):
+        break # 반복 2 이후로 빠져나가서 멈춥니다.
+    else:
+        print('반복 ', num)
+
+        # 반복  1
+        # 반복  2
+```
+
+<br />
+
+## continue
+
+continue문은 break문과 비슷하게 for와 while 반복문을 빠져나오지만 <br/> **반복문을 중단시키지 않고 다음 반복으로 넘어갑니다.**
+
+```python
+my_num = 0
+while my_num < 10:
+    my_num += 1
+    if my_num < 4:
+        print('ing ', my_num)
+        # ing  1
+        # ing  2
+        # ing  3
+        continue
+    if my_num == 8:
+        print('end' , my_num)
+        # end 8
+        break
+```
+
+<br />
+
+## 참고
+
+-   [김왼손의 왼손코딩](https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EA%B8%B0%EC%B4%88-%EA%B0%95%EC%A2%8C)
+-   https://blockdmask.tistory.com/426
+-   https://wikidocs.net/16033
