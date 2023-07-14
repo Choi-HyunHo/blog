@@ -1,0 +1,175 @@
+---
+title: Python 의 for 반복문
+date: "2023-04-24"
+description: Python 5화 - 반복문
+tag: Python
+---
+
+## 반복문
+
+반복문은 **특정 조건을 만족할 때 같은 동작을 계속해서 반복하고자 할 때 사용 합니다.**
+
+python 에는 for, while 두 가지 반복문이 있습니다. <br/>
+먼저 for 반복문에 대해 알아보겠습니다.
+
+for는 횟수를 기준으로 반복할 때 사용 합니다.
+
+### 기본 구조
+
+```python
+for 변수 in 컨테이너 :
+    실행할 명령1
+    실행할 명령2
+    ...
+```
+
+-   컨테이너 안의 값을 전부 순회 할 때 까지 반복 합니다.
+-   반복하는 부분을 코드블럭이라고 합니다.
+-   코드블럭을 구분하기 위해 `:` 와 들여쓰기를 사용 합니다.
+
+**⚠️ 주의 !! python에서는 들여쓰기는 선택이 아닌 필수 입니다.**
+
+```python
+colors = ['blue', 'red', 'green', 'yellow']
+
+for color in colors :
+    print(color)
+
+    # blue
+    # red
+    # green
+    # yellow
+
+for num in [1,2,3] :
+    print(num)
+
+    # 1
+    # 2
+    # 3
+
+for name in 'hyunho' :
+    print(name)
+
+    # h
+    # y
+    # u
+    # n
+    # h
+    # o
+```
+
+<br />
+
+## range
+
+for 의 내장 함수 입니다.
+
+-   `range(stop)` : 0부터 stop 전까지의 숫자를 나열 합니다.
+-   `range(start, stop)` : start부터 stop 전까지의 숫자를 나열 합니다.
+-   `range(start, stop, step)` : step 은 간격을 나타냅니다.
+
+```python
+for num in range(1, 5) :
+    print(num)
+
+    # 1
+    # 2
+    # 3
+    # 4
+
+for sum in range(2, 10, 2) :
+    print(sum)
+
+    # 2
+    # 4
+    # 6
+    # 8
+
+for value in range(10, 2, -2) :
+    print(value)
+
+    # 10
+    # 8
+    # 6
+    # 4
+```
+
+<br />
+
+## 중첩해서 사용하기
+
+**반복문은 중첩**해서 사용 할 수 있습니다.
+
+```python
+for i in range(1, 10):
+    print('{}x{}={}'.format(2, i, 2 * i))
+
+    # 2x1=2
+    # 2x2=4
+    # 2x3=6
+    # 2x4=8
+    # 2x5=10
+    # 2x6=12
+    # 2x7=14
+    # 2x8=16
+    # 2x9=18
+
+# 구구단 출력 예시
+for i in range(2, 10) :
+    for j in range(1, 10) :
+        print('{}x{}={}'.format(j, i, j * i))
+```
+
+<br />
+
+## 컴프리헨션
+
+**python의 간결하고 실용적이며, 직관적인 기능 입니다.**
+
+-   조건문을 사용해서도 나타낼 수 있는데 아직 정리하지 않았기에 for 위주로 살펴보겠습니다.
+
+<br />
+
+### 예시
+
+기존의 `for in range` 를 사용해서 1부터 10까지 리스트를 만들어보겠습니다.
+
+```python
+nums = []
+for num in range(1, 11) :
+    nums.append(num)
+
+print(nums) # [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+```
+
+<br />
+
+다음과 같이 컴프리헨션을 사용해서 동일한 기능을 하지만 더 간결하게 만들어보겠습니다.
+
+```python
+print([num for num in range(1,11)]) # [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+```
+
+<br />
+
+또 다른 예시로는
+
+```python
+print([num * 2 for num in range(1,11)]) # [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+```
+
+풀어서 설명하면
+
+1. 전체 대괄호 `[]` 는 리스트를 생성하는 방법 입니다.
+2. `for num in range(1,11)` 는 대괄호 안의 `for num in range(1,11)` 와 동일 합니다.
+3. 그리고 `append(num)`의 **num**은 대괄호 맨 앞에 `num` 과 같습니다.
+
+조건문을 정리 할 때 컴프리헨션에서 사용하늰 방법을 추가로 정리 하겠습니다.
+
+<br />
+
+## 참고
+
+-   [김왼손의 왼손코딩](https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EA%B8%B0%EC%B4%88-%EA%B0%95%EC%A2%8C)
+-   https://wikidocs.net/22805
+-   https://wikidocs.net/22
