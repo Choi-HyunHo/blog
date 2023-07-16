@@ -1,0 +1,234 @@
+---
+title: Python 의 딕셔너리(dictionary)
+date: "2023-04-28"
+description: Python 9화 - 딕셔너리(dictionary)
+tag: Python
+---
+
+## 딕셔너리 ❓
+
+딕셔너리를 말 그대로 해석하면 사전이라는 뜻으로 <br/> **키(key)와 값(value)** 을 쌍으로 갖는 자료형입니다.
+
+-   `중괄호 {}` 를 사용해서 생성 합니다.
+-   키(key)와 값(value)를 가지는 데이터 구조로 `콜론(:)`으로 연결합니다.
+-   구분자로는 `,` 를 사용 합니다.
+-   순서가 없기 때문에 인덱스로는 접근할수 없고, 키(key)로 접근 할 수 있습니다.
+
+<br />
+
+### 딕셔너리 선언
+
+```python
+dic = {}
+dic2 = dict()
+
+print(dic)  # {} 빈 딕셔너리 선언
+print(dic2) # {} 빈 딕셔너리 선언
+```
+
+-   물론 값을 넣어서 선언을 할 수 있습니다.
+
+<br />
+
+### 딕셔너리 값 다루기
+
+`추가`하는 방법은 딕셔너리 변수에 key와 value를 추가하면 됩니다.
+
+```python
+# 딕셔너리 값 추가
+my_dic = {} # {}
+my_dic[1] = 'a' # {1: 'a'}
+my_dic['apple'] = 2 # {1:'a', 'apple' : 2}
+my_dic[3] = 'c' # {1: 'a', 'apple': 2, 3: 'c'}
+
+print(my_dic) # {1: 'a', 'apple': 2, 3: 'c'}
+```
+
+<br />
+
+`수정`하는 방법은 해당 key의 value를 변경하면됩니다.
+
+```python
+
+my_dic = {} # {}
+my_dic[1] = 'a' # {1: 'a'}
+my_dic['apple'] = 2 # {1:'a', 'apple' : 2}
+my_dic[3] = 'c' # {1: 'a', 'apple': 2, 3: 'c'}
+
+print(my_dic) # {1: 'a', 'apple': 2, 3: 'c'}
+
+
+# 딕셔너리 값 수정
+my_dic[3] = 'korea'
+
+print(my_dic) # {1: 'a', 'apple': 2, 3: 'korea'}
+```
+
+<br />
+
+`삭제`하는 방법은 `del` 를 사용 합니다.
+
+```python
+my_dic = {} # {}
+my_dic[1] = 'a' # {1: 'a'}
+my_dic['apple'] = 2 # {1:'a', 'apple' : 2}
+my_dic[3] = 'c' # {1: 'a', 'apple': 2, 3: 'c'}
+
+print(my_dic) # {1: 'a', 'apple': 2, 3: 'c'}
+
+# 딕셔너리 값 수정
+my_dic[3] = 'korea'
+
+print(my_dic) # {1: 'a', 'apple': 2, 3: 'korea'}
+
+# 딕셔너리 삭제
+del(my_dic[3])
+
+print(my_dic) # {1: 'a', 'apple': 2}
+```
+
+<br />
+
+이번에는 value가 아닌 key값을 구하는 방법을 살펴보겠습니다.
+
+<br />
+
+### 딕셔너리 키 구하기
+
+`keys` 메서드를 활용 합니다.
+
+-   키 값만 구하고 싶을 때 `딕셔너리 이름.keys` 라고 호출하면 됩니다.
+
+```python
+my_dic = {} # {}
+my_dic[1] = 'a' # {1: 'a'}
+my_dic['apple'] = 2 # {1:'a', 'apple' : 2}
+my_dic[3] = 'c' # {1: 'a', 'apple': 2, 3: 'c'}
+
+print(my_dic) # {1: 'a', 'apple': 2, 3: 'c'}
+
+# 딕셔너리 값 수정
+my_dic[3] = 'korea'
+
+print(my_dic) # {1: 'a', 'apple': 2, 3: 'korea'}
+
+# 딕셔너리 삭제
+del(my_dic[3])
+
+print(my_dic) # {1: 'a', 'apple': 2}
+
+# 딕셔너리 키 구하기
+a = my_dic.keys()
+```
+
+<br />
+
+그런데 값에 `'dict_keys'`라는 것이 있습니다. 확인 할 수 있는 사실은 **Keys 메서드의 반환 값은 <br/> 리스트가 아니며**, 리스트로 만들려면 **list** 키워드를 사용해서 타입을 변환해야 합니다.
+
+```python
+# 딕셔너리 값 추가
+my_dic = {} # {}
+my_dic[1] = 'a' # {1: 'a'}
+my_dic['apple'] = 2 # {1:'a', 'apple' : 2}
+my_dic[3] = 'c' # {1: 'a', 'apple': 2, 3: 'c'}
+
+print(my_dic) # {1: 'a', 'apple': 2, 3: 'c'}
+
+# 딕셔너리 값 수정
+my_dic[3] = 'korea'
+
+print(my_dic) # {1: 'a', 'apple': 2, 3: 'korea'}
+
+# 딕셔너리 삭제
+del(my_dic[3])
+
+print(my_dic) # {1: 'a', 'apple': 2}
+
+# 딕셔너리 키 구하기
+a = my_dic.keys()
+
+print(a) # dict_keys([1, 'apple'])
+
+a = list(my_dic.keys())
+
+print(a) # [1, 'apple']
+```
+
+<br />
+
+비슷하기 값 목록을 받아오려면 `values()` 를 사용 합니다.
+
+```python
+# 딕셔너리 값 추가
+my_dic = {} # {}
+my_dic[1] = 'a' # {1: 'a'}
+my_dic['apple'] = 2 # {1:'a', 'apple' : 2}
+my_dic[3] = 'c' # {1: 'a', 'apple': 2, 3: 'c'}
+
+print(my_dic) # {1: 'a', 'apple': 2, 3: 'c'}
+
+# 딕셔너리 값 수정
+my_dic[3] = 'korea'
+
+print(my_dic) # {1: 'a', 'apple': 2, 3: 'korea'}
+
+# 딕셔너리 삭제
+del(my_dic[3])
+
+print(my_dic) # {1: 'a', 'apple': 2}
+
+# 딕셔너리 키 구하기
+a = my_dic.keys()
+
+print(a) # dict_keys([1, 'apple'])
+
+a = list(my_dic.keys())
+
+print(a) # [1, 'apple']
+
+b = list(my_dic.values())
+
+print(b) # ['a', 2]
+```
+
+<br />
+
+## 다양한 메서드들
+
+-   `get()` : 키(key)를 알고 있을 경우 값(value)를 얻을 수 있습니다.
+
+```python
+# {1: 'a', 'apple': 2}
+print(my_dic.get(1)) # a
+```
+
+<br />
+
+-   `update()` : 여러 값을 수정 할 때 사용합니다.
+
+```python
+# {1: 'a', 'apple': 2}
+my_dic.update({'banana' : 3, 123 : 555})
+
+print(my_dic) # {1: 'a', 'apple': 2, 'banana': 3, 123: 555}
+```
+
+<br />
+
+-   `in` : 키 값에 한정적으로 동작 합니다.
+
+```python
+# {1: 'a', 'apple': 2, 'banana': 3, 123: 555}
+print(1 in my_dic) # True
+print('apple' in my_dic) # True
+print('melon' in my_dic) # False
+```
+
+<br />
+
+## 참고
+
+-   [김왼손의 왼손코딩](https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EA%B8%B0%EC%B4%88-%EA%B0%95%EC%A2%8C)
+-   https://wikidocs.net/16043
+-   https://wikidocs.net/2858
+-   [velog.ig](https://velog.io/@nayeo0on/Python-%EA%B8%B0%EC%B4%88-05%EC%9E%90%EB%A3%8C%ED%98%95%EB%94%95%EC%85%94%EB%84%88%EB%A6%AC)
