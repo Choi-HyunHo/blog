@@ -1,0 +1,57 @@
+---
+title: recoil은 redux 보다 과연 좋을까❓
+date: 2023-07-21
+description: recoil을 알아보자
+tag: React
+---
+
+> 작성 중인 포스팅 입니다..
+
+[React 상태관리 히스토리](https://www.choi-hyunho.com/posts/React/react-state-manage) 포스팅을 먼저 참고하시면 좋습니다 👋
+
+포스팅에서 사용한 코드들은 Repositories 주소를 걸어놓겠습니다.
+
+## RecoilRoot
+
+컴포넌트에서 Recoil 의 state 를 사용하기 위해서는 redux를 사용하기전에 Provider 를 씌우듯 부모에 `RecoilRoot`를 선언해야 합니다.
+
+-   최상위 root에 선언을 했습니다.
+
+```js
+import Counter from "./Counter";
+import NumberText from "./NumberText";
+
+// recoil 관련 코드 import
+import { RecoilRoot } from "recoil";
+
+function App() {
+    return (
+        <RecoilRoot>
+            <Counter />
+            <NumberText />
+        </RecoilRoot>
+    );
+}
+
+export default App;
+```
+
+## Atoms
+
+> Atoms는 state의 단위이며 업데이트와 구독이 가능합니다. <br/> atom 값을 읽는 컴포넌트들은 암묵적으로 atom을 구독합니다.
+
+-   atom에 변화가 생기면 atom을 구독하는 모든 컴포넌트가 리렌더링이 됩니다.
+
+```js
+import { atom } from "recoil";
+
+export const counterValue = atom({
+    key: "counterState", // 전역적으로 유일해야 함
+    default: 0, // 초기 값
+});
+```
+
+-   `key` : 내부적으로 atom을 식별 할 때 사용하는 고유한 문자열
+-   `default` : atom의 초기값
+
+💡 atom을 설정할 때 비동기 함수를 사용하기 위해서는 selectors를 사용해야 합니다.
