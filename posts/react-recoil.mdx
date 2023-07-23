@@ -5,11 +5,9 @@ description: recoil을 알아보자
 tag: React
 ---
 
-> 작성 중인 포스팅 입니다..
-
 [React 상태관리 히스토리](https://www.choi-hyunho.com/posts/React/react-state-manage) 포스팅을 먼저 참고하시면 좋습니다 👋
 
-포스팅에서 사용한 코드들은 Repositories 주소를 걸어놓겠습니다.
+포스팅에서 사용한 코드들은 Repositories 주소를 걸어놓겠습니다. 👉 [https://github.com/Choi-HyunHo/recoil-study](https://github.com/Choi-HyunHo/recoil-study)
 
 ## RecoilRoot
 
@@ -55,3 +53,248 @@ export const counterValue = atom({
 -   `default` : atom의 초기값
 
 💡 atom을 설정할 때 비동기 함수를 사용하기 위해서는 selectors를 사용해야 합니다.
+
+## useRecoilState
+
+Atoms 및 Selectors와 상호작용하기 위해 자주 사용되는 hooks입니다.
+
+-   `useRecoilState()`: atom을 읽고, 쓰기 위해 사용
+
+다음으로 위의 counterValue 를 사용해서 초기값을 다른 컴포넌트에서 상태변화를 발생시키겠습니다.
+
+```js
+import React from "react";
+import { useRecoilState } from "recoil";
+import { counterValue } from "./atom";
+
+export default function Counter() {
+    const [value, setValue] = useRecoilState(counterValue);
+
+    const add = () => {
+        setValue((prev) => prev + 1);
+    };
+
+    const minus = () => {
+        setValue((prev) => prev - 1);
+    };
+
+    return (
+        <div>
+            <button onClick={() => add()}>+</button>
+            <p>{value}</p>
+            <button onClick={() => minus()}>-</button>
+        </div>
+    );
+}
+```
+
+![](https://github.com/Choi-HyunHo/blog/assets/87301268/3ac850b4-3236-4df7-949b-84dc0490c6e4)
+
+자 그럼, 값을 변경하고 `다음 값은 무엇입니다.` 라고 사용자에게 표시할 수 있을까요?
+
+-   Selectors에 대해 살펴봅시다.
+
+## Selectors
+
+위에서 잠깐 나왔던 selectors를 알아보겠습니다.
+
+> selector는 전역 상태 값을 기반으로 어떤 계산을 통해 파생된 상태(derived state)를 반환하는 순수함수입니다.
+
+-   `get` : 함수만 제공되면 selector는 **읽기만 가능**한 RecoilValueReadOnly 객체를 반환합니다.
+-   `set` : 함수 또한 제공되며 (optional) selector는 **쓰기 가능**한 RecoilState 객체를 반환합니다.
+
+> selector는 기본적으로 값을 자체적으로 캐싱 합니다. <br/> 입력된 적 있는 값을 기억하고, 이 값이 재호출되면 캐싱된 결과를 바로 보여주기 때문에 <br/> 비동기 데이터를 다루는 측면에서 유리 합니다.
+
+```js
+import { atom, selector } from "recoil";
+
+export const counterValue = atom({
+    key: "counterState",
+    default: 0,
+});
+
+export const counterNextValue = selector({
+    key: "counterNextState",
+    get: ({ get }) => {
+        return get(counterValue) + 1;
+    },
+});
+```
+
+### useRecoilValue
+
+-   `useRecoilValue()`: atom을 읽기만 할 때 사용
+
+```js
+import React from "react";
+import { useRecoilValue } from "recoil";
+import { counterNextValue } from "./atom";
+
+export default function NumberText() {
+    const nextCount = useRecoilValue(counterNextValue);
+    return <p>다음 카운터는 {nextCount} 입니다.</p>;
+}
+```
+
+![](https://github.com/Choi-HyunHo/blog/assets/87301268/4149a1ae-16a3-442d-a358-05915c0b7b2b)
+
+그 외의 다른 hooks
+
+-   `useSetRecoilState()` : atom을 쓰려고만 할 때 사용.
+-   `useResetRecoilState()` : atom을 default 값으로 초기화 할 때 사용.
+
+## useResetRecoilState
+
+```js
+import React from "react";
+import { useRecoilValue, useResetRecoilState } from "recoil";
+import { counterNextValue, counterValue } from "./atom";
+
+export default function NumberText() {
+    const nextCount = useRecoilValue(counterNextValue);
+    const resetCounter = useResetRecoilState(counterValue); // 위의 atom 참고
+    return (
+        <>
+            <p>다음 카운터는 {nextCount} 입니다.</p>
+            <button onClick={resetCounter}>Reset</button>
+        </>
+    );
+}
+```
+
+![](https://github.com/Choi-HyunHo/blog/assets/87301268/208f7440-06e8-445e-a019-1baf3b30bc29)
+
+<br />
+
+## Recoil 의 비동기 처리 방법
+
+### 1. 기본적인 async/await
+
+selector 에 `async/await`를 사용해서 API를 불러오는 비동키 코드 예시 입니다.
+
+-   API는 랜던하게 사진을 불러올 수 있는 OPEN API 를 사용하겠습니다.(https://dog.ceo/)
+
+```js
+import { atom, selector } from "recoil";
+
+export const dogData = selector({
+    key: "dogData",
+    get: async () => {
+        const res = await fetch("https://dog.ceo/api/breeds/image/random");
+        const data = await res.json();
+        return data.message;
+    },
+});
+```
+
+```js
+import React from "react";
+import { useRecoilValue } from "recoil";
+import { dogData } from "./atom";
+
+export default function Dog() {
+    const dogImg = useRecoilValue(dogData);
+
+    return (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+            <img src={dogImg} alt="" width="20%" height="auto" />
+        </div>
+    );
+}
+```
+
+<img
+    width="730"
+    alt="image"
+    src="https://github.com/Choi-HyunHo/blog/assets/87301268/a2f23d04-6e23-4f7f-8b59-df748b1d7126"
+/>
+
+<br />
+
+### 2. selectorFamily()
+
+`selectorFamily` 는 매개변수를 이용해 비동기 호출을 할 때 사용 합니다.
+
+```js
+import { selectorFamily } from "recoil";
+
+export const nameBreed = selectorFamily({
+    key: "breed",
+    get: (breed) => async () => {
+        const res = await fetch(
+            `https://dog.ceo/api/breed/${breed}/images/random`
+        );
+        const data = await res.json();
+        return data.message;
+    },
+});
+```
+
+```js
+import Counter from "./Counter";
+
+// recoil 관련 코드 import
+import { RecoilRoot } from "recoil";
+import NumberText from "./NumberText";
+import Dog from "./Dog";
+
+function App() {
+    return (
+        <RecoilRoot>
+            <Counter />
+            <NumberText />
+            <Dog breed="pug" />
+        </RecoilRoot>
+    );
+}
+
+export default App;
+```
+
+```js
+import React from "react";
+import { useRecoilValue } from "recoil";
+import { dogData, nameBreed } from "./atom";
+
+export default function Dog({ breed }) {
+    // const dogImg = useRecoilValue(dogData);
+    const dogImg = useRecoilValue(nameBreed(breed));
+
+    return (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+            <img src={dogImg} alt="" width="20%" height="auto" />
+        </div>
+    );
+}
+```
+
+<img
+    width="560"
+    alt="image"
+    src="https://github.com/Choi-HyunHo/blog/assets/87301268/2523c6d2-f64f-41b6-83e8-014f1d881212"
+/>
+
+<br />
+
+## 정리
+
+recoil 을 간단하게 정리해봤습니다.<br/> 이번 포스팅 말고도 기능이 더 많기때문에 recoil을 처음 사용하게 된다면 참고하면 좋을 듯 합니다👍
+
+마지막으로 대중적인 redux 와 짧게나마 비교를 해보자면
+
+장점
+
+-   세팅이 간단합니다.
+-   비동기 요청이 직관적 입니다.
+
+단점
+
+-   안정성(지속적인 업데이트 여부 확인 필요)
+-   개발자 도구의 부재
+-   부족한 레퍼런스(redux가 너무 앞도적으로 자료가 많습니다..)
+
+<br />
+
+## 참고
+
+-   [https://recoiljs.org/ko/](https://recoiljs.org/ko/)
