@@ -1,0 +1,81 @@
+---
+title: Next.js는 styled-components 보다 tailwind CSS 를 사용하라고..❓
+date: "2023-08-03"
+description: tailwind 를 컴포넌트처럼 사용하자
+tag: Next.js
+---
+
+포스팅 제목 그 자체 입니다.
+
+React를 사용하며 styled-components 를 즐겨 사용했었습니다. <br/>
+하지만 이번 Next.js 13버전에서 styled-components 를 사용해봤는데 <br/> 어..? 원래 이랬나 하는 점을 발견하게 되었습니다.
+
+## 그것은 바로.. FOUC 🔥
+
+페이지의 스타일시트 정보가 **로드 시점에 포함되지 않아**
+잠시 스타일이 적용되지 않은 페이지가 나타나는 현상 입니다.
+
+### 해당 현상이 나타나는 이유는
+
+Next.js 렌더링 방식을 다시 살펴보겠습니다.
+
+1.  Next.js의 Server-side Rendering 과 Static Generation 모두 Pre-rendering 방식 입니다.
+2.  그렇기에 data fetching 과 HTML rendering은 클라이언트에게 보내지기 전에 먼저 수행됩니다.
+
+### ✅ 결론!
+
+클라이언트는 non-interactive 하지 않은 페이지를 빠르게 전달 받을 수 있고 <br/>
+컴포넌트에 필요한 이벤트 리스터 같은 interactive 속성은 별도의 번들로 전달받아 <br/>
+클라이언트 단에서 hydration(수화)이 이루어진 다음에 웹이 완성 됩니다.
+
+<br />
+
+## 그렇다면 styled-components 랑 어떠한 부분에서 연관되어있을까 ?
+
+styled-components 는 **CSS-in-JS** 입니다.
+
+> CSS-in-JS는 단어 그대로 자바스크립트 코드에서 CSS를 작성하는 방식을 말합니다.
+
+이부분이 문제가 되었습니다..
+
+위에서 Next.js의 렌더링 방식에 대해 설명을 잠깐 했는데 <br/>
+기본 SSR 렌더링으로 동작하는 Next의 경우 서버에서 미리 Meta태그 등이 포함되어 있는 HTML을 먼저 만들어 놓고 <br/>
+클라이언트에게 보여준 다음 그 후에 JS 를 불러오는데 이때 styled-components 는 CSS-in-JS <br/>
+
+즉, JS파일안에 스타일이 선언되어 있어서 스타일이 적용이 되지 않은 화면을 보고 <br/> 나중에 적용된 화면을 사용자가 볼 수 있습니다.
+
+이 과정에서 사용자는 좋지 않은 UX경험을 가지게 됩니다.
+
+### 위와 같은 이유에도 불구하고
+
+styled-components 를 SSR 설정을 할 수 있습니다.
+
+-   그렇지만 별도의 기록은 하지 않겠습니다.
+-   설정을 위해 추가 플러그인이 필요하고 별도의 코드를 추가적으로 만들어야 합니다.
+-   개인적인 의견이지만 tailwind를 사용하는 것이 더 개발 경험에 좋다고 느꼈습니다.
+
+특히, 타입스크립트를 사용하면 styled-components에 타입 적용이 필요한데 tailwind는 그럴 필요가 없었습니다..👍
+
+<br />
+
+## Next.js 공식문서에서도 다음과 같이 추천하고 있습니다.
+
+<img
+    width="668"
+    alt="image"
+    src="https://github.com/Choi-HyunHo/blog/assets/87301268/eeb63790-9d2a-43ef-b892-0eb39a92e2df"
+/>
+
+## 정리
+
+여기까지 Next.js 에 어울리는 스타일 도구는 무엇인가 짧게나마 알아봤습니다.
+
+styled-components 를 사용하던 tailwind CSS 사용하던 개발하는 개발자의 자유입니다.<br/>
+다만 화면의 깜빡거림을 처음 마주하게 되었을 때 느끼는 당혹감을 이 글을 통해 도움이 되었으면 합니다 🙏
+
+<br />
+
+## 참고
+
+-   https://jsramblings.com/server-side-rendered-styled-components-with-nextjs/
+-   https://nextjs.org/docs/app/building-your-application/styling
