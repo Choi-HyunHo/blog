@@ -19,9 +19,7 @@ export default function BlogPost({ date, title, des, tag, slug }: Props) {
                     <p className="font-medium text-xs text-gray-400">{tag}</p>
                 </div>
 
-                <p className={`font-extrabold text-lg md:text-xl mt-2`}>
-                    {title}
-                </p>
+                <p className={`font-bold text-lg md:text-xl mt-2`}>{title}</p>
                 <p className="mt-1">{des}</p>
             </div>
         </Link>
