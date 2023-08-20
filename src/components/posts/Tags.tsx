@@ -18,6 +18,7 @@ const tagList = [
     "CSS",
     "Python",
     "Review",
+    "Dev",
 ]; // 태그 목록 배열
 
 const Tags = ({ onFilter, onClearFilter, tagData }: Props) => {
