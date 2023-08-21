@@ -1,0 +1,113 @@
+---
+title: 가끔 헷갈려서 끄적여보는 useState의 예시들
+date: 2023-08-22
+description: 깊이가 깊을수록 종종 헷갈리는지...
+tag: React
+---
+
+### 제목 그대로 메모장 입니다..📝
+
+![](https://github.com/Choi-HyunHo/blog/assets/87301268/0b8de06f-7453-4840-a27e-069d99b791b6)
+
+<br />
+
+### 다양한 값을 하나의 state로 사용하고자 할 때 예시들
+
+```js
+import React, { useState } from "react";
+
+export default function MyComponent() {
+    const [data, setData] = useState({
+        users: [
+            { id: 1, name: "Alice" },
+            { id: 2, name: "Bob" },
+        ],
+        products: [
+            { id: 101, name: "Product A" },
+            { id: 102, name: "Product B" },
+        ],
+    });
+
+    // Function to update both the users and products arrays
+    const updateData = () => {
+        setData((prevState) => ({
+            ...prevState, // Spread the previous state to avoid mutation
+            users: [
+                ...prevState.users,
+                { id: 3, name: "Charlie" }, // Add a new user
+            ],
+            products: [
+                ...prevState.products,
+                { id: 103, name: "Product C" }, // Add a new product
+            ],
+        }));
+    };
+
+    return (
+        <div>
+            <h1>Users:</h1>
+            <ul>
+                {data.users.map((user) => (
+                    <li key={user.id}>{user.name}</li>
+                ))}
+            </ul>
+            <h1>Products:</h1>
+            <ul>
+                {data.products.map((product) => (
+                    <li key={product.id}>{product.name}</li>
+                ))}
+            </ul>
+            <button onClick={updateData}>Add User and Product</button>
+        </div>
+    );
+}
+```
+
+<br />
+
+```js
+import React, { useState } from "react";
+
+export default function App() {
+    const [person, setPerson] = useState({
+        name: "Alice",
+        job: "dev",
+        friend: {
+            name: "Bob",
+            job: "designer",
+        },
+    });
+    return (
+        <div>
+            <h1>
+                {person.name}는 {person.job}
+            </h1>
+            <p>
+                {person.name}의 친구 {person.friend.name} ({person.friend.job})
+            </p>
+            <button
+                onClick={() => {
+                    const name = prompt(`친구의 이름은?`);
+                    setPerson((person) => ({
+                        ...person,
+                        friend: { ...person.friend, name },
+                    }));
+                }}
+            >
+                친구 이름 바꾸기
+            </button>
+            <button
+                onClick={() => {
+                    const job = prompt(`친구의 직업은?`);
+                    setPerson((person) => ({
+                        ...person,
+                        friend: { ...person.friend, job },
+                    }));
+                }}
+            >
+                친구 직업 바꾸기
+            </button>
+        </div>
+    );
+}
+```
