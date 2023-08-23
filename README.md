@@ -1,5 +1,7 @@
 ## If this document was helpful to you, please give it a star ⭐️
 
+직접 개발하여 사용하고 있고, 운영하고 있습니다 👋
+
 <br>
 
 # 🎉 introduce
