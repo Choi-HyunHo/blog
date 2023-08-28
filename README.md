@@ -680,7 +680,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
 ## 💡 Vercel 배포 참고용
 
-순서대로 따라하면 어렵지 않게 할 수 있습니다.
+순서대로 따라하면 어렵지 않게 할 수 있습니다.✌️
 
 <table>
   <tr>
