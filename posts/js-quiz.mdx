@@ -1,7 +1,7 @@
 ---
 title: 하루에 한 개..❗️ JS Quiz로 복습하기
 date: "2023-09-01"
-description: 자바스크립트 공부하는 사람들은 모를 수 없는 그 책..❗️
+description: JavaScript Quiz Note
 tag: JS
 ---
 
@@ -38,5 +38,35 @@ sayHi();
 
 함수 안에서, 우선 `var` 키워드를 사용해 `name` 변수를 선언 합니다. 이것은 변수를 정의한 줄에 실제로 도달할 때까지, 기본값 `undefined`으로 호이스팅 되는 것(생성단계에 메모리 공간이 설정)을 의미 합니다. `name` 변수를 출력하려는 줄에서 아직 변수를 정의하지 않았기 때문에, `undefined` 값을 유지
 `var`와는 다르게 `let` 키워드(그리고 `const`)를 가진 변수는 호이스팅 되지만, 초기화 되지 않습니다. 변수를 선언(초기화)하는 줄 전에는 접근 ❌ 이건 "일시적 사각지대"라고 합니다. 변수가 선언되기 전 변수에 접근하려고 하면, JavaScript는 `ReferenceError`를 표현합니다.
+
+</details>
+
+<br />
+
+### 2023.09.02
+
+2. What's the output?
+
+```js
+for (var i = 0; i < 3; i++) {
+    setTimeout(() => console.log(i), 1);
+}
+
+for (let i = 0; i < 3; i++) {
+    setTimeout(() => console.log(i), 1);
+}
+```
+
+-   A: 0 1 2 and 0 1 2
+-   B: 0 1 2 and 3 3 3
+-   C: 3 3 3 and 0 1 2
+
+<details>
+<summary><b>Answer</b></summary>
+
+### Answer: C
+
+JavaScript의 이벤트 큐 때문에, setTimeout의 콜백 함수는 루프가 실행된 후에 호출 됩니다. 첫 번째의 루프의 변수 i는 var 키워드를 사용해 선언되어 전역 값이 됩니다. 루프 동안, 단항 연산자 ++를 사용해 매번 i의 값을 1씩 증가. setTimeout콜백 함수가 호출되기까지, 첫 번째 예시에서의 i는 3.
+두 번째 루프에서, 변수 i는 let 키워드를 사용해 선언. let(그리고 const) 키워드로 선언된 변수는 블록스코프. 각각을 반복하는 동안, i는 새로운 값을 갖게 되고, 각각의 값은 루프 스코프 안에 있습니다.
 
 </details>
