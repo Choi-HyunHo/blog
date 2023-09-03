@@ -7,7 +7,7 @@ tag: JS
 
 > 해당 포스트는 [https://github.com/lydiahallie/javascript-questions](https://github.com/lydiahallie/javascript-questions) 저장소를 기반으로 합니다.
 
-회사 일 이외에 조금이라도 공부를 하고 하자는 마음으로 기반이 단단하면 잘 무너지지 않을 거라는 믿을 하에 <br/> 프론트엔드 개발자의 베이스 중 베이스인 자바스크립트 감을 유지하는 목적입니다.
+회사 일 이외에 조금이라도 공부를 하고 하자는 마음으로 기반을 하자는 목적 하에 <br/> 프론트엔드 개발자의 베이스 중 베이스인 자바스크립트 감을 유지하는 목적입니다.
 
 해당 포스트는 노트처럼 한 문제 씩 이곳에 기록. 📝
 
@@ -68,5 +68,44 @@ for (let i = 0; i < 3; i++) {
 
 JavaScript의 이벤트 큐 때문에, setTimeout의 콜백 함수는 루프가 실행된 후에 호출 됩니다. 첫 번째의 루프의 변수 i는 var 키워드를 사용해 선언되어 전역 값이 됩니다. 루프 동안, 단항 연산자 ++를 사용해 매번 i의 값을 1씩 증가. setTimeout콜백 함수가 호출되기까지, 첫 번째 예시에서의 i는 3.
 두 번째 루프에서, 변수 i는 let 키워드를 사용해 선언. let(그리고 const) 키워드로 선언된 변수는 블록스코프. 각각을 반복하는 동안, i는 새로운 값을 갖게 되고, 각각의 값은 루프 스코프 안에 있습니다.
+
+</details>
+
+<br />
+
+### 2023.09.03
+
+3. What's the output?
+
+```js
+const shape = {
+    radius: 10,
+    diameter() {
+        return this.radius * 2;
+    },
+    perimeter: () => 2 * Math.PI * this.radius,
+};
+
+console.log(shape.diameter());
+console.log(shape.perimeter());
+```
+
+-   A: `20` and `62.83185307179586`
+-   B: `20` and `NaN`
+-   C: `20` and `63`
+-   D: `NaN` and `63`
+
+<details>
+<summary><b>Answer</b></summary>
+
+### Answer: B
+
+처음에 생각한 답은 A 입니다(하지만 오답,,)
+
+`diameter`의 값은 일반 함수지만, `perimeter`의 값은 화살표 함수라는 점을 유의 합시다.
+
+**화살표 함수**에서 `this` 키워드는 일반 함수와는 다르게 **현재 주변 스코프를 참조** 합니다! 이것은 `perimeter`를 부를 때 shape 객체가 아닌 그것을 둘러싼 스코프를 참조 합니다.
+
+그 객체에는 `radius`라는 값은 없기 때문에 `undefined`를 반환 합니다.
 
 </details>
