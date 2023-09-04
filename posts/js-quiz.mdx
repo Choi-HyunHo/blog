@@ -109,3 +109,29 @@ console.log(shape.perimeter());
 그 객체에는 `radius`라는 값은 없기 때문에 `undefined`를 반환 합니다.
 
 </details>
+
+<br />
+
+### 2023.09.04
+
+3. What's the output?
+
+```js
++true;
+!"Lydia";
+```
+
+-   A: `1` and `false`
+-   B: `false` and `NaN`
+-   C: `false` and `false`
+
+<details>
+<summary><b>Answer</b></summary>
+
+### Answer: A
+
+단항 더하기는 피연산자를 숫자로 변환 합니다. `true`는 `1`이고, `false`는 `0`이.
+문자열 `'Lydia'`는 참 같은 값 입니다. 느낌표(!)는 논리적 NOT 연산자로 사용됩니다. 주요 목적은 Boolean 값을 부정하는 것입니다.
+따라서 true의 부정은 false 값 이므로 2번째는 false가 됩니다.
+
+</details>
