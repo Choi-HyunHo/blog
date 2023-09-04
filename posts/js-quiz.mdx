@@ -135,3 +135,42 @@ console.log(shape.perimeter());
 따라서 true의 부정은 false 값 이므로 2번째는 false가 됩니다.
 
 </details>
+
+<br />
+
+### 2023.09.05
+
+4. What's the output?
+
+```js
+const bird = {
+    size: "small",
+};
+
+const mouse = {
+    name: "Mickey",
+    small: true,
+};
+```
+
+-   A: `mouse.bird.size` 는 유효하지 않아요
+-   B: `mouse[bird.size]` 는 유효하지 않아요
+-   C: `mouse[bird['size']]` 는 유효하지 않아요
+-   D: 이 모든 것은 유효해요.
+
+<details>
+<summary><b>Answer</b></summary>
+
+### Answer: A
+
+(와.. 전혀 몰랐다)
+
+JavaScript에서 모든 객체의 키는 문자열이에요(심볼이 아닌 한). 객체의 키를 문자열 _형_ 으로 입력하지 않더라도, 항상 내부적으로 문자열로 변환돼요.
+
+JavaScript는 문장을 해석(또는 분)해요. 대괄호 표기를 사용하면 첫 번째 열린 대괄호 `[`를 보고 닫힌 대괄호 `]`를 찾을 때까지 진행해요. 다 찾은 후에만 문장을 평가할 거예요.
+
+`mouse[bird.size]`: 먼저 `'small'`인 `bird.size`를 평가해요. `mouse['small']` 은 `true`를 반환해요.
+
+그러나 이것은 점 표기법에서 발생하지 않아요. `mouse`가 `bird`라고 불리는 키를 가지고 있지 않기 때문에, `mouse.bird`는 `undefined`임을 의미해요. 그다음에, 점 표기법을 사용해 `size`를 물어봐요: `mouse.bird.size`. `mouse.bird`는 `undefined`이기 때문에, 사실 우리가 물어보는 건 `undefined.size`에요. 이건 유효하지 않아요, 그리고 `Cannot read property 'size' of undefined`와 비슷한 오류를 던질 거예요.
+
+</details>
