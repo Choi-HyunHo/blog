@@ -247,3 +247,42 @@ console.log(b === c);
 그러나, `===`연산자를 사용할 때는, 값과 타입 둘 다 같아야 합니다. 추가로 `new Number()`는 숫자가 아니고. **객체** 입니다. 따라서 둘 다 `false`를 반환 합니다.
 
 </details>
+
+<br />
+
+### 2023.09.08
+
+8. What's the output?
+
+```js
+class Chameleon {
+    static colorChange(newColor) {
+        this.newColor = newColor;
+        return this.newColor;
+    }
+
+    constructor({ newColor = "green" } = {}) {
+        this.newColor = newColor;
+    }
+}
+
+const freddie = new Chameleon({ newColor: "purple" });
+console.log(freddie.colorChange("orange"));
+```
+
+-   A: `orange`
+-   B: `purple`
+-   C: `green`
+-   D: `TypeError`
+
+<details>
+<summary><b>Answer</b></summary>
+
+### Answer: d
+
+헷갈리는 클래스,,, 왜 B라고 생각했지..
+
+`colorChange`함수는 정적 입니다. 정적 메소드는 그것이 만들어지는 생성자에서만 살아있도록 설계되어,
+어떤 자식들도 상속받을 수 없습니다. `freddie`는 자식이기 때문에, 이 함수는 상속되지 않아 `freddie`인스턴스에서는 이용할 수 없으며 `TypeError`가 주어집니다.
+
+</details>
