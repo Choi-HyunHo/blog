@@ -286,3 +286,28 @@ console.log(freddie.colorChange("orange"));
 어떤 자식들도 상속받을 수 없습니다. `freddie`는 자식이기 때문에, 이 함수는 상속되지 않아 `freddie`인스턴스에서는 이용할 수 없으며 `TypeError`가 주어집니다.
 
 </details>
+
+<br />
+
+### 2023.09.09
+
+9. What's the output?
+
+```js
+let greeting;
+greetign = {}; // Typo!
+console.log(greetign);
+```
+
+-   A: `{}`
+-   B: `ReferenceError: greetign is not defined`
+-   C: `undefined`
+
+<details>
+<summary><b>Answer</b></summary>
+
+### Answer: A
+
+전역 객체에 빈 객체를 만들었기 때문에, 객체는 출력!
+
+</details>
