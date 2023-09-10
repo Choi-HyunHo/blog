@@ -311,3 +311,35 @@ console.log(greetign);
 전역 객체에 빈 객체를 만들었기 때문에, 객체는 출력!
 
 </details>
+
+<br />
+
+### 2023.09.10
+
+10. What's the output?
+
+```js
+function bark() {
+    console.log("Woof!");
+}
+
+bark.animal = "dog";
+```
+
+-   A: No problem
+-   B: `SyntaxError` 이 방법으로 함수에 속성을 추가할 수 없음.
+-   C: `"Woof"`이 출력
+-   D: `ReferenceError`
+
+<details>
+<summary><b>Answer</b></summary>
+
+### Answer: A
+
+B라고 생각했는데 이게 문제 없다고..?
+
+> JavaScript에서는 가능한데, 함수는 객체이기 때문! (원시형 이외는 모두 객체)
+
+함수는 특별한 종류의 객체 입니다. 당신이 쓴 코드는 실제 함수가 아니에요. 함수는 속성을 가진 객체이므로 이 속성은 호출이 가능 합니다.
+
+</details>
