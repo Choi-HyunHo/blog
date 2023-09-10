@@ -343,3 +343,40 @@ B라고 생각했는데 이게 문제 없다고..?
 함수는 특별한 종류의 객체 입니다. 당신이 쓴 코드는 실제 함수가 아니에요. 함수는 속성을 가진 객체이므로 이 속성은 호출이 가능 합니다.
 
 </details>
+
+<br />
+
+### 2023.09.11
+
+11. What's the output?
+
+```js
+function Person(firstName, lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+}
+
+const member = new Person("Lydia", "Hallie");
+Person.getFullName = function () {
+    return `${this.firstName} ${this.lastName}`;
+};
+
+console.log(member.getFullName());
+```
+
+-   A: `TypeError`
+-   B: `SyntaxError`
+-   C: `Lydia Hallie`
+-   D: `undefined` `undefined`
+
+<details>
+<summary><b>Answer</b></summary>
+
+### Answer: A
+
+> 기억하자,, 자바스크립트에서 함수는 객체다.
+
+JavaScript에서, 함수는 객체이고 그렇기 때문에 메소드 `getFullName`은 생성자 함수 객체 자체에 추가 됩니다.
+이런 이유로, 우리는 `Person.getFullName()`을 부를 수 있지만 `member.getFullName()`은 `TypeError`를 나타냅니다.
+
+</details>
