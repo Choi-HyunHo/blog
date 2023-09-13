@@ -417,3 +417,37 @@ console.log(sarah);
 `sarah` 자체는 `undefined`로 남아있기에, `Person`함수의 값을 반환하지 않습니다.
 
 </details>
+
+<br />
+
+### 2023.09.13
+
+11. 이벤트 전달의 3단계는
+
+-   A: Target > Capturing > Bubbling
+-   B: Bubbling > Target > Capturing
+-   C: Target > Bubbling > Capturing
+-   D: Capturing > Target > Bubbling
+
+<details>
+<summary><b>Answer</b></summary>
+
+### Answer: D
+
+> 자바스크립트에서 이벤트가 부모에 걸쳐서 의도치 않게 되는 경우가 있으니까 기억하고 있자.
+
+**capturing** 단계 동안에, 이벤트는 부모 요소를 거쳐 target 요소까지 내려가고, <br/> 그런 다음 **target** 요소에 도달 후, **bubbling**이 시작 됩니다.
+
+> 이벤트 버블링이란 한 요소에 이벤트가 발생하면 이 요소에 할당된 핸들러가 동작하고, 이어서 부모 요소의 핸들러가 동작하고 최상단의 부모 요소를 만날 때까지 반복되면서 핸들러가 동작하는 현상을 말한다.
+
+> 캡처링은 버블링과는 반대로 최상위 태그에서 해당 태그를 찾아 내려간다.
+
+정리하자면
+
+-   캡처링 단계 : 이벤트가 하위 요소로 전파되는 단계
+-   타깃 단계 : 이벤트가 실제 타깃 요소에 전달되는 단계
+-   버블링 단계 : 이벤트가 상위 요소로 전파되는 단계
+
+<img src="https://i.imgur.com/N18oRgd.png" width="200" />
+
+</details>
