@@ -385,7 +385,7 @@ JavaScript에서, 함수는 객체이고 그렇기 때문에 메소드 `getFullN
 
 ### 2023.09.12
 
-11. What's the output?
+12. What's the output?
 
 ```js
 function Person(firstName, lastName) {
@@ -422,7 +422,7 @@ console.log(sarah);
 
 ### 2023.09.13
 
-11. 이벤트 전달의 3단계는
+13. 이벤트 전달의 3단계는
 
 -   A: Target > Capturing > Bubbling
 -   B: Bubbling > Target > Capturing
@@ -449,5 +449,33 @@ console.log(sarah);
 -   버블링 단계 : 이벤트가 상위 요소로 전파되는 단계
 
 <img src="https://i.imgur.com/N18oRgd.png" width="200" />
+
+</details>
+
+<br />
+
+### 2023.09.14
+
+14. What's the output?
+
+```js
+function sum(a, b) {
+    return a + b;
+}
+
+sum(1, "2");
+```
+
+-   A: `NaN`
+-   B: `TypeError`
+-   C: `'12'`
+-   D: `3`
+
+<details>
+<summary><b>Answer</b></summary>
+
+### Answer: C
+
+자바스크립트는 동적 타입 언어! 숫자 타입과 문자 타입을 연산하려고 하면 숫자는 문자열로 인식 합니다.
 
 </details>
