@@ -479,3 +479,32 @@ sum(1, "2");
 자바스크립트는 동적 타입 언어! 숫자 타입과 문자 타입을 연산하려고 하면 숫자는 문자열로 인식 합니다.
 
 </details>
+
+<br />
+
+### 2023.09.15
+
+15. What's the output?
+
+```js
+let number = 0;
+console.log(number++);
+console.log(++number);
+console.log(number);
+```
+
+-   A: `1` `1` `2`
+-   B: `1` `2` `2`
+-   C: `0` `2` `2`
+-   D: `0` `1` `2`
+
+<details>
+<summary><b>Answer</b></summary>
+
+### Answer: C
+
+1. console.log(number++): 이 줄에서는 number 변수를 출력한 후에 number를 증가시킵니다. 따라서 출력은 0이 됩니다. 그러나 이후에 number는 1이 됩니다.
+2. console.log(++number): 이 줄에서는 number를 먼저 증가시킨 후에 출력합니다. 따라서 출력은 2가 됩니다. number는 이제 2입니다.
+3. console.log(number): 이 줄에서는 number의 현재 값을 출력합니다. 따라서 출력은 2가 됩니다.
+
+</details>
