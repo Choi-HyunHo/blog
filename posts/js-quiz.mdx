@@ -508,3 +508,39 @@ console.log(number);
 3. console.log(number): 이 줄에서는 number의 현재 값을 출력합니다. 따라서 출력은 2가 됩니다.
 
 </details>
+
+<br />
+
+### 2023.09.16
+
+16. What's the output?
+
+```js
+function getPersonInfo(one, two, three) {
+    console.log(one);
+    console.log(two);
+    console.log(three);
+}
+
+const person = "Lydia";
+const age = 21;
+
+getPersonInfo`${person} is ${age} years old`;
+```
+
+-   A: `"Lydia"` `21` `["", " is ", " years old"]`
+-   B: `["", " is ", " years old"]` `"Lydia"` `21`
+-   C: `"Lydia"` `["", " is ", " years old"]` `21`
+
+<details>
+<summary><b>Answer</b></summary>
+
+### Answer: B
+
+> 태그가 지정된 템플릿 리터럴을 사용하고 있습니다. 태그된 템플릿 리터럴은 함수를 사용하여 템플릿 리터럴(백틱으로 묶인 문자열)을 처리할 수 있게 해주는 JavaScript의 기능입니다. 코드에서 getPersonInfo는 함수이며 이를 사용하여 템플릿 리터럴을 처리하고 있습니다
+
+첫 번째는 빈 문자열인 배열 console.log(one);의 첫 번째 요소를 인쇄합니다. → ["", " is ", " years old"] <br/>
+두 번째는 변수 console.log(two);의 값인 를 인쇄합니다 → 'Lydia' <br/>
+세 번째는 변수 console.log(three);의 값인 를 인쇄합니다 → 21
+
+</details>
