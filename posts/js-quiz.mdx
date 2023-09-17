@@ -544,3 +544,42 @@ getPersonInfo`${person} is ${age} years old`;
 세 번째는 변수 console.log(three);의 값인 를 인쇄합니다 → 21
 
 </details>
+
+<br />
+
+### 2023.09.17
+
+17. What's the output?
+
+```js
+function checkAge(data) {
+    if (data === { age: 18 }) {
+        console.log("You are an adult!");
+    } else if (data == { age: 18 }) {
+        console.log("You are still an adult.");
+    } else {
+        console.log(`Hmm.. You don't have an age I guess`);
+    }
+}
+
+checkAge({ age: 18 });
+```
+
+-   A: `You are an adult!`
+-   B: `You are still an adult.`
+-   C: `Hmm.. You don't have an age I guess`
+
+<details>
+<summary><b>Answer</b></summary>
+
+### Answer: C
+
+> 원시형은 값으로 비교하고 객체는 값을 참조하고 있는 주소로 비교한다는 것을 기억합시다.
+
+JavaScript는 객체가 메모리 내의 같은 장소를 참조하고 있는지를 확인 합니다.
+
+파라미터로 전달된 객체와 동등성을 확인하기 위해 사용한 객체는 **메모리 내의 다른 장소를 참조 합니다.**
+
+`{ age: 18 } === { age: 18 }` 그리고 `{ age: 18 } == { age: 18 }` 두 개 다 `false`를 반환하는 이유 입니다.
+
+</details>
