@@ -583,3 +583,33 @@ JavaScript는 객체가 메모리 내의 같은 장소를 참조하고 있는지
 `{ age: 18 } === { age: 18 }` 그리고 `{ age: 18 } == { age: 18 }` 두 개 다 `false`를 반환하는 이유 입니다.
 
 </details>
+
+<br />
+
+### 2023.09.18
+
+18. What's the output?
+
+```js
+function getAge(...args) {
+    console.log(typeof args);
+}
+
+getAge(21);
+```
+
+-   A: number
+-   B: array
+-   C: object
+-   D: NaN
+
+<details>
+<summary><b>Answer</b></summary>
+
+### Answer: C
+
+> 자바스크립트 배열은 인덱스를 프로퍼티 키로 갖으며 length 프로퍼티를 갖는 특수한 객체이다.
+
+rest 파라미터 (`...args`)는 남아있는 모든 인수을 하나의 배열로 "집합" 합니다. 그리고 자바스크립트에서 배열은 객체이니까 `typeof args`는 `"object"`를 반환 합니다.
+
+</details>
