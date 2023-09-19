@@ -646,3 +646,29 @@ getAge();
 만약 `use strict`을 사용하지 않았다면 에러를 던지지 않습니다. `age` 속성이 전역 객체에 추가된 것이기 때문입니다.
 
 </details>
+
+<br />
+
+### 2023.09.20
+
+20. What's the output?
+
+```js
+const sum = eval("10*10+5");
+```
+
+-   A: 105
+-   B: "105"
+-   C: TypeError
+-   D: "10\*10+5"
+
+<details>
+<summary><b>Answer</b></summary>
+
+### Answer: A
+
+> `eval` 문자열로 통과된 코드를 평가 합니다.
+
+만약 그것이 이 경우처럼 표현 식이라면, 표현 식을 평가 합니다(`10 * 10 + 5`), 이것은 숫자 105 를 반환 홥니다.
+
+</details>
