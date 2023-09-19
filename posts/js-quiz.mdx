@@ -613,3 +613,36 @@ getAge(21);
 rest 파라미터 (`...args`)는 남아있는 모든 인수을 하나의 배열로 "집합" 합니다. 그리고 자바스크립트에서 배열은 객체이니까 `typeof args`는 `"object"`를 반환 합니다.
 
 </details>
+
+<br />
+
+### 2023.09.19
+
+19. What's the output?
+
+```js
+function getAge() {
+    "use strict";
+    age = 21;
+    console.log(age);
+}
+
+getAge();
+```
+
+-   A: `21`
+-   B: `undefined`
+-   C: `ReferenceError`
+-   D: `TypeError`
+
+<details>
+<summary><b>Answer</b></summary>
+
+### Answer: C
+
+> use strict는 자바스크립트를 엄격하게 해줍니다.
+
+`use strict`을 사용하면, 실수로 전역 변수를 선언하지 않게 해줍니다. `age`라는 변수를 선언한 적이 전혀 없고, `use strict`을 사용하고 있으니, reference error를 던지게 됩니다.
+만약 `use strict`을 사용하지 않았다면 에러를 던지지 않습니다. `age` 속성이 전역 객체에 추가된 것이기 때문입니다.
+
+</details>
