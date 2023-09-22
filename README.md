@@ -178,8 +178,6 @@ yarn dev
 
 ## 라이브러리 사용법
 
-<br>
-
 ## next-theme
 
 -   [공식 문서](https://github.com/pacocoursey/next-themes#readme)
