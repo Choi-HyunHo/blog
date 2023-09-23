@@ -723,3 +723,37 @@ console.log(num);
 `var` 키워드를 사용하면, 같은 이름으로 복수의 변수를 선언할 수 있습니다.
 
 </details>
+
+<br />
+
+### 2023.09.23
+
+23. What's the output?
+
+```js
+const obj = { 1: "a", 2: "b", 3: "c" };
+const set = new Set([1, 2, 3, 4, 5]);
+
+obj.hasOwnProperty("1");
+obj.hasOwnProperty(1);
+set.has("1");
+set.has(1);
+```
+
+-   A: `false` `true` `false` `true`
+-   B: `false` `true` `true` `true`
+-   C: `true` `true` `false` `true`
+-   D: `true` `true` `true` `true`
+
+<details>
+<summary><b>Answer</b></summary>
+
+### Answer: C
+
+> 모든 객체의 키는(심볼 제외) 문자열로 직접 입력하지 않았다고 해도 내부적으로는 문자열 입니다.
+
+이것이 `obj.hasOwnProperty('1')`도 true를 반환하는 이유 입니다.
+
+set에서는 동작하지 않습니다. set에는 '1'이 없습니다. `set.has('1')`은 `false`를 반환하고, 숫자 유형인 `1`을 가지고 있어, `set.has(1)`는 `true`를 반환 합니다.
+
+</details>
