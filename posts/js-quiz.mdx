@@ -757,3 +757,32 @@ set.has(1);
 set에서는 동작하지 않습니다. set에는 '1'이 없습니다. `set.has('1')`은 `false`를 반환하고, 숫자 유형인 `1`을 가지고 있어, `set.has(1)`는 `true`를 반환 합니다.
 
 </details>
+
+<br />
+
+### 2023.09.24
+
+24. What's the output?
+
+```js
+for (let i = 1; i < 5; i++) {
+    if (i === 3) continue;
+    console.log(i);
+}
+```
+
+-   A: `1` `2`
+-   B: `1` `2` `3`
+-   C: `1` `2` `4`
+-   D: `1` `3` `4`
+
+<details>
+<summary><b>Answer</b></summary>
+
+### Answer: C
+
+> `continue` 표현 식은 특정 조건이 `true`를 반환하면 반복 처리를 건너뜁니다.
+
+즉, continue에 도달했을 때 그 아래 코드들을 실행하지 않고 진행 합니다.
+
+</details>
