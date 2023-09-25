@@ -786,3 +786,33 @@ for (let i = 1; i < 5; i++) {
 즉, continue에 도달했을 때 그 아래 코드들을 실행하지 않고 진행 합니다.
 
 </details>
+
+<br />
+
+### 2023.09.25
+
+25. What's the output?
+
+```js
+String.prototype.giveLydiaPizza = () => {
+    return "Just give Lydia pizza already!";
+};
+
+const name = "Lydia";
+
+console.log(name.giveLydiaPizza());
+```
+
+-   A: `"Just give Lydia pizza already!"`
+-   B: `TypeError: not a function`
+-   C: `SyntaxError`
+-   D: `undefined`
+
+<details>
+<summary><b>Answer</b></summary>
+
+### Answer: A
+
+`String`은 내장 생성자로 속성을 추가할 수 있습니다.
+
+</details>
