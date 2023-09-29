@@ -917,3 +917,31 @@ baz();
 `event.stopPropagation`을 통해서 버블링을 중단할 수 있습니다.
 
 </details>
+
+<br />
+
+### 2023.09.29
+
+29. p태그를 클릭하면 출력된 로그는 무엇일까요?
+
+```js
+<div onclick="console.log('div')">
+    <p onclick="console.log('p')">Click here!</p>
+</div>
+```
+
+-   A: `p` `div`
+-   B: `div` `p`
+-   C: `p`
+-   D: `div`
+
+<details>
+<summary><b>Answer</b></summary>
+
+### Answer: A
+
+> 이벤트 버블링에 관련된 문제 입니다.
+
+이벤트 버블링이란 한 요소에 이벤트가 발생하면 이 요소에 할당된 핸들러가 동작하고, 이어서 부모 요소의 핸들러가 동작하고 최상단의 부모 요소를 만날 때까지 반복되면서 핸들러가 동작하는 현상 입니다.
+
+</details>
