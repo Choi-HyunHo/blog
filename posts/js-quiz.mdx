@@ -945,3 +945,46 @@ baz();
 이벤트 버블링이란 한 요소에 이벤트가 발생하면 이 요소에 할당된 핸들러가 동작하고, 이어서 부모 요소의 핸들러가 동작하고 최상단의 부모 요소를 만날 때까지 반복되면서 핸들러가 동작하는 현상 입니다.
 
 </details>
+
+<br />
+
+### 2023.09.30
+
+30. What's the output?
+
+```js
+const person = { name: "Lydia" };
+
+function sayHi(age) {
+    console.log(`${this.name} is ${age}`);
+}
+
+sayHi.call(person, 21);
+sayHi.bind(person, 21);
+```
+
+-   A: `undefined is 21` `Lydia is 21`
+-   B: `function` `function`
+-   C: `Lydia is 21` `Lydia is 21`
+-   D: `Lydia is 21` `function`
+
+<details>
+<summary><b>Answer</b></summary>
+
+### Answer: D
+
+> 함수는 별도의 처리를 하지 않으면 this는 window 객체를 나타냅니다. 하지만 call()은 window객체가 아니라 특정 객체를 지정 할 수 있습니다.
+
+함수는 별도의 처리를 하지 않으면 this는 window 객체를 나타냅니다. <br/>
+call()은 모든 함수에서 사용 가능하며, this를 특정 객체로 지정할 수 있습니다. <br/>
+
+> bind()는 this를 영구적으로 변경 할 수 있습니다. 그러나 중요한 차이점이 있습니다. 함수를 즉시 호출하지 않는다는 것 입니다.
+
+함수를 실행 시키려면 예시처럼 별도로 호출을 해야 합니다.
+
+```js
+const boundFunction = sayHi.bind(person, 21);
+boundFunction(); // Output: Lydia is 21
+```
+
+</details>
