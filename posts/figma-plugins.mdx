@@ -1,0 +1,99 @@
+---
+title: Design-System:Figma Plugins
+date: "2023-10-08"
+description: Figma Native System 과 Figma Token❓
+tag: CSS
+---
+
+디자인 시스템을 구성하기 앞서 Figma의 기본 기능과 플러그인에 대해 살펴보겠습니다.
+
+## Figma Native System
+
+### 색상 코드를 등록하여 재사용하기 쉽게 명칭하는 방법
+
+<img
+    width="144"
+    alt="image"
+    src="https://github.com/Choi-HyunHo/blog/assets/87301268/057e3afa-223c-4d89-affc-2ca935c408b9"
+/>
+
+만약 위와 같은 요소가 있다면 **Fill** 탭에서 점 네개의 모양을 누르고 <br/>
+띄워진 창에서 +을 누르면 최종적으로 **Variable** 을 등록하면 됩니다.
+
+<img
+    width="814"
+    alt="image"
+    src="https://github.com/Choi-HyunHo/blog/assets/87301268/2cff8ff4-2a02-45e1-bf74-4f6fb0f3aae3"
+/>
+
+<br />
+
+등록 후 요소를 클릭하면 색상에 코드가 아닌 사용자가 입력한 명칭으로 표기 됩니다.
+
+<img
+    width="322"
+    alt="image"
+    src="https://github.com/Choi-HyunHo/blog/assets/87301268/b659fefc-35c8-41ef-b2cb-71e2fac10b94"
+/>
+
+<br />
+
+### 요소 그루핑 하는 방법
+
+만약 서비스에 사용되는 RED의 색상이 여러가지여서 번호로 구분하는 경우?
+
+`/` 를 사용하면 요소별 그루핑이 가능 합니다.
+
+<img
+    width="570"
+    alt="image"
+    src="https://github.com/Choi-HyunHo/blog/assets/87301268/168be55c-413b-4a17-87f4-7870d0775a32"
+/>
+
+<img
+    width="706"
+    alt="image"
+    src="https://github.com/Choi-HyunHo/blog/assets/87301268/c2859a75-4a7a-434b-a50d-82b43c5f3527"
+/>
+
+색상 뿐만 아니라 텍스트 등 여러 요소들도 가능 합니다.
+
+<br />
+
+**그래서 위의 기능을 사용해서 디자인 시스템의 가장 베이스가 되는 원자(Atoms) 부분을 미리 등록해 놓을 수 있습니다.**
+
+<br />
+
+## Figma Token
+
+피그마의 작업물은 마지막에는 개발자들에게 핸드오프가 됩니다. <br/>
+그래서 넘어갈 때 기본적인 항목들이 전부 코드화가 돼서 넘어가야 됩니다.
+
+**Figma Token**을 사용하면 등록해놨던 모든 항목들이 깔끔하게 **json** 파일로 나오게 되고 <br/>
+추후에는 디자이너가 Github나 GitLab 이런 곳에다 올릴 수 있습니다.
+
+그리고 파일을 올렸다면 넘겨받은 개발자가 json 데이터만 가지고 와서 작업을 진행 할 수 있습니다.
+
+**최종적으로 디자이너가 색상을 변경하고 다시 푸쉬를 했을 때 해당 색상이 바로 프로젝트에 반영이 될 수도 있습니다.**
+
+<img
+    width="317"
+    alt="image"
+    src="https://github.com/Choi-HyunHo/blog/assets/87301268/c695301a-7aa8-4923-a170-b1467790210f"
+/>
+
+<img
+    width="394"
+    alt="image"
+    src="https://github.com/Choi-HyunHo/blog/assets/87301268/bab014c1-f5d5-42d3-a40a-b6f3d32d7e1c"
+/>
+
+설치가 완료되었다면 위와 같은 모달이 나옵니다.
+
+앞으로는 Figma Tokens를 활용해서 작업을 해나가는 방법에 대해 공부 하겠습니다.
+
+---
+
+### 참고
+
+-   [인프런](https://www.inflearn.com/course/%EB%94%94%EC%9E%90%EC%9D%B8-%EC%8B%9C%EC%8A%A4%ED%85%9C-with-%ED%94%BC%EA%B7%B8%EB%A7%88)
